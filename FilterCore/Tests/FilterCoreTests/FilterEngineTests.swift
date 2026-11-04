@@ -82,6 +82,13 @@ struct FilterEngineTests {
         "bаhis fırsatı", // Cyrillic "а"
         "VIP grubumuza katıl: https://t.me/kazanc_vip",
         "Kanalımız: t.me/bonusgrubu",
+        "Betvakti Kazancin Adresi Guncellendi! www.betvakti414.com",
+        "Avva'dan 1500 FS Hediye Kazandin! https://avvabet804com",
+        "SANS HERKES 1 KEZ FAYDALANABILIR. www.vaycasino1042.com",
+        "ANLIK %30a Varan SINIRSIZ KAYIP B0nus",
+        "Kripto yatirimlara ozel %50 cevirmsiz bonus!",
+        "250 TL yatir, 250 TL FreeSpini kap!",
+        "Havale ile 250 TL ve uzeri yatirim! https://t2m.io/rUpWUBr",
     ])
     func defaultRulesSendSpamToJunk(body: String) {
         #expect(evaluate(body).action == .junk)
@@ -133,6 +140,20 @@ struct FilterEngineTests {
         https://kisalt.art/ B052
         """
         let decision = evaluate(body, sender: "SDNMAKİNA")
+        #expect(decision.action == .junk)
+        #expect(decision.matchedRule?.builtInID == "betting")
+    }
+
+    /// Free spins written as "25Spn"; the "B052" at the end alone would send it to Promotions.
+    @Test func bettingSpamWithFreeSpinsGoesToJunk() {
+        let body = """
+        Bin Lira Hesabinda
+        Hemen Cekebilirsin.
+        Fenerbahce macinda her gole bizden 25Spn Hediye
+
+        https://dub.mn/girisyapege B052
+        """
+        let decision = evaluate(body, sender: "TEKSOYINSTC")
         #expect(decision.action == .junk)
         #expect(decision.matchedRule?.builtInID == "betting")
     }

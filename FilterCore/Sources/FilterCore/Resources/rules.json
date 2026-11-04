@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "fragments": {
     "suspiciousTLDs": "store|site|vip|live|online|icu|top|click|link|sbs|cfd|shop|support|help|info|art|xyz|buzz|club|bond|rest|cyou|monster|lol|quest|website|space|fun|pw|tk|ml|ga|cf|gq",
     "nonWordTLDs": "icu|sbs|cfd|xyz|cyou|buzz|pw|tk|ml|ga|cf|gq",
@@ -18,9 +18,9 @@
           "details": "Betting, casino and \"free trial bonus\" ads."
         }
       },
-      "note": "Betting spam avoids \"bonus\" with wording like \"deneme hediye\" or \"yatirim sartsiz anlik cekim\". A bare \"%10 bonus\" is left out: it is also how Garanti BBVA Bonus card campaigns read.",
+      "note": "Betting spam avoids \"bonus\" with wording like \"deneme hediye\" or \"yatirim sartsiz anlik cekim\". A bare \"%10 bonus\" is left out: it is also how Garanti BBVA Bonus card campaigns read. Free spins come as \"25Spn\"; a bare \"spin\" or \"FS\" needs \"hediye\" or \"bedava\" next to it. Sites rotate numbered domains (betvakti414.com, vaycasino1042.com) and write \"B0nus\" or \"cevirmsiz\". \"Her gole hediye\" is left out: carriers run match campaigns like that too.",
       "matchType": "regex",
-      "pattern": "\\b(bahis|casino|kumarhane|rulet|freespin|free spin|freebet|deneme (bonus\\w*|hediye\\w*)|yatirim bonusu|kayip bonusu|hos ?geldin bonusu|cevrimsiz\\w*|yatirim ?sartsiz|sartsiz (bonus|hediye|cekim)\\w*|anlik cekim|canli bahis|bedava bahis)\\b",
+      "pattern": "\\b(bahis|\\w*casino\\w*|kumarhane|rulet|freespin\\w*|free spin\\w*|freebet|b0nus\\w*|deneme (bonus\\w*|hediye\\w*)|yatirim bonusu|kayip bonusu|hos ?geldin bonusu|cevi?ri?msiz\\w*|yatirim ?sartsiz|sartsiz (bonus|hediye|cekim)\\w*|anlik cekim|canli bahis|bedava bahis|\\d+ ?spn|\\d+ ?(spin|fs) (hediye|bedava)\\w*|hediye\\w* \\d+ ?fs|[a-z]*(bet|bahis)[a-z]*\\d+(\\.({{linkTLDs}})|com)(?![a-z0-9-]))\\b",
       "action": "junk"
     },
     {
@@ -65,7 +65,7 @@
         }
       },
       "matchType": "regex",
-      "pattern": "(^|[^a-z0-9.])(bit\\.ly|t\\.ly|cutt\\.ly|tinyurl\\.com|shorturl\\.at|rb\\.gy|is\\.gd|goo\\.gl|s\\.id|tiny\\.cc|ow\\.ly|t\\.co|kisalt\\w*\\.[a-z]{2,})/",
+      "pattern": "(^|[^a-z0-9.])(bit\\.ly|t\\.ly|cutt\\.ly|tinyurl\\.com|shorturl\\.at|rb\\.gy|is\\.gd|goo\\.gl|s\\.id|tiny\\.cc|ow\\.ly|t2m\\.io|t\\.co|kisalt\\w*\\.[a-z]{2,})/",
       "action": "junk"
     },
     {
