@@ -47,8 +47,12 @@ jobs:
       - uses: actions/checkout@v4
       - run: mkdir site && cp "$RULES" site/rules.json
       - uses: actions/configure-pages@v5
+      # A name per attempt, so "Re-run failed jobs" doesn't leave two artifacts deploy-pages can't choose between.
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
+          name: github-pages-${{ github.run_attempt }}
       - id: deploy
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
