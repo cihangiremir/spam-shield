@@ -70,8 +70,10 @@ public enum RuleSuggester {
     // MARK: - Private
 
     /// 1: scheme, 2: "www.", 3: host, 4: path slash. The lookbehind skips e-mail addresses and word middles.
+    /// Each label is atomic `(?>…)`: without it, text like "a.1a.1a.1…" makes the regex engine backtrack
+    /// exponentially, and a 100-character message froze the app for minutes.
     private static let hostRegex = try! NSRegularExpression(
-        pattern: #"(?<![a-z0-9@.-])(https?://)?(www\.)?((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,})(?![a-z0-9-])(/)?"#
+        pattern: #"(?<![a-z0-9@.-])(https?://)?(www\.)?((?:(?>[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\.)+[a-z]{2,})(?![a-z0-9-])(/)?"#
     )
 
     private static let knownTopLevelDomains: Set<String> = [

@@ -22,6 +22,7 @@ struct RuleSuggesterTests {
         ("Ödeme: gib.gov.tr-islemw4.store", ["tr-islemw4.store"]),
         ("Bilgi: ornek.xyz ve https://ORNEK.xyz/a", ["ornek.xyz"]),
         ("İki link: http://bir.site/a ve iki.online", ["bir.site", "iki.online"]),
+        ("Detay: kargo-takip.site.", ["kargo-takip.site"]),
     ])
     func extractsRegistrableDomains(text: String, expected: [String]) {
         #expect(RuleSuggester.linkDomains(in: text) == expected)
@@ -35,6 +36,14 @@ struct RuleSuggesterTests {
     ])
     func ignoresTextThatIsNotALink(text: String) {
         #expect(RuleSuggester.linkDomains(in: text).isEmpty)
+    }
+
+    /// A spammer controls the text; a backtracking regex used to take minutes on 100 characters of this.
+    @Test(.timeLimit(.minutes(1)), arguments: ["a.1", "a-1.", "a.", "a-"])
+    func longRepetitiveTextIsFast(unit: String) {
+        let text = String(repeating: unit, count: 3000 / unit.count)
+        let duration = ContinuousClock().measure { _ = RuleSuggester.linkDomains(in: text) }
+        #expect(duration < .seconds(1))
     }
 
     @Test func domainRuleBlocksTheMessageAndOtherSubdomains() {
