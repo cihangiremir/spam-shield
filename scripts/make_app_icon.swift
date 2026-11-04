@@ -42,8 +42,8 @@ ctx.restoreGState()
 
 // Speech bubble inside the shield, in the brand blue.
 var bubble = CGMutablePath()
-let bubbleRect = CGRect(x: cx - 170, y: 385, width: 340, height: 230)
-bubble.addRoundedRect(in: bubbleRect, cornerWidth: 70, cornerHeight: 70)
+let bubbleRect = CGRect(x: cx - 180, y: 375, width: 360, height: 250)
+bubble.addRoundedRect(in: bubbleRect, cornerWidth: 75, cornerHeight: 75)
 ctx.addPath(bubble); ctx.setFillColor(rgb(0.20, 0.36, 0.95)); ctx.fillPath()
 // The tail is filled on its own so its winding can't cut a hole where it overlaps the bubble.
 bubble = CGMutablePath()
@@ -53,9 +53,9 @@ bubble.addLine(to: CGPoint(x: cx - 20, y: bubbleRect.maxY - 10))
 bubble.closeSubpath()
 ctx.addPath(bubble); ctx.setFillColor(rgb(0.20, 0.36, 0.95)); ctx.fillPath()
 
-// White check mark in the bubble.
-ctx.setStrokeColor(rgb(1, 1, 1)); ctx.setLineWidth(44); ctx.setLineCap(.round); ctx.setLineJoin(.round)
-ctx.move(to: CGPoint(x: cx - 80, y: 503)); ctx.addLine(to: CGPoint(x: cx - 18, y: 563)); ctx.addLine(to: CGPoint(x: cx + 88, y: 445))
+// White check mark, centered in the bubble with room around it.
+ctx.setStrokeColor(rgb(1, 1, 1)); ctx.setLineWidth(38); ctx.setLineCap(.round); ctx.setLineJoin(.round)
+ctx.move(to: CGPoint(x: cx - 68, y: 505)); ctx.addLine(to: CGPoint(x: cx - 20, y: 550)); ctx.addLine(to: CGPoint(x: cx + 70, y: 452))
 ctx.strokePath()
 
 let out = URL(fileURLWithPath: CommandLine.arguments[1])
