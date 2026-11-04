@@ -59,7 +59,7 @@ struct SpamShieldApp: App {
 
     private static func scheduleRulesRefresh() {
         let request = BGAppRefreshTaskRequest(identifier: rulesRefreshTaskID)
-        request.earliestBeginDate = .now.addingTimeInterval(12 * 60 * 60)
+        request.earliestBeginDate = .now.addingTimeInterval(RuleListModel.automaticCheckInterval)
         try? BGTaskScheduler.shared.submit(request)
     }
 }

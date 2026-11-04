@@ -52,19 +52,19 @@ public enum RuleSuggester {
     /// "hepsiburada.com" or "hepsiburada.co.uk".
     public static func domainRule(_ domain: String) -> Rule {
         let pattern = #"(?<![a-z0-9-])"# + NSRegularExpression.escapedPattern(for: domain) + #"(?![a-z0-9-])(?!\.[a-z0-9])"#
-        return Rule(name: "Link: \(domain)", matchType: .regex, pattern: pattern, action: .junk)
+        return Rule(name: String(localized: "Link: \(domain)", bundle: .module), matchType: .regex, pattern: pattern, action: .junk)
     }
 
     public static func senderRule(_ sender: String) -> Rule? {
         let trimmed = sender.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return nil }
-        return Rule(name: "Gönderici: \(trimmed)", target: .sender, matchType: .prefix, pattern: trimmed, action: .junk)
+        return Rule(name: String(localized: "Sender: \(trimmed)", bundle: .module), target: .sender, matchType: .prefix, pattern: trimmed, action: .junk)
     }
 
     public static func phraseRule(_ phrase: String) -> Rule? {
         let trimmed = phrase.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !TextNormalizer.normalize(trimmed).isEmpty else { return nil }
-        return Rule(name: "İfade: \(trimmed)", matchType: .contains, pattern: trimmed, action: .junk)
+        return Rule(name: String(localized: "Phrase: \(trimmed)", bundle: .module), matchType: .contains, pattern: trimmed, action: .junk)
     }
 
     // MARK: - Private

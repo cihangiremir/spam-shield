@@ -1,0 +1,2049 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@ göndericisini engelle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Block sender %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ göndericisini engelle"
+          }
+        }
+      }
+    },
+    "%lld": {
+      "shouldTranslate": false
+    },
+    "%lld kural açık": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld rule on"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld rules on"
+                }
+              }
+            }
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kural açık"
+          }
+        }
+      }
+    },
+    "%lld kural eklendi. Benzer mesajlar artık Gereksiz'e gidecek.": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld rule added. Similar messages will now go to Junk."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld rules added. Similar messages will now go to Junk."
+                }
+              }
+            }
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kural eklendi. Benzer mesajlar artık Gereksiz'e gidecek."
+          }
+        }
+      }
+    },
+    "%lld/%lld açık": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld/%lld on"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld/%lld açık"
+          }
+        }
+      }
+    },
+    "App Group bulunamadı. Kurallar kaydedilemez, filtre sadece varsayılan kurallarla çalışır. Xcode'da hedeflerin Signing ayarlarını kontrol et.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Group not found. Rules can't be saved, so the filter only uses the default rules. Check the targets' Signing settings in Xcode."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Group bulunamadı. Kurallar kaydedilemez, filtre sadece varsayılan kurallarla çalışır. Xcode'da hedeflerin Signing ayarlarını kontrol et."
+          }
+        }
+      }
+    },
+    "Ayarlar uygulamasını aç.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the Settings app."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayarlar uygulamasını aç."
+          }
+        }
+      }
+    },
+    "Açık kurallar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rules on"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açık kurallar"
+          }
+        }
+      }
+    },
+    "Bahis ve kredi reklamı": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betting and loan ads"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bahis ve kredi reklamı"
+          }
+        }
+      }
+    },
+    "Bahis, kredi ve dolandırıcılık mesajlarını Gereksiz klasörüne ayırır. Doğrulama kodlarını ve kargo bildirimlerini kendi klasörlerine koyar.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moves betting, loan and scam messages to Junk. Puts verification codes and delivery updates in their own folders."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bahis, kredi ve dolandırıcılık mesajlarını Gereksiz klasörüne ayırır. Doğrulama kodlarını ve kargo bildirimlerini kendi klasörlerine koyar."
+          }
+        }
+      }
+    },
+    "Bahisçiler gerçek firmaların gönderici adlarını kullanabiliyor. Engellersen o firmanın gerçek mesajları da gelmez.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betting spammers can use real companies' sender names. If you block it, that company's real messages won't come through either."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bahisçiler gerçek firmaların gönderici adlarını kullanabiliyor. Engellersen o firmanın gerçek mesajları da gelmez."
+          }
+        }
+      }
+    },
+    "Başla": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get Started"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başla"
+          }
+        }
+      }
+    },
+    "Bilinmeyen ve Spam bölümüne gir.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go to Unknown & Spam."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilinmeyen ve Spam bölümüne gir."
+          }
+        }
+      }
+    },
+    "Bir numarayı rehberden silmek onu filtreye sokmaz: o numaraya daha önce cevap yazdıysan iOS onu tanıdık saymaya devam eder.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deleting a number from your contacts doesn't send it to the filter: if you have replied to that number before, iOS still treats it as known."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir numarayı rehberden silmek onu filtreye sokmaz: o numaraya daha önce cevap yazdıysan iOS onu tanıdık saymaya devam eder."
+          }
+        }
+      }
+    },
+    "Birden fazla kural eşleşirse öncelik: İzin ver › Gereksiz › Promosyonlar › İşlemler.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If several rules match, the order is: Allow › Junk › Promotions › Transactions."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Birden fazla kural eşleşirse öncelik: İzin ver › Gereksiz › Promosyonlar › İşlemler."
+          }
+        }
+      }
+    },
+    "Bitti": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bitti"
+          }
+        }
+      }
+    },
+    "Bu adresi içeren tüm mesajlar Gereksiz'e gider. Bilinen bir siteyse (ör. instagram.com) işaretleme.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every message containing this address goes to Junk. Don't select well-known sites (e.g. instagram.com)."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu adresi içeren tüm mesajlar Gereksiz'e gider. Bilinen bir siteyse (ör. instagram.com) işaretleme."
+          }
+        }
+      }
+    },
+    "Bu ifade mesajda geçmiyor.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This phrase isn't in the message."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ifade mesajda geçmiyor."
+          }
+        }
+      }
+    },
+    "Bu kural gelişmiş bir desen kullanıyor. Görmek veya değiştirmek için Gelişmiş'i aç.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This rule uses an advanced pattern. Open Advanced to see or change it."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu kural gelişmiş bir desen kullanıyor. Görmek veya değiştirmek için Gelişmiş'i aç."
+          }
+        }
+      }
+    },
+    "Bu kurallar zaten listende var.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These rules are already in your list."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu kurallar zaten listende var."
+          }
+        }
+      }
+    },
+    "Bu mesajlar silinmez; Mesajlar'daki Promosyonlar ve İşlemler klasörlerine ayrılır.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These messages aren't deleted; they go to the Promotions and Transactions folders in Messages."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu mesajlar silinmez; Mesajlar'daki Promosyonlar ve İşlemler klasörlerine ayrılır."
+          }
+        }
+      }
+    },
+    "Büyük/küçük harf, Türkçe karakterler ve fazla boşluklar dikkate alınmaz.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upper/lower case, Turkish characters and extra spaces are ignored."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Büyük/küçük harf, Türkçe karakterler ve fazla boşluklar dikkate alınmaz."
+          }
+        }
+      }
+    },
+    "Devam": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Devam"
+          }
+        }
+      }
+    },
+    "Diğer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diğer"
+          }
+        }
+      }
+    },
+    "Diğer korumalar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other protections"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diğer korumalar"
+          }
+        }
+      }
+    },
+    "Dolandırıcılık": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scams"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dolandırıcılık"
+          }
+        }
+      }
+    },
+    "Dosya okunamadı: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file can't be read: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dosya okunamadı: %@"
+          }
+        }
+      }
+    },
+    "Düzenlendi": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edited"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düzenlendi"
+          }
+        }
+      }
+    },
+    "Dışa aktar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dışa aktar"
+          }
+        }
+      }
+    },
+    "Engellemek için yukarıdan seç": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select something above to block"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Engellemek için yukarıdan seç"
+          }
+        }
+      }
+    },
+    "Engellenecek ifade": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phrase to block"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Engellenecek ifade"
+          }
+        }
+      }
+    },
+    "Etkin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enabled"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etkin"
+          }
+        }
+      }
+    },
+    "Eşleşen kural: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matching rule: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşen kural: %@"
+          }
+        }
+      }
+    },
+    "Eşleşme": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Match"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşme"
+          }
+        }
+      }
+    },
+    "Filtre tamamen iPhone'unda çalışır, hiçbir mesaj bir sunucuya gönderilmez. Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar filtreye hiç gelmez.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The filter runs entirely on your iPhone; no message is sent to a server. Messages from your contacts, from numbers you have replied to and iMessages never reach the filter."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtre tamamen iPhone'unda çalışır, hiçbir mesaj bir sunucuya gönderilmez. Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar filtreye hiç gelmez."
+          }
+        }
+      }
+    },
+    "Filtre tamamen iPhone'unda çalışır. Mesajların hiçbir sunucuya gönderilmez.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The filter runs entirely on your iPhone. Your messages are never sent to a server."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtre tamamen iPhone'unda çalışır. Mesajların hiçbir sunucuya gönderilmez."
+          }
+        }
+      }
+    },
+    "Filtre, Ayarlar'da Spam Shield seçili değilse çalışmaz.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The filter only works when Spam Shield is selected in Settings."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtre, Ayarlar'da Spam Shield seçili değilse çalışmaz."
+          }
+        }
+      }
+    },
+    "Filtrelenen mesajlar nereye gider": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where filtered messages go"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtrelenen mesajlar nereye gider"
+          }
+        }
+      }
+    },
+    "Filtrelenen mesajlar silinmez. Mesajlar uygulamasında sol üstteki Filtreler menüsünden Gereksiz, Promosyonlar ve İşlemler klasörlerinde görebilirsin. Bu mesajlar için bildirim gelmez.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtered messages aren't deleted. In Messages, open the Filters menu at the top left to see them in Junk, Promotions and Transactions. You don't get notifications for them."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtrelenen mesajlar silinmez. Mesajlar uygulamasında sol üstteki Filtreler menüsünden Gereksiz, Promosyonlar ve İşlemler klasörlerinde görebilirsin. Bu mesajlar için bildirim gelmez."
+          }
+        }
+      }
+    },
+    "Filtreyi aç": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn On the Filter"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtreyi aç"
+          }
+        }
+      }
+    },
+    "Gelen kutusuna gelir": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goes to the inbox"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gelen kutusuna gelir"
+          }
+        }
+      }
+    },
+    "Gelişmiş": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Advanced"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gelişmiş"
+          }
+        }
+      }
+    },
+    "Gelişmiş desen (regex)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Advanced pattern (regex)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gelişmiş desen (regex)"
+          }
+        }
+      }
+    },
+    "Gereksiz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Junk"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gereksiz"
+          }
+        }
+      }
+    },
+    "Gereksiz'e gider": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goes to Junk"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gereksiz'e gider"
+          }
+        }
+      }
+    },
+    "Gerçek kurumların .tr adreslerine ve kendi numaralarına dokunmaz.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doesn't touch real institutions' .tr addresses or their own numbers."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerçek kurumların .tr adreslerine ve kendi numaralarına dokunmaz."
+          }
+        }
+      }
+    },
+    "Geç": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geç"
+          }
+        }
+      }
+    },
+    "Gizlilik": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizlilik"
+          }
+        }
+      }
+    },
+    "Gönderici": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sender"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderici"
+          }
+        }
+      }
+    },
+    "Gönderici \"%@\" ile başlıyorsa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If the sender starts with \"%@\""
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderici \"%@\" ile başlıyorsa"
+          }
+        }
+      }
+    },
+    "Gönderici \"%@\" içeriyorsa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If the sender contains \"%@\""
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderici \"%@\" içeriyorsa"
+          }
+        }
+      }
+    },
+    "Gönderici (ör. SDNMAKINA)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sender (e.g. SDNMAKINA)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderici (ör. SDNMAKINA)"
+          }
+        }
+      }
+    },
+    "Göndericiyi engelle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Block the sender"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Göndericiyi engelle"
+          }
+        }
+      }
+    },
+    "Hangi mesajlar filtrelenir": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which messages are filtered"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hangi mesajlar filtrelenir"
+          }
+        }
+      }
+    },
+    "Hazır kural: silinemez, kapatılabilir. Düzenlersen kural listesi güncellemeleri bu kuralı artık değiştirmez.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Built-in rule: it can be turned off but not deleted. If you edit it, rule list updates no longer change it."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hazır kural: silinemez, kapatılabilir. Düzenlersen kural listesi güncellemeleri bu kuralı artık değiştirmez."
+          }
+        }
+      }
+    },
+    "Henüz yapılmadı": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not yet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz yapılmadı"
+          }
+        }
+      }
+    },
+    "Hiçbir kural eşleşmedi.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No rule matched."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiçbir kural eşleşmedi."
+          }
+        }
+      }
+    },
+    "Kaydet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydet"
+          }
+        }
+      }
+    },
+    "Kayıtlı kurallar okunamadı, filtre varsayılan kurallarla çalışıyor. Kayıtlı dosyanın üzerine yazılmasın diye değişiklikler kaydedilmiyor. Varsayılanlara dönebilir ya da kuralları içe aktarabilirsin.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your saved rules can't be read, so the filter is using the default rules. Changes aren't saved, so the saved file isn't overwritten. You can reset to the defaults or import your rules."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıtlı kurallar okunamadı, filtre varsayılan kurallarla çalışıyor. Kayıtlı dosyanın üzerine yazılmasın diye değişiklikler kaydedilmiyor. Varsayılanlara dönebilir ya da kuralları içe aktarabilirsin."
+          }
+        }
+      }
+    },
+    "Kaçan bir spam mesajdan kural oluşturmak için Kontrol et sekmesine yapıştır.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To make a rule from spam that got through, paste it into the Check tab."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaçan bir spam mesajdan kural oluşturmak için Kontrol et sekmesine yapıştır."
+          }
+        }
+      }
+    },
+    "Kelimelere dokunarak ifade oluştur. Kısa ve yaygın ifadeler normal mesajları da engelleyebilir; \"deneme hediye\" gibi spame özgü ifadeler seç.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap words to build a phrase. Short, common phrases can block normal messages too; pick phrases typical of spam, like \"deneme hediye\"."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kelimelere dokunarak ifade oluştur. Kısa ve yaygın ifadeler normal mesajları da engelleyebilir; \"deneme hediye\" gibi spame özgü ifadeler seç."
+          }
+        }
+      }
+    },
+    "Kendi kuralların": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your rules"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kendi kuralların"
+          }
+        }
+      }
+    },
+    "Klasörlere ayırma": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sorting into folders"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klasörlere ayırma"
+          }
+        }
+      }
+    },
+    "Kontrol et": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontrol et"
+          }
+        }
+      }
+    },
+    "Koruma": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protection"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koruma"
+          }
+        }
+      }
+    },
+    "Kural adı": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rule name"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kural adı"
+          }
+        }
+      }
+    },
+    "Kural ara": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search rules"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kural ara"
+          }
+        }
+      }
+    },
+    "Kural ekle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Rule"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kural ekle"
+          }
+        }
+      }
+    },
+    "Kural listesi": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rule list"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kural listesi"
+          }
+        }
+      }
+    },
+    "Kural listesi güncellenemedi: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The rule list couldn't be updated: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kural listesi güncellenemedi: %@"
+          }
+        }
+      }
+    },
+    "Kurallar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rules"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurallar"
+          }
+        }
+      }
+    },
+    "Kurallar kaydedilemedi: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The rules couldn't be saved: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurallar kaydedilemedi: %@"
+          }
+        }
+      }
+    },
+    "Kuralları yönet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manage rules"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuralları yönet"
+          }
+        }
+      }
+    },
+    "Kurulum rehberi": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setup guide"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurulum rehberi"
+          }
+        }
+      }
+    },
+    "Link adreslerini engelle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Block link addresses"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link adreslerini engelle"
+          }
+        }
+      }
+    },
+    "Liste sürümü": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "List version"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liste sürümü"
+          }
+        }
+      }
+    },
+    "Mesaj \"%@\" ile başlıyorsa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If the message starts with \"%@\""
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesaj \"%@\" ile başlıyorsa"
+          }
+        }
+      }
+    },
+    "Mesaj \"%@\" içeriyorsa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If the message contains \"%@\""
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesaj \"%@\" içeriyorsa"
+          }
+        }
+      }
+    },
+    "Mesaj kontrol et": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check a message"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesaj kontrol et"
+          }
+        }
+      }
+    },
+    "Mesaj metni": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message text"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesaj metni"
+          }
+        }
+      }
+    },
+    "Mesaj nereye gitsin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where the message goes"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesaj nereye gitsin"
+          }
+        }
+      }
+    },
+    "Mesajlar ayarlarını aç": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Messages Settings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesajlar ayarlarını aç"
+          }
+        }
+      }
+    },
+    "Mesajlar'da mesaja uzun bas › Kopyala, sonra buraya yapıştır. Göndericiyi elle yazabilirsin.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Messages, touch and hold the message › Copy, then paste it here. You can type the sender yourself."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesajlar'da mesaja uzun bas › Kopyala, sonra buraya yapıştır. Göndericiyi elle yazabilirsin."
+          }
+        }
+      }
+    },
+    "Mesajların sende kalır": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Messages Stay with You"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesajların sende kalır"
+          }
+        }
+      }
+    },
+    "Nasıl çalışır": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How it works"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nasıl çalışır"
+          }
+        }
+      }
+    },
+    "Ne yakalar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What it catches"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne yakalar"
+          }
+        }
+      }
+    },
+    "Ne zaman": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne zaman"
+          }
+        }
+      }
+    },
+    "Nereye bakılsın": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look in"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nereye bakılsın"
+          }
+        }
+      }
+    },
+    "Promosyonlar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promotions"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promosyonlar"
+          }
+        }
+      }
+    },
+    "Promosyonlar veya İşlemler klasörü sende görünmüyorsa, ilgili kuralları açıp \"Mesaj nereye gitsin\" ayarını Gereksiz yap.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If you don't see the Promotions or Transactions folder, open those rules and set \"Where the message goes\" to Junk."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promosyonlar veya İşlemler klasörü sende görünmüyorsa, ilgili kuralları açıp \"Mesaj nereye gitsin\" ayarını Gereksiz yap."
+          }
+        }
+      }
+    },
+    "Promosyonlar'a gider": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goes to Promotions"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promosyonlar'a gider"
+          }
+        }
+      }
+    },
+    "Regex": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regex"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regex"
+          }
+        }
+      }
+    },
+    "Regex deseni": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regex pattern"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regex deseni"
+          }
+        }
+      }
+    },
+    "Regex küçük harfli ve Türkçe karaktersiz metne uygulanır (\"kazandınız\" → \"kazandiniz\"). Deseni de öyle yaz.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regex runs on lowercase text without Turkish characters (\"kazandınız\" → \"kazandiniz\"). Write the pattern the same way."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regex küçük harfli ve Türkçe karaktersiz metne uygulanır (\"kazandınız\" → \"kazandiniz\"). Deseni de öyle yaz."
+          }
+        }
+      }
+    },
+    "Rehberinde olmayan göndericilerden gelen SMS'ler bu kurallarla, cihazında kontrol edilir.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SMS from senders who aren't in your contacts are checked against these rules on your device."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rehberinde olmayan göndericilerden gelen SMS'ler bu kurallarla, cihazında kontrol edilir."
+          }
+        }
+      }
+    },
+    "Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar iOS tarafından filtreye hiç gönderilmez. Buradaki sonuç bu mesajlar için geçerli olmaz.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS never sends messages from your contacts, from numbers you have replied to, or iMessages to the filter. The result here doesn't apply to them."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar iOS tarafından filtreye hiç gönderilmez. Buradaki sonuç bu mesajlar için geçerli olmaz."
+          }
+        }
+      }
+    },
+    "SMS Filtreleme altında Spam Shield'ı seç.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Under SMS Filtering, select Spam Shield."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SMS Filtreleme altında Spam Shield'ı seç."
+          }
+        }
+      }
+    },
+    "Seçili kuralları ekle (%lld)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Selected Rules (%lld)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili kuralları ekle (%lld)"
+          }
+        }
+      }
+    },
+    "Sil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sil"
+          }
+        }
+      }
+    },
+    "Son kontrol": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last checked"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son kontrol"
+          }
+        }
+      }
+    },
+    "Sonuç": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Result"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonuç"
+          }
+        }
+      }
+    },
+    "Spam SMS'lere karşı kalkan": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Shield Against Spam SMS"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spam SMS'lere karşı kalkan"
+          }
+        }
+      }
+    },
+    "Spam bildir": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report Spam"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spam bildir"
+          }
+        }
+      }
+    },
+    "Sıkı korumalar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strict protections"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sıkı korumalar"
+          }
+        }
+      }
+    },
+    "Temizle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temizle"
+          }
+        }
+      }
+    },
+    "Tüm kurallar silinip varsayılanlar yüklensin mi?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete all rules and load the defaults?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm kurallar silinip varsayılanlar yüklensin mi?"
+          }
+        }
+      }
+    },
+    "Uygulama internete sadece güncel kural listesini GitHub'dan indirmek için bağlanır.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The app only goes online to download the latest rule list from GitHub."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama internete sadece güncel kural listesini GitHub'dan indirmek için bağlanır."
+          }
+        }
+      }
+    },
+    "Uygulamalar › Mesajlar'a gir (iOS 17'de doğrudan Mesajlar).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go to Apps › Messages (on iOS 17, just Messages)."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulamalar › Mesajlar'a gir (iOS 17'de doğrudan Mesajlar)."
+          }
+        }
+      }
+    },
+    "Varsayılan olarak kapalı. Açarsan bazı gerçek mesajlar da Gereksiz'e düşebilir.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off by default. If you turn them on, some real messages may go to Junk too."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varsayılan olarak kapalı. Açarsan bazı gerçek mesajlar da Gereksiz'e düşebilir."
+          }
+        }
+      }
+    },
+    "Varsayılanlara dön": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset to Defaults"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varsayılanlara dön"
+          }
+        }
+      }
+    },
+    "Vazgeç": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vazgeç"
+          }
+        }
+      }
+    },
+    "Yeni kural": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New Rule"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni kural"
+          }
+        }
+      }
+    },
+    "Yeni kurallar GitHub'daki açık listeden otomatik indirilir. Değiştirdiğin kurallar korunur.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New rules are downloaded automatically from the public list on GitHub. Rules you changed are kept."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni kurallar GitHub'daki açık listeden otomatik indirilir. Değiştirdiğin kurallar korunur."
+          }
+        }
+      }
+    },
+    "iOS sadece tanımadığın göndericilerden gelen SMS/MMS mesajlarını filtreye gönderir. Rehberindeki kişiler, daha önce cevap yazdığın numaralar ve iMessage'lar filtrelenmez.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS only sends SMS/MMS from unknown senders to the filter. Your contacts, numbers you have replied to and iMessages aren't filtered."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS sadece tanımadığın göndericilerden gelen SMS/MMS mesajlarını filtreye gönderir. Rehberindeki kişiler, daha önce cevap yazdığın numaralar ve iMessage'lar filtrelenmez."
+          }
+        }
+      }
+    },
+    "spam-kurallari": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "spam-rules"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "spam-kurallari"
+          }
+        }
+      }
+    },
+    "Ör. +90850 veya FIRMAADI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E.g. +90850 or COMPANYNAME"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ör. +90850 veya FIRMAADI"
+          }
+        }
+      }
+    },
+    "Ör. deneme bonusu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E.g. deneme bonusu"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ör. deneme bonusu"
+          }
+        }
+      }
+    },
+    "İfade engelle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Block a phrase"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İfade engelle"
+          }
+        }
+      }
+    },
+    "İndirilen liste kullanılmadı, mevcut kurallar çalışmaya devam ediyor. %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The downloaded list wasn't used; the current rules keep working. %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirilen liste kullanılmadı, mevcut kurallar çalışmaya devam ediyor. %@"
+          }
+        }
+      }
+    },
+    "İzin ver": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzin ver"
+          }
+        }
+      }
+    },
+    "İçe aktar (mevcutların yerine)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import (replaces current rules)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İçe aktar (mevcutların yerine)"
+          }
+        }
+      }
+    },
+    "İçerir": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contains"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İçerir"
+          }
+        }
+      }
+    },
+    "İşlemler": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transactions"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlemler"
+          }
+        }
+      }
+    },
+    "İşlemler'e gider": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goes to Transactions"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlemler'e gider"
+          }
+        }
+      }
+    },
+    "Şimdi güncelle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update Now"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şimdi güncelle"
+          }
+        }
+      }
+    },
+    "Şununla başlar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starts with"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şununla başlar"
+          }
+        }
+      }
+    },
+    "Şüpheli linkler": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suspicious links"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şüpheli linkler"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

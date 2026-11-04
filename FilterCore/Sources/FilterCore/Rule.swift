@@ -97,10 +97,10 @@ public struct Rule: Codable, Identifiable, Hashable, Sendable {
     /// Message shown in the rule editor when the pattern can't be used, otherwise nil.
     public var validationError: String? {
         if pattern.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return "Desen boş olamaz."
+            return String(localized: "The pattern can't be empty.", bundle: .module)
         }
         if matchType == .regex, (try? NSRegularExpression(pattern: TextNormalizer.foldRegexPattern(pattern))) == nil {
-            return "Geçersiz regex."
+            return String(localized: "Invalid regex.", bundle: .module)
         }
         return nil
     }

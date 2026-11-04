@@ -7,6 +7,10 @@ options:
   deploymentTarget:
     iOS: "17.0"
   createIntermediateGroups: true
+  # Texts in the code are Turkish keys; App/Localizable.xcstrings holds both the English and the Turkish text,
+  # so both languages get their own .lproj. With Turkish as the source language Xcode makes no tr.lproj,
+  # and iOS then falls back to English on Turkish phones.
+  developmentLanguage: en
 
 settings:
   base:
@@ -16,6 +20,9 @@ settings:
     # Pick your team in Xcode (Signing & Capabilities) or put the Team ID here.
     DEVELOPMENT_TEAM: ""
     CODE_SIGN_STYLE: Automatic
+    # Lets the compiler list the texts in the code, so they can be checked against Localizable.xcstrings.
+    SWIFT_EMIT_LOC_STRINGS: YES
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
 
 packages:
   FilterCore:
@@ -34,8 +41,9 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: Spam Shield
-        # Turkish, so system controls (Paste, Cancel, search) show in Turkish.
-        CFBundleDevelopmentRegion: tr
+        # Phones in a language other than Turkish or English get English.
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations: [tr, en]
         UILaunchScreen: {}
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         # Where the app downloads new rules from (see README, "Kural listesini güncelleme").
@@ -88,13 +96,15 @@ targets:
       - App/CheckView.swift
       - App/RuleListModel.swift
       - App/FilterCore+Display.swift
+      - App/Localizable.xcstrings
     dependencies:
       - package: FilterCore
     info:
       path: ShareExtension/Info.plist
       properties:
         CFBundleDisplayName: Spam Shield
-        CFBundleDevelopmentRegion: tr
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations: [tr, en]
         NSExtension:
           NSExtensionPointIdentifier: com.apple.share-services
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShareViewController

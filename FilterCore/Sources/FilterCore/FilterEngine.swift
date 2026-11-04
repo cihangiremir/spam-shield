@@ -18,7 +18,8 @@ public struct FilterEngine {
 
     public init(rules: [Rule]) {
         compiledRules = rules.compactMap { rule in
-            guard rule.isEnabled, rule.validationError == nil else { return nil }
+            // Same checks as `validationError`, without compiling each regex a second time.
+            guard rule.isEnabled, !rule.pattern.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return nil }
 
             switch rule.matchType {
             case .regex:

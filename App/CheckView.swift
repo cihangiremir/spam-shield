@@ -103,7 +103,7 @@ struct CheckForm: View {
     }
 
     private var resultSection: some View {
-        let decision = FilterEngine(rules: model.rules).evaluate(sender: sender, body: messageText)
+        let decision = model.engine.evaluate(sender: sender, body: messageText)
         return Section("Sonuç") {
             HStack(spacing: 14) {
                 Image(systemName: decision.action.systemImage)
@@ -115,7 +115,7 @@ struct CheckForm: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(decision.action.outcome)
                         .font(.headline)
-                    Text(decision.matchedRule.map { "Eşleşen kural: \($0.name)" } ?? "Hiçbir kural eşleşmedi.")
+                    Text(decision.matchedRule.map { String(localized: "Eşleşen kural: \($0.name)") } ?? String(localized: "Hiçbir kural eşleşmedi."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -187,10 +187,12 @@ struct CheckForm: View {
             Button {
                 let added = model.addReportedRules(selectedRules)
                 resultMessage = added == 0
-                    ? "Bu kurallar zaten listende var."
-                    : "\(added) kural eklendi. Benzer mesajlar artık Gereksiz'e gidecek."
+                    ? String(localized: "Bu kurallar zaten listende var.")
+                    : String(localized: "\(added) kural eklendi. Benzer mesajlar artık Gereksiz'e gidecek.")
             } label: {
-                Text(selectedRules.isEmpty ? "Engellemek için yukarıdan seç" : "Seçili kuralları ekle (\(selectedRules.count))")
+                Text(selectedRules.isEmpty
+                     ? String(localized: "Engellemek için yukarıdan seç")
+                     : String(localized: "Seçili kuralları ekle (\(selectedRules.count))"))
                     .font(.headline)
                     .frame(maxWidth: .infinity)
             }

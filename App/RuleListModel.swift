@@ -7,7 +7,14 @@ import Observation
 @MainActor
 @Observable
 final class RuleListModel {
-    private(set) var rules: [Rule]
+    private(set) var rules: [Rule] {
+        didSet {
+            // Coming back to the foreground reloads the same rules; no need to compile them again.
+            if rules != oldValue { engine = FilterEngine(rules: rules) }
+        }
+    }
+    /// Built once per rule change, so the Check screen doesn't compile every regex on each keystroke.
+    private(set) var engine: FilterEngine
     var errorMessage: String?
 
     /// Version of the built-in rule list in use (bundled or downloaded from GitHub).
@@ -27,14 +34,17 @@ final class RuleListModel {
     init(store: RuleStore? = RuleStore.shared()) {
         self.store = store
         rules = DefaultRules.all
+        engine = FilterEngine(rules: DefaultRules.all)
         reload()
+        // `didSet` doesn't run during init.
+        if rules != DefaultRules.all { engine = FilterEngine(rules: rules) }
     }
 
     /// Reads the saved rules again. The app calls this when it comes to the foreground, because the share
     /// extension may have added rules meanwhile, and saving the old list would drop them.
     func reload() {
         guard let store else {
-            errorMessage = "App Group bulunamadı. Kurallar kaydedilemez, filtre sadece varsayılan kurallarla çalışır. Xcode'da her iki hedefin Signing ayarlarını kontrol et."
+            errorMessage = String(localized: "App Group bulunamadı. Kurallar kaydedilemez, filtre sadece varsayılan kurallarla çalışır. Xcode'da hedeflerin Signing ayarlarını kontrol et.")
             return
         }
         catalogVersion = store.loadCatalog().version
@@ -43,23 +53,30 @@ final class RuleListModel {
             unblockSaving()
         } catch {
             isSavingBlocked = true
-            errorMessage = "Kayıtlı kurallar okunamadı, filtre varsayılan kurallarla çalışıyor. Kayıtlı dosyanın üzerine yazılmasın diye değişiklikler kaydedilmiyor. Varsayılanlara dönebilir ya da kuralları içe aktarabilirsin."
+            errorMessage = String(localized: "Kayıtlı kurallar okunamadı, filtre varsayılan kurallarla çalışıyor. Kayıtlı dosyanın üzerine yazılmasın diye değişiklikler kaydedilmiyor. Varsayılanlara dönebilir ya da kuralları içe aktarabilirsin.")
         }
     }
 
     /// Downloads the rule list from GitHub (`RulesUpdateURL` in Info.plist) and uses it if it is newer.
     /// A list that doesn't pass `RuleCatalog`'s checks or junks a legitimate sample is ignored, so a bad
-    /// commit can't break filtering. Without `force`, does nothing if the last check was less than 6 hours ago.
+    /// commit can't break filtering. Without `force` (automatic checks), does nothing if the last check was less than 2 days ago and skips
+    /// Low Data Mode, so it costs almost no battery or data.
     func updateRules(force: Bool = false) async {
         guard let store, !isUpdating,
               let url = (Bundle.main.object(forInfoDictionaryKey: "RulesUpdateURL") as? String).flatMap(URL.init(string:))
         else { return }
-        if !force, let lastUpdateCheck, Date.now.timeIntervalSince(lastUpdateCheck) < 6 * 60 * 60 { return }
+        if !force, let lastUpdateCheck, Date.now.timeIntervalSince(lastUpdateCheck) < Self.automaticCheckInterval { return }
 
         isUpdating = true
         defer { isUpdating = false }
         do {
-            let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 20)
+            var request = URLRequest(url: url, timeoutInterval: 20)
+            if force {
+                request.cachePolicy = .reloadIgnoringLocalCacheData
+            } else {
+                // Lets URLSession revalidate with GitHub's ETag, so an unchanged list isn't downloaded again.
+                request.allowsConstrainedNetworkAccess = false
+            }
             let (data, response) = try await URLSession.shared.data(for: request)
             // The real list is a few tens of KB; anything this big isn't it.
             guard (response as? HTTPURLResponse)?.statusCode == 200, data.count < 1_000_000 else {
@@ -74,11 +91,14 @@ final class RuleListModel {
             lastUpdateCheck = .now
             updateError = nil
         } catch let error as RuleCatalogError {
-            updateError = "İndirilen liste kullanılmadı, mevcut kurallar çalışmaya devam ediyor. \(error.localizedDescription)"
+            updateError = String(localized: "İndirilen liste kullanılmadı, mevcut kurallar çalışmaya devam ediyor. \(error.localizedDescription)")
         } catch {
-            updateError = "Kural listesi güncellenemedi: \(error.localizedDescription)"
+            updateError = String(localized: "Kural listesi güncellenemedi: \(error.localizedDescription)")
         }
     }
+
+    /// How often the app checks for new rules on its own (on opening and in the background).
+    static let automaticCheckInterval: TimeInterval = 2 * 24 * 60 * 60
 
     func rules(for action: FilterAction) -> [Rule] {
         rules.filter { $0.action == action }
@@ -148,7 +168,7 @@ final class RuleListModel {
             unblockSaving()
             save()
         } catch {
-            errorMessage = "Dosya okunamadı: \(error.localizedDescription)"
+            errorMessage = String(localized: "Dosya okunamadı: \(error.localizedDescription)")
         }
     }
 
@@ -163,7 +183,7 @@ final class RuleListModel {
         do {
             try store.save(rules)
         } catch {
-            errorMessage = "Kurallar kaydedilemedi: \(error.localizedDescription)"
+            errorMessage = String(localized: "Kurallar kaydedilemedi: \(error.localizedDescription)")
         }
     }
 }

@@ -40,6 +40,22 @@ struct RuleCatalogTests {
         #expect(catalog.rules[0].category == "scam" && catalog.rules[0].details == "Test")
     }
 
+    @Test func usesTranslationForLanguageAndTurkishOtherwise() throws {
+        var translated = entry(id: "a")
+        translated["translations"] = ["en": ["name": "English name", "details": "English details"]]
+        var nameOnly = entry(id: "b")
+        nameOnly["translations"] = ["en": ["name": "Only name"]]
+        let data = try catalogData(rules: [translated, nameOnly])
+
+        let english = try RuleCatalog(data: data, language: "en")
+        #expect(english.rules.map(\.name) == ["English name", "Only name"])
+        #expect(english.rules.map(\.details) == ["English details", "Test"])
+
+        let turkish = try RuleCatalog(data: data, language: "tr")
+        #expect(turkish.rules.map(\.name) == ["a", "b"])
+        #expect(turkish.rules.map(\.details) == ["Test", "Test"])
+    }
+
     @Test func expandsFragmentsInsideFragments() throws {
         let fragments = ["inner": "xyz|top", "outer": "com|{{inner}}"]
         #expect(try RuleCatalog.expand(#"\.({{outer}})\b"#, fragments: fragments) == #"\.(com|xyz|top)\b"#)

@@ -4,20 +4,20 @@ import SwiftUI
 extension FilterAction {
     var title: String {
         switch self {
-        case .allow: return "İzin ver"
-        case .junk: return "Gereksiz"
-        case .promotion: return "Promosyonlar"
-        case .transaction: return "İşlemler"
+        case .allow: return String(localized: "İzin ver")
+        case .junk: return String(localized: "Gereksiz")
+        case .promotion: return String(localized: "Promosyonlar")
+        case .transaction: return String(localized: "İşlemler")
         }
     }
 
     /// Where a matching message ends up, as a sentence.
     var outcome: String {
         switch self {
-        case .allow: return "Gelen kutusuna gelir"
-        case .junk: return "Gereksiz'e gider"
-        case .promotion: return "Promosyonlar'a gider"
-        case .transaction: return "İşlemler'e gider"
+        case .allow: return String(localized: "Gelen kutusuna gelir")
+        case .junk: return String(localized: "Gereksiz'e gider")
+        case .promotion: return String(localized: "Promosyonlar'a gider")
+        case .transaction: return String(localized: "İşlemler'e gider")
         }
     }
 
@@ -43,8 +43,8 @@ extension FilterAction {
 extension RuleTarget {
     var title: String {
         switch self {
-        case .body: return "Mesaj metni"
-        case .sender: return "Gönderici"
+        case .body: return String(localized: "Mesaj metni")
+        case .sender: return String(localized: "Gönderici")
         }
     }
 }
@@ -52,9 +52,9 @@ extension RuleTarget {
 extension MatchType {
     var title: String {
         switch self {
-        case .contains: return "İçerir"
-        case .prefix: return "Şununla başlar"
-        case .regex: return "Regex"
+        case .contains: return String(localized: "İçerir")
+        case .prefix: return String(localized: "Şununla başlar")
+        case .regex: return String(localized: "Regex")
         }
     }
 }
@@ -71,12 +71,12 @@ enum RuleCategory: String, CaseIterable {
 
     var title: String {
         switch self {
-        case .scam: return "Dolandırıcılık"
-        case .ads: return "Bahis ve kredi reklamı"
-        case .links: return "Şüpheli linkler"
-        case .sorting: return "Klasörlere ayırma"
-        case .other: return "Diğer korumalar"
-        case .strict: return "Sıkı korumalar"
+        case .scam: return String(localized: "Dolandırıcılık")
+        case .ads: return String(localized: "Bahis ve kredi reklamı")
+        case .links: return String(localized: "Şüpheli linkler")
+        case .sorting: return String(localized: "Klasörlere ayırma")
+        case .other: return String(localized: "Diğer korumalar")
+        case .strict: return String(localized: "Sıkı korumalar")
         }
     }
 
@@ -93,10 +93,10 @@ enum RuleCategory: String, CaseIterable {
 
     var footer: String? {
         switch self {
-        case .scam: return "Gerçek kurumların .tr adreslerine ve kendi numaralarına dokunmaz."
+        case .scam: return String(localized: "Gerçek kurumların .tr adreslerine ve kendi numaralarına dokunmaz.")
         case .ads, .links, .other: return nil
-        case .sorting: return "Bu mesajlar silinmez; Mesajlar'daki Promosyonlar ve İşlemler klasörlerine ayrılır."
-        case .strict: return "Varsayılan olarak kapalı. Açarsan bazı gerçek mesajlar da Gereksiz'e düşebilir."
+        case .sorting: return String(localized: "Bu mesajlar silinmez; Mesajlar'daki Promosyonlar ve İşlemler klasörlerine ayrılır.")
+        case .strict: return String(localized: "Varsayılan olarak kapalı. Açarsan bazı gerçek mesajlar da Gereksiz'e düşebilir.")
         }
     }
 }
@@ -111,11 +111,12 @@ extension Rule {
     /// One line for the list: the explanation for built-in rules, what the rule looks for otherwise.
     var summary: String {
         if let details { return details }
-        let subject = target == .sender ? "Gönderici" : "Mesaj"
-        switch matchType {
-        case .contains: return "\(subject) \"\(pattern)\" içeriyorsa"
-        case .prefix: return "\(subject) \"\(pattern)\" ile başlıyorsa"
-        case .regex: return "Gelişmiş desen (regex)"
+        switch (matchType, target) {
+        case (.contains, .sender): return String(localized: "Gönderici \"\(pattern)\" içeriyorsa")
+        case (.contains, .body): return String(localized: "Mesaj \"\(pattern)\" içeriyorsa")
+        case (.prefix, .sender): return String(localized: "Gönderici \"\(pattern)\" ile başlıyorsa")
+        case (.prefix, .body): return String(localized: "Mesaj \"\(pattern)\" ile başlıyorsa")
+        case (.regex, _): return String(localized: "Gelişmiş desen (regex)")
         }
     }
 }

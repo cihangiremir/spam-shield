@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "fragments": {
     "suspiciousTLDs": "store|site|vip|live|online|icu|top|click|link|sbs|cfd|shop|support|help|info|art|xyz|buzz|club|bond|rest|cyou|monster|lol|quest|website|space|fun|pw|tk|ml|ga|cf|gq",
     "nonWordTLDs": "icu|sbs|cfd|xyz|cyou|buzz|pw|tk|ml|ga|cf|gq",
@@ -12,6 +12,12 @@
       "name": "Bahis ve casino",
       "category": "ads",
       "details": "Bahis, casino ve \"deneme bonusu\" reklamları.",
+      "translations": {
+        "en": {
+          "name": "Betting and casino",
+          "details": "Betting, casino and \"free trial bonus\" ads."
+        }
+      },
       "note": "Betting spam avoids \"bonus\" with wording like \"deneme hediye\" or \"yatirim sartsiz anlik cekim\". A bare \"%10 bonus\" is left out: it is also how Garanti BBVA Bonus card campaigns read.",
       "matchType": "regex",
       "pattern": "\\b(bahis|casino|kumarhane|rulet|freespin|free spin|freebet|deneme (bonus\\w*|hediye\\w*)|yatirim bonusu|kayip bonusu|hos ?geldin bonusu|cevrimsiz\\w*|yatirim ?sartsiz|sartsiz (bonus|hediye|cekim)\\w*|anlik cekim|canli bahis|bedava bahis)\\b",
@@ -22,6 +28,12 @@
       "name": "Kredi ve borç kapatma",
       "category": "ads",
       "details": "\"Borcunuzu kapatıyoruz\", \"sicil affı\", \"kefilsiz kredi\" gibi kredi teklifleri.",
+      "translations": {
+        "en": {
+          "name": "Loans and debt payoff",
+          "details": "Loan offers like \"we'll pay off your debt\", \"credit record amnesty\" or \"loans without a guarantor\"."
+        }
+      },
       "matchType": "regex",
       "pattern": "kredi notu(nuz)? (ne olursa olsun|fark etmez|onemsiz|dusuk)|borc\\w* kapatiyoruz|borc kapatma kredi\\w*|icrali\\w* (kredi|kisi)|kefilsiz kredi|aninda kredi|sicil affi|nakit ihtiyac",
       "action": "junk"
@@ -31,6 +43,12 @@
       "name": "Sahte ödül ve çekiliş",
       "category": "scam",
       "details": "\"Tebrikler, kazandınız\", \"hediyeniz tanımlandı\" gibi sahte ödüller.",
+      "translations": {
+        "en": {
+          "name": "Fake prizes and draws",
+          "details": "Fake prizes like \"Congratulations, you've won\" or \"your gift is ready\"."
+        }
+      },
       "matchType": "regex",
       "pattern": "tebrikler.{0,40}(kazandi|kazanan)|hediye\\w* (tanimlandi|hazir|sizi bekliyor)|cekilis\\w*.{0,30}kazandi|odul\\w* (talep|almak icin)",
       "action": "junk"
@@ -40,6 +58,12 @@
       "name": "Kısaltılmış linkler",
       "category": "links",
       "details": "bit.ly, cutt.ly gibi asıl adresi gizleyen kısa linkler.",
+      "translations": {
+        "en": {
+          "name": "Shortened links",
+          "details": "Short links like bit.ly or cutt.ly that hide the real address."
+        }
+      },
       "matchType": "regex",
       "pattern": "(^|[^a-z0-9.])(bit\\.ly|t\\.ly|cutt\\.ly|tinyurl\\.com|shorturl\\.at|rb\\.gy|is\\.gd|goo\\.gl|s\\.id|tiny\\.cc|ow\\.ly|t\\.co|kisalt\\w*\\.[a-z]{2,})/",
       "action": "junk"
@@ -49,6 +73,12 @@
       "name": "Telegram linkleri",
       "category": "links",
       "details": "t.me linkleri. Takip ettiğin bir kanal SMS ile link atıyorsa kapat.",
+      "translations": {
+        "en": {
+          "name": "Telegram links",
+          "details": "t.me links. Turn this off if a channel you follow sends links by SMS."
+        }
+      },
       "note": "Betting and scam groups move people to Telegram; banks, carriers and shops rarely link there by SMS. A separate rule so it can be turned off for a Telegram channel you follow.",
       "matchType": "regex",
       "pattern": "(^|[^a-z0-9.])(t\\.me|telegram\\.me)/",
@@ -59,6 +89,12 @@
       "name": "Sahte kargo, ceza ve iade linkleri",
       "category": "scam",
       "details": "Gümrük ücreti, HGS/OGS cezası veya vergi iadesini .tr olmayan bir linkle isteyen mesajlar.",
+      "translations": {
+        "en": {
+          "name": "Fake delivery, fine and refund links",
+          "details": "Messages asking for a customs fee, HGS/OGS toll fine or tax refund through a link that isn't .tr."
+        }
+      },
       "note": "Asks for a payment or refund through a link. \"Teslim edilemedi\" and \"adres eksik\" are left out: real carriers send those with a tracking link (yurticikargo.com) too.",
       "matchType": "regex",
       "pattern": "(gumruk (ucreti|vergisi)|(hgs|ogs).{0,30}(ceza|borc)|vergi iade|e-?devlet.{0,30}iade).{0,120}{{nonTurkishLink}}",
@@ -69,6 +105,12 @@
       "name": "Resmi kurum taklidi linkler",
       "category": "scam",
       "details": "e-Devlet'i taklit eden adresler. Gerçek adres yalnızca turkiye.gov.tr.",
+      "translations": {
+        "en": {
+          "name": "Government lookalike links",
+          "details": "Addresses imitating e-Devlet. The real address is only turkiye.gov.tr."
+        }
+      },
       "note": "The only real e-Devlet domain is turkiye.gov.tr. \"gov.tr-...\" / \"gov.tr.xyz\" and \"edevlet\", \"turkiye-gov\" inside another domain are look-alikes.",
       "matchType": "regex",
       "pattern": "gov\\.tr(-|\\.[a-z0-9])|[a-z0-9-]*(edevlet|e-devlet|turkiye-gov|gov-tr)[a-z0-9-]*(\\.[a-z0-9-]+)*\\.({{linkTLDs}})(?![a-z0-9-])",
@@ -79,6 +121,12 @@
       "name": "Şüpheli alan adı uzantıları",
       "category": "links",
       "details": ".xyz, .top, .icu gibi bankaların ve mağazaların kullanmadığı uzantılar.",
+      "translations": {
+        "en": {
+          "name": "Suspicious domain endings",
+          "details": "Endings like .xyz, .top or .icu that banks and stores don't use."
+        }
+      },
       "note": "Cheap TLDs that real Turkish banks, carriers and shops don't use. Many of them are also words, so \"Ödemeniz alındı.Online işlemler\" (a missing space) must not count: a word-like TLD needs a link sign (http, www, a path) or a hyphen/digit in the domain.",
       "matchType": "regex",
       "pattern": "(https?://|www\\.)[a-z0-9.-]*\\.({{suspiciousTLDs}})(?![a-z0-9-])|[a-z0-9-]\\.({{suspiciousTLDs}})/|[a-z0-9-]\\.({{nonWordTLDs}})(?![a-z0-9-])|(?<![a-z0-9-])[a-z0-9]*[0-9-][a-z0-9-]*\\.({{suspiciousTLDs}})(?![a-z0-9-])",
@@ -89,6 +137,12 @@
       "name": "Ücretsiz hosting ve IP linkleri",
       "category": "links",
       "details": "Ücretsiz site servislerinde (netlify, blogspot...) veya IP adresinde açılan linkler.",
+      "translations": {
+        "en": {
+          "name": "Free hosting and IP links",
+          "details": "Links on free website services (netlify, blogspot...) or to an IP address."
+        }
+      },
       "matchType": "regex",
       "pattern": "(netlify\\.app|vercel\\.app|firebaseapp\\.com|web\\.app|github\\.io|pages\\.dev|glitch\\.me|weebly\\.com|wixsite\\.com|blogspot\\.com|herokuapp\\.com|000webhostapp\\.com|ngrok)|https?://\\d{1,3}(\\.\\d{1,3}){3}|xn--",
       "action": "junk"
@@ -98,6 +152,12 @@
       "name": "Marka taklidi alan adları",
       "category": "scam",
       "details": "turkcell-odeme.com gibi marka adına kelime eklenmiş taklit adresler.",
+      "translations": {
+        "en": {
+          "name": "Brand lookalike domains",
+          "details": "Fake addresses that add a word to a brand name, like turkcell-odeme.com."
+        }
+      },
       "note": "Hyphenated .com/.net/.org domains with words like \"odeme\", \"dogrulama\" or a \"-tr\" part, e.g. turkcell-odeme.com. Real brands use their plain domain (turkcell.com.tr).",
       "matchType": "regex",
       "pattern": "(^|[^a-z0-9.-]|www\\.)(?=[a-z0-9-]*-)(?=[a-z0-9-]*(dogrula|guvenlik|onay|iade|odeme|basvuru|giris|musteri|takip|teslimat|hediye|guncelle|destek|hizmet|bilgi|-tr\\b))[a-z0-9-]+\\.(com|net|org)(?![a-z0-9-])(?!\\.tr)",
@@ -108,6 +168,12 @@
       "name": "Link ile bilgi isteyen mesajlar",
       "category": "scam",
       "details": "Kart, kimlik veya giriş bilgisini .tr olmayan bir linkle isteyen mesajlar.",
+      "translations": {
+        "en": {
+          "name": "Messages asking for details via a link",
+          "details": "Messages asking for card, ID or login details through a link that isn't .tr."
+        }
+      },
       "note": "Banks and institutions never ask for card, ID or login details through an SMS link to a non-.tr domain. Their own .tr sites (turkiye.gov.tr, garantibbva.com.tr) are left alone.",
       "matchType": "regex",
       "pattern": "^(?=.*(kart bilgileri|kimlik bilgi|kimlik dogrulama|iban ve kimlik|tc kimlik numaraniz|bilgilerinizi (gir|guncelle|dogrula|onayla)|giris (yapin|bilgilerinizle)\\b|adresinizi (bugun icinde )?(onaylayin|guncelleyin|dogrulayin)))(?=.*{{nonTurkishLink}})",
@@ -118,6 +184,12 @@
       "name": "\"Anne/baba ben\" dolandırıcılığı",
       "category": "scam",
       "details": "\"Anne ben, para gönder\" mesajları. Ailen rehberde olduğu için etkilenmez.",
+      "translations": {
+        "en": {
+          "name": "\"Mom/Dad, it's me\" scam",
+          "details": "\"Mom, it's me, send money\" messages. Your family is in your contacts, so they aren't affected."
+        }
+      },
       "note": "Family members are in Contacts, so iOS never sends their messages to the filter. \"Abi/abla\" are left out: they are also how strangers, like couriers, address you.",
       "matchType": "regex",
       "pattern": "\\b(anne|baba|anneci?gim|babaci?gim)\\b,? ben\\b.{0,200}\\b(para|tl|iban|hesab\\w*|gonder\\w*)",
@@ -128,6 +200,12 @@
       "name": "Yanlış havale dolandırıcılığı",
       "category": "scam",
       "details": "\"Yanlışlıkla hesabınıza para gönderdim\" dolandırıcılığı.",
+      "translations": {
+        "en": {
+          "name": "Wrong transfer scam",
+          "details": "\"I sent money to your account by mistake\" scams."
+        }
+      },
       "note": "Spelling is loose on purpose: these messages often come with typos (\"yanlşlıkla\").",
       "matchType": "regex",
       "pattern": "yanl\\w{0,5}kla.{0,60}\\b(tl|para)\\b.{0,20}(gonderdim|yatirdim|attim)",
@@ -138,6 +216,12 @@
       "name": "Cep numarası aratan banka uyarısı",
       "category": "scam",
       "details": "\"İşlem size ait değilse\" deyip cep numarası aratan sahte banka uyarıları.",
+      "translations": {
+        "en": {
+          "name": "Bank alerts with a mobile number",
+          "details": "Fake bank alerts that say \"if you didn't make this transaction\" and ask you to call a mobile number."
+        }
+      },
       "note": "Banks give 444 / 0850 lines, never a mobile number. The whole number is required, so \"0850 222 0 500\" or \"4.550 TL\" doesn't count as a 5xx mobile number (\"x\" allows masked digits).",
       "matchType": "regex",
       "pattern": "(size ait degilse|siz yapmadiysaniz|bilginiz disinda).{0,80}(?<!\\d)(\\+?90 ?)?0? ?5[\\dx]{2} ?[\\dx]{3} ?[\\dx]{2} ?[\\dx]{2}(?!\\d)",
@@ -148,6 +232,12 @@
       "name": "Kod paylaşma tuzağı",
       "category": "scam",
       "details": "Gelen doğrulama kodunu iletmeni isteyen mesajlar. Gerçek kodlar \"kimseyle paylaşmayın\" der.",
+      "translations": {
+        "en": {
+          "name": "Code sharing trap",
+          "details": "Messages asking you to pass on a verification code you received. Real codes say \"don't share it with anyone\"."
+        }
+      },
       "note": "Real OTP messages say \"don't share this code\"; scams ask you to pass it on. Only positive verb forms match: the first part lists them, the second rejects the negative \"-me/-ma\" (\"iletmeyin\"). Delivery codes meant for the courier are left out.",
       "matchType": "regex",
       "pattern": "^(?!.*\\b(kurye|gorevli)\\w*).*?(gelen.{0,30}\\bkod\\w*.{0,50}\\b(iletir|iletin|iletmeniz|yazin|yazar|yazmaniz|gonderin|gonderir|gondermeniz|soyler|soyleyin|soylemeniz|paylasin|paylasir|paylasmaniz|okur|okuyun|okumaniz)\\b|\\bkod\\w*\\b.{0,40}\\b(bana|bize|bu sohbete|buraya) (ilet|yaz|gonder|soyle|paylas|oku)(?!m)\\w*)",
@@ -158,6 +248,12 @@
       "name": "Sahte iş ilanı",
       "category": "scam",
       "details": "\"Ürün yorumu yaparak günlük 2.000 TL\" gibi sahte iş ilanları.",
+      "translations": {
+        "en": {
+          "name": "Fake job offers",
+          "details": "Fake job offers like \"earn 2,000 TL a day reviewing products\"."
+        }
+      },
       "matchType": "regex",
       "pattern": "(urun yorumu|begeni|like) yaparak|evden calis\\w*.{0,60}(kazan|gelir)|(gunluk|saatlik|haftalik) [\\d.,]+ ?tl.{0,40}(gelir|kazanc)|deneyim gerekmez",
       "action": "junk"
@@ -167,6 +263,12 @@
       "name": "Link içeren tüm mesajlar",
       "category": "strict",
       "details": "İçinde http veya www geçen her mesaj. Bankaların ve kargoların linkli mesajları da gider.",
+      "translations": {
+        "en": {
+          "name": "All messages with links",
+          "details": "Every message containing http or www. Banks' and couriers' messages with links go too."
+        }
+      },
       "matchType": "regex",
       "pattern": "https?://|www\\.",
       "action": "junk",
@@ -177,6 +279,12 @@
       "name": "0850 numaraları",
       "category": "strict",
       "details": "0850 ile başlayan numaralardan gelen tüm mesajlar.",
+      "translations": {
+        "en": {
+          "name": "0850 numbers",
+          "details": "All messages from numbers starting with 0850."
+        }
+      },
       "target": "sender",
       "matchType": "regex",
       "pattern": "^(\\+?90)?0?850",
@@ -188,6 +296,12 @@
       "name": "Ticari SMS (İYS / RET)",
       "category": "sorting",
       "details": "İYS veya RET bilgisi taşıyan ticari kampanya mesajları.",
+      "translations": {
+        "en": {
+          "name": "Commercial SMS (İYS / RET)",
+          "details": "Marketing messages carrying İYS or RET opt-out information."
+        }
+      },
       "matchType": "regex",
       "pattern": "\\bret\\b.{0,40}\\b\\d{4}\\b|\\bmersis\\b|\\biys\\b|\\bb0\\d{2}\\b|(sms|mesaj) (almamak|listeden cikmak) icin",
       "action": "promotion"
@@ -197,6 +311,12 @@
       "name": "Doğrulama kodları",
       "category": "sorting",
       "details": "Doğrulama ve giriş kodları.",
+      "translations": {
+        "en": {
+          "name": "Verification codes",
+          "details": "Verification and login codes."
+        }
+      },
       "matchType": "regex",
       "pattern": "(dogrulama|onay|aktivasyon|guvenlik|giris|tek kullanimlik) ?(kodu|kodunuz|sifre|sifreniz|sifresi)|verification code|\\b(code|kod|kodu|kodunuz|sifreniz)\\b\\D{0,20}\\d{4,8}\\b|\\b\\d{4,8} (sifresi|kodu) ile",
       "action": "transaction"
@@ -206,6 +326,12 @@
       "name": "Kargo bilgilendirme",
       "category": "sorting",
       "details": "\"Kargoya verildi\", \"teslim edildi\" bildirimleri.",
+      "translations": {
+        "en": {
+          "name": "Delivery updates",
+          "details": "\"Shipped\" and \"delivered\" notifications."
+        }
+      },
       "matchType": "regex",
       "pattern": "kargoya verildi|(kargo|gonderi)\\w*.{0,60}(teslim edil(di|mistir)|dagitima cikti|yola cikti|sube\\w* ulas)",
       "action": "transaction"
@@ -215,6 +341,12 @@
       "name": "Kart ve hesap hareketleri",
       "category": "sorting",
       "details": "Kart harcaması ve hesap hareketi bildirimleri.",
+      "translations": {
+        "en": {
+          "name": "Card and account activity",
+          "details": "Card spending and account activity notifications."
+        }
+      },
       "matchType": "regex",
       "pattern": "(kartinizla|kartinizdan|hesabinizdan|hesabiniza).{0,80}\\d.{0,10}\\b(tl|try)\\b",
       "action": "transaction"

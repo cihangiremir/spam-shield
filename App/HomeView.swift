@@ -129,7 +129,7 @@ struct HomeView: View {
         model.rules.filter { $0.isEnabled && $0.action == action }.count
     }
 
-    private func shortcut(_ title: String, systemImage: String, tint: Color, action: @escaping () -> Void) -> some View {
+    private func shortcut(_ title: LocalizedStringKey, systemImage: String, tint: Color, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack {
                 Label {
@@ -146,7 +146,7 @@ struct HomeView: View {
         .tint(.primary)
     }
 
-    private func info(_ title: String, systemImage: String, @ViewBuilder content: () -> some View) -> some View {
+    private func info(_ title: LocalizedStringKey, systemImage: String, @ViewBuilder content: () -> some View) -> some View {
         let content = content()
         return DisclosureGroup {
             VStack(alignment: .leading, spacing: 8) { content }

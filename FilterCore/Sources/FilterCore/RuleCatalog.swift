@@ -8,7 +8,8 @@ import Foundation
 /// - `fragments`: pattern parts shared by several rules, used in patterns as `{{name}}`.
 ///   A fragment may use other fragments.
 /// - `rules`: `id` (the rule's `builtInID`), `name`, `category`, `details`, `matchType`, `pattern`, `action`,
-///   and optionally `target` (default `body`), `isEnabled` (default true) and `note` (for maintainers, not shown).
+///   and optionally `target` (default `body`), `isEnabled` (default true), `note` (for maintainers, not shown)
+///   and `translations` (`{"en": {"name": ..., "details": ...}}`; `name` and `details` themselves are Turkish).
 public struct RuleCatalog: Equatable, Sendable {
     public let version: Int
     public let rules: [Rule]
@@ -32,8 +33,15 @@ public struct RuleCatalog: Equatable, Sendable {
         }
     }()
 
+    /// Language the rule names and explanations are shown in: the one the app is using, the same way iOS picks it
+    /// for the app's own texts (English when the phone's language is neither Turkish nor English).
+    public static var preferredLanguage: String {
+        Bundle.preferredLocalizations(from: ["tr", "en"]).first ?? "en"
+    }
+
     /// Reads and checks a list: every fragment exists, every pattern compiles and every id is unique.
-    public init(data: Data) throws {
+    /// Names and explanations are taken in `language` when the list has them, in Turkish otherwise.
+    public init(data: Data, language: String = RuleCatalog.preferredLanguage) throws {
         let file: File
         do {
             file = try JSONDecoder().decode(File.self, from: data)
@@ -47,8 +55,9 @@ public struct RuleCatalog: Equatable, Sendable {
         var rules: [Rule] = []
         for entry in file.rules {
             guard seenIDs.insert(entry.id).inserted else { throw RuleCatalogError.duplicateID(entry.id) }
+            let translation = entry.translations?[language]
             let rule = Rule(
-                name: entry.name,
+                name: translation?.name ?? entry.name,
                 isEnabled: entry.isEnabled ?? true,
                 target: entry.target ?? .body,
                 matchType: entry.matchType,
@@ -56,7 +65,7 @@ public struct RuleCatalog: Equatable, Sendable {
                 action: entry.action,
                 builtInID: entry.id,
                 category: entry.category,
-                details: entry.details
+                details: translation?.details ?? entry.details
             )
             if let error = rule.validationError { throw RuleCatalogError.invalidRule(entry.name, error) }
             rules.append(rule)
@@ -120,6 +129,12 @@ public struct RuleCatalog: Equatable, Sendable {
         let pattern: String
         let action: FilterAction
         let isEnabled: Bool?
+        let translations: [String: Translation]?
+    }
+
+    private struct Translation: Decodable {
+        let name: String?
+        let details: String?
     }
 }
 
@@ -134,14 +149,20 @@ public enum RuleCatalogError: Error, Equatable, LocalizedError {
 
     public var errorDescription: String? {
         switch self {
-        case .unreadable: return "Kural listesi okunamadı."
-        case .empty: return "Kural listesi boş."
-        case .duplicateID(let id): return "Kural listesinde aynı kimlik iki kez geçiyor: \(id)."
-        case .unknownFragment(let name): return "Kural listesinde tanımsız bir parça var: \(name)."
-        case .fragmentLoop: return "Kural listesindeki parçalar birbirini kullanıyor."
-        case .invalidRule(let name, let error): return "\"\(name)\" kuralı kullanılamıyor: \(error)"
+        case .unreadable:
+            return String(localized: "The rule list can't be read.", bundle: .module)
+        case .empty:
+            return String(localized: "The rule list is empty.", bundle: .module)
+        case .duplicateID(let id):
+            return String(localized: "The rule list uses the same id twice: \(id).", bundle: .module)
+        case .unknownFragment(let name):
+            return String(localized: "The rule list uses an undefined fragment: \(name).", bundle: .module)
+        case .fragmentLoop:
+            return String(localized: "Fragments in the rule list use each other.", bundle: .module)
+        case .invalidRule(let name, let error):
+            return String(localized: "The rule \"\(name)\" can't be used: \(error)", bundle: .module)
         case .junksLegitimateMessage(let rule, let message):
-            return "\"\(rule)\" kuralı normal bir mesajı Gereksiz'e atıyor: \"\(message)\""
+            return String(localized: "The rule \"\(rule)\" sends a normal message to Junk: \"\(message)\"", bundle: .module)
         }
     }
 }

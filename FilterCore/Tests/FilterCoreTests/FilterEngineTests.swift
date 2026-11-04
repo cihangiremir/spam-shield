@@ -88,25 +88,25 @@ struct FilterEngineTests {
     }
 
     @Test(arguments: [
-        ("e-Devlet: Adınıza destek ödemesi tanımlandı, başvuru: https://turkiye.gov.tr-destek.com/basvur", "Resmi kurum taklidi linkler"),
-        ("Destek ödemenizi almak için edevlet-sorgu.net adresine girin", "Resmi kurum taklidi linkler"),
-        ("GİB: vergi iadenizi almak için edevlet-sorgu.net adresine girin", "Sahte kargo, ceza ve iade linkleri"),
-        ("Puanlarınızın süresi doluyor, hemen kullanın: puan-merkezi.online", "Şüpheli alan adı uzantıları"),
-        ("Hesabınız kısıtlandı, açmak için: https://banka-giris.netlify.app", "Ücretsiz hosting ve IP linkleri"),
-        ("Paketiniz bekliyor: http://198.51.100.7/takip", "Ücretsiz hosting ve IP linkleri"),
-        ("Faturanız iade edilecek: turkcell-odeme.com", "Marka taklidi alan adları"),
-        ("Hesabınız bloke edildi. Kart bilgilerinizi doğrulamak için tıklayın: bankam.com/kart", "Link ile bilgi isteyen mesajlar"),
-        ("Anne ben Can, telefonum bozuldu. Acil 2.000 TL lazım, şu hesaba gönderir misin?", "\"Anne/baba ben\" dolandırıcılığı"),
-        ("Merhaba, yanlışlıkla hesabınıza 3.000 TL gönderdim, lütfen iade edin.", "Yanlış havale dolandırıcılığı"),
-        ("Kartınızla 9.800 TL işlem yapıldı. İşlem size ait değilse hemen 0532 111 22 33'ü arayın.", "Cep numarası aratan banka uyarısı"),
-        ("Evden çalışarak günde 1.500 TL kazanın, deneyim gerekmez!", "Sahte iş ilanı"),
-        ("Bankanızın güvenlik biriminden arıyoruz. İşlemi durdurmak için telefonunuza gelen kodu bize iletir misiniz?", "Kod paylaşma tuzağı"),
-        ("Hediyenizi tanımlamak için SMS ile gelen doğrulama kodunu buraya yazın.", "Kod paylaşma tuzağı"),
+        ("e-Devlet: Adınıza destek ödemesi tanımlandı, başvuru: https://turkiye.gov.tr-destek.com/basvur", "gov-spoof"),
+        ("Destek ödemenizi almak için edevlet-sorgu.net adresine girin", "gov-spoof"),
+        ("GİB: vergi iadenizi almak için edevlet-sorgu.net adresine girin", "fake-delivery-fine"),
+        ("Puanlarınızın süresi doluyor, hemen kullanın: puan-merkezi.online", "suspicious-tld"),
+        ("Hesabınız kısıtlandı, açmak için: https://banka-giris.netlify.app", "free-hosting-ip"),
+        ("Paketiniz bekliyor: http://198.51.100.7/takip", "free-hosting-ip"),
+        ("Faturanız iade edilecek: turkcell-odeme.com", "brand-spoof"),
+        ("Hesabınız bloke edildi. Kart bilgilerinizi doğrulamak için tıklayın: bankam.com/kart", "credential-link"),
+        ("Anne ben Can, telefonum bozuldu. Acil 2.000 TL lazım, şu hesaba gönderir misin?", "family-emergency"),
+        ("Merhaba, yanlışlıkla hesabınıza 3.000 TL gönderdim, lütfen iade edin.", "wrong-transfer"),
+        ("Kartınızla 9.800 TL işlem yapıldı. İşlem size ait değilse hemen 0532 111 22 33'ü arayın.", "mobile-callback"),
+        ("Evden çalışarak günde 1.500 TL kazanın, deneyim gerekmez!", "fake-job"),
+        ("Bankanızın güvenlik biriminden arıyoruz. İşlemi durdurmak için telefonunuza gelen kodu bize iletir misiniz?", "code-sharing"),
+        ("Hediyenizi tanımlamak için SMS ile gelen doğrulama kodunu buraya yazın.", "code-sharing"),
     ])
-    func phishingRulesSendScamsToJunk(body: String, ruleName: String) {
+    func phishingRulesSendScamsToJunk(body: String, ruleID: String) {
         let decision = evaluate(body)
         #expect(decision.action == .junk)
-        #expect(decision.matchedRule?.name == ruleName)
+        #expect(decision.matchedRule?.builtInID == ruleID)
     }
 
     /// Real messages that share words or link shapes with scams must not end up in Junk.
@@ -134,7 +134,7 @@ struct FilterEngineTests {
         """
         let decision = evaluate(body, sender: "SDNMAKİNA")
         #expect(decision.action == .junk)
-        #expect(decision.matchedRule?.name == "Bahis ve casino")
+        #expect(decision.matchedRule?.builtInID == "betting")
     }
 
     @Test(arguments: [
@@ -182,7 +182,7 @@ struct FilterEngineTests {
     @Test func junkBeatsTransaction() {
         let decision = evaluate("Deneme bonusu kodunuz: 1234")
         #expect(decision.action == .junk)
-        #expect(decision.matchedRule?.name == "Bahis ve casino")
+        #expect(decision.matchedRule?.builtInID == "betting")
     }
 
     @Test func allowBeatsJunk() {

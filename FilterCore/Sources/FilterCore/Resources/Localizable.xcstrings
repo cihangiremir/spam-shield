@@ -1,0 +1,126 @@
+{
+  "sourceLanguage": "en",
+  "version": "1.0",
+  "strings": {
+    "Fragments in the rule list use each other.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kural listesindeki parçalar birbirini kullanıyor."
+          }
+        }
+      }
+    },
+    "Invalid regex.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçersiz regex."
+          }
+        }
+      }
+    },
+    "Link: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link: %@"
+          }
+        }
+      }
+    },
+    "Phrase: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İfade: %@"
+          }
+        }
+      }
+    },
+    "Sender: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderici: %@"
+          }
+        }
+      }
+    },
+    "The pattern can't be empty.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desen boş olamaz."
+          }
+        }
+      }
+    },
+    "The rule \"%@\" can't be used: %@": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\"%1$@\" kuralı kullanılamıyor: %2$@"
+          }
+        }
+      }
+    },
+    "The rule \"%@\" sends a normal message to Junk: \"%@\"": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\"%1$@\" kuralı normal bir mesajı Gereksiz'e atıyor: \"%2$@\""
+          }
+        }
+      }
+    },
+    "The rule list can't be read.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kural listesi okunamadı."
+          }
+        }
+      }
+    },
+    "The rule list is empty.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kural listesi boş."
+          }
+        }
+      }
+    },
+    "The rule list uses an undefined fragment: %@.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kural listesinde tanımsız bir parça var: %@."
+          }
+        }
+      }
+    },
+    "The rule list uses the same id twice: %@.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kural listesinde aynı kimlik iki kez geçiyor: %@."
+          }
+        }
+      }
+    }
+  }
+}

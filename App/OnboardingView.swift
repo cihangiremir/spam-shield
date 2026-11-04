@@ -40,7 +40,7 @@ struct OnboardingView: View {
                         onFinish()
                     }
                 } label: {
-                    Text(page < pageCount - 1 ? "Devam" : "Başla")
+                    Text(page < pageCount - 1 ? LocalizedStringKey("Devam") : LocalizedStringKey("Başla"))
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                 }
@@ -83,8 +83,8 @@ struct OnboardingView: View {
 
     private func pageContent(
         systemImage: String,
-        title: String,
-        text: String?,
+        title: LocalizedStringKey,
+        text: LocalizedStringKey?,
         @ViewBuilder extra: () -> some View = { EmptyView() }
     ) -> some View {
         ScrollView {
@@ -122,7 +122,7 @@ struct OnboardingView: View {
         }
     }
 
-    private func step(_ number: Int, _ text: String) -> some View {
+    private func step(_ number: Int, _ text: LocalizedStringKey) -> some View {
         Label {
             Text(text)
         } icon: {

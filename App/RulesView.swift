@@ -62,7 +62,7 @@ struct RulesView: View {
                 isPresented: $isExporting,
                 document: RulesDocument(rules: model.rules),
                 contentType: .json,
-                defaultFilename: "spam-kurallari"
+                defaultFilename: String(localized: "spam-kurallari", comment: "File name for exported rules")
             ) { _ in }
             .fileImporter(isPresented: $isImporting, allowedContentTypes: [.json]) { result in
                 if case .success(let url) = result { model.importRules(from: url) }

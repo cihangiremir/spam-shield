@@ -30,7 +30,7 @@ struct RuleEditorView: View {
                     Toggle("Etkin", isOn: $rule.isEnabled)
                 } footer: {
                     if rule.builtInID != nil {
-                        Text("Hazır kural: silinemez, kapatılabilir. Düzenlersen uygulama güncellemeleri bu kuralı artık değiştirmez.")
+                        Text("Hazır kural: silinemez, kapatılabilir. Düzenlersen kural listesi güncellemeleri bu kuralı artık değiştirmez.")
                     }
                 }
 
@@ -88,7 +88,7 @@ struct RuleEditorView: View {
                     }
                 }
             }
-            .navigationTitle(rule.name.isEmpty ? "Yeni kural" : rule.name)
+            .navigationTitle(rule.name.isEmpty ? String(localized: "Yeni kural") : rule.name)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -121,9 +121,9 @@ struct RuleEditorView: View {
 
     private var placeholder: String {
         switch (rule.target, isRegex) {
-        case (_, true): return "Regex deseni"
-        case (.sender, false): return "Ör. +90850 veya FIRMAADI"
-        case (.body, false): return "Ör. deneme bonusu"
+        case (_, true): return String(localized: "Regex deseni")
+        case (.sender, false): return String(localized: "Ör. +90850 veya FIRMAADI")
+        case (.body, false): return String(localized: "Ör. deneme bonusu")
         }
     }
 
