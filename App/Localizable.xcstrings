@@ -908,6 +908,22 @@
         }
       }
     },
+    "Hiçbir kural eşleşmedi, öğrenen filtre spam'e benzetti." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No rule matched; the learning filter thinks it looks like spam."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiçbir kural eşleşmedi, öğrenen filtre spam'e benzetti."
+          }
+        }
+      }
+    },
     "Hiçbir kural eşleşmedi." : {
       "localizations" : {
         "en" : {
@@ -920,6 +936,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hiçbir kural eşleşmedi."
+          }
+        }
+      }
+    },
+    "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Mesajlar saklanmaz, sadece kelimeleri sayılır." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Of the messages no rule catches, moves the ones that look like spam to Promotions instead of Junk, so a wrong guess doesn't hide a message. Trained on thousands of example messages; you can teach it more in the Check tab. Messages aren't stored; only their words are counted."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Mesajlar saklanmaz, sadece kelimeleri sayılır."
+          }
+        }
+      }
+    },
+    "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Mesaj saklanmaz, sadece kelimeleri sayılır." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Of the messages no rule catches, moves the ones that look like spam to Promotions. The message isn't stored; only its words are counted."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Mesaj saklanmaz, sadece kelimeleri sayılır."
           }
         }
       }
@@ -1548,6 +1596,166 @@
         }
       }
     },
+    "Normal mesaj olarak öğretildi." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taught as a normal message."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal mesaj olarak öğretildi."
+          }
+        }
+      }
+    },
+    "Öğrenen filtre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learning filter"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrenen filtre"
+          }
+        }
+      }
+    },
+    "Öğrenen filtre ayarları kaydedilemedi: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't save the learning filter settings: %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrenen filtre ayarları kaydedilemedi: %@"
+          }
+        }
+      }
+    },
+    "Öğrenen filtre bu mesajı normal buluyor." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The learning filter thinks this message looks normal."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrenen filtre bu mesajı normal buluyor."
+          }
+        }
+      }
+    },
+    "Öğrenen filtre bu mesajı spam'e benzetiyor." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The learning filter thinks this message looks like spam."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrenen filtre bu mesajı spam'e benzetiyor."
+          }
+        }
+      }
+    },
+    "Öğrenen filtre kapalı. Öğrettiklerin saklanır; Kurallar sekmesinden açınca kullanılır." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The learning filter is off. What you teach is kept and used once you turn it on in the Rules tab."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrenen filtre kapalı. Öğrettiklerin saklanır; Kurallar sekmesinden açınca kullanılır."
+          }
+        }
+      }
+    },
+    "Öğrenen filtreye öğret" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teach the learning filter"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrenen filtreye öğret"
+          }
+        }
+      }
+    },
+    "Öğrettiğin mesajlar" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Messages you taught"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrettiğin mesajlar"
+          }
+        }
+      }
+    },
+    "Öğrettiğin mesajlar unutulsun mu?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forget the messages you taught?"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrettiğin mesajlar unutulsun mu?"
+          }
+        }
+      }
+    },
+    "Öğrettiklerini sil" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete what you taught"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrettiklerini sil"
+          }
+        }
+      }
+    },
     "Ör. +90850 veya FIRMAADI" : {
       "localizations" : {
         "en" : {
@@ -1820,6 +2028,22 @@
         }
       }
     },
+    "Spam" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spam"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spam"
+          }
+        }
+      }
+    },
     "Spam bildir" : {
       "localizations" : {
         "en" : {
@@ -1832,6 +2056,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spam bildir"
+          }
+        }
+      }
+    },
+    "Spam değil" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not spam"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spam değil"
+          }
+        }
+      }
+    },
+    "Spam olarak öğretildi." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taught as spam."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spam olarak öğretildi."
           }
         }
       }

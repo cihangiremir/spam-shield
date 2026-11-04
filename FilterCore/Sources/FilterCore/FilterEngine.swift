@@ -2,8 +2,17 @@ import Foundation
 
 public struct FilterDecision: Equatable, Sendable {
     public let action: FilterAction
-    /// The rule that decided the action. Nil means nothing matched and the message is allowed.
+    /// The rule that decided the action. Nil means no rule matched: the message is allowed,
+    /// or sent to Promotions when `isFromClassifier`.
     public let matchedRule: Rule?
+    /// True when no rule matched and the classifier found the message spammy.
+    public let isFromClassifier: Bool
+
+    init(action: FilterAction, matchedRule: Rule?, isFromClassifier: Bool = false) {
+        self.action = action
+        self.matchedRule = matchedRule
+        self.isFromClassifier = isFromClassifier
+    }
 }
 
 /// Runs the rules against one message. Build it once per rule set; patterns are prepared in `init`.
@@ -15,8 +24,11 @@ public struct FilterEngine {
     }
 
     private let compiledRules: [CompiledRule]
+    private let classifier: SpamClassifier?
 
-    public init(rules: [Rule]) {
+    /// `classifier` is asked only when no rule matched, see `SpamClassifier`.
+    public init(rules: [Rule], classifier: SpamClassifier? = nil) {
+        self.classifier = classifier
         compiledRules = rules.compactMap { rule in
             // Same checks as `validationError`, without compiling each regex a second time.
             guard rule.isEnabled, !rule.pattern.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return nil }
@@ -50,7 +62,11 @@ public struct FilterEngine {
             if compiled.rule.action == .allow { break }
         }
 
-        return FilterDecision(action: best?.action ?? .allow, matchedRule: best)
+        if let best { return FilterDecision(action: best.action, matchedRule: best) }
+        if let classifier, let body, classifier.isJunk(body) {
+            return FilterDecision(action: .promotion, matchedRule: nil, isFromClassifier: true)
+        }
+        return FilterDecision(action: .allow, matchedRule: nil)
     }
 
     private func matches(_ compiled: CompiledRule, _ input: String) -> Bool {

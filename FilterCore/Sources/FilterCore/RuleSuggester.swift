@@ -7,7 +7,11 @@ public enum RuleSuggester {
     /// Only the registrable part is kept ("a.b.ornek.com" → "ornek.com", "x.ornek.com.tr" → "ornek.com.tr")
     /// so the rule also catches the spammer's other subdomains.
     public static func linkDomains(in text: String) -> [String] {
-        let normalized = TextNormalizer.normalize(text)
+        linkDomains(inNormalized: TextNormalizer.normalize(text))
+    }
+
+    /// `linkDomains(in:)` for text that already went through `TextNormalizer.normalize`.
+    static func linkDomains(inNormalized normalized: String) -> [String] {
         let range = NSRange(normalized.startIndex..., in: normalized)
 
         var domains: [String] = []

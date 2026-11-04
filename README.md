@@ -7,6 +7,7 @@ Mesajlar cihazdan çıkmaz; kural listesi açık ve GitHub'dan güncellenir.
   bildirimlerini **İşlemler**'e ayırır.
 - Kaçan spami Mesajlar'da **Paylaş › Spam Shield** ile bildirip ondan kural oluşturabilirsin.
 - Hazır kurallar uygulama güncellemesi beklemeden indirilir; senin kuralların ve değişikliklerin korunur.
+- İstersen açabileceğin **öğrenen filtre**, hiçbir kuralın yakalamadığı spam'e benzeyen mesajları Promosyonlar'a taşır.
 - Türkçe ve İngilizce.
 
 ## Kurulum
@@ -81,6 +82,31 @@ cd FilterCore && swift test
 ```
 
 Arayüz çevirileri `App/Localizable.xcstrings` içinde; yeni bir metnin hem `en` hem `tr` karşılığını doldur.
+
+## Öğrenen filtre
+
+`FilterCore/Sources/FilterCore/SpamClassifier.swift` bir naive Bayes sınıflandırıcı. Sadece hiçbir kural eşleşmediğinde
+sorulur ve spam derse mesaj Gereksiz'e değil Promosyonlar'a gider. Varsayılan olarak kapalı; Kurallar sekmesinden açılır,
+Kontrol et sekmesinden "Spam" / "Spam değil" diye öğretilir. Telefonda mesaj metni saklanmaz, sadece kelime sayıları.
+
+Hazır model (`Resources/classifier.json`) yalnızca kelime sayılarını içerir; 3'ten az mesajda geçen kelimeler atılır.
+`FilterCore/TrainingData/messages.json` içindeki mesajlardan üretilir:
+
+- `mac-junk`: Gereksiz klasörüne düşmüş Türkçe spam SMS'ler, geliş sırasıyla.
+- `ds-commercial`, `ds-betting`, `ds-personal`: [Turkish SMS Collection](https://www.kaggle.com/datasets/onurkarasoy/turkish-sms-collection)
+  (Karasoy ve Ballı, 2021) ve [turkishSMS-ds](https://huggingface.co/datasets/akuysal/turkishSMS-ds) (Uysal ve diğerleri, 2013).
+  Bu setlerdeki "spam" mesajların çoğu bilinen markaların kampanyaları olduğu için normal sayıldı (`ds-commercial`);
+  kaçak bahis ve benzeri ilanlar spam sayıldı (`ds-betting`).
+- `legit-samples`: `Resources/legitimate-samples.json`.
+
+Kişisel veriler çıkarıldı: 7 haneden uzun sayılar sıfırlandı, e-posta adreslerinin kullanıcı adı, hitaptan sonraki
+adlar, şifreler ve kısa linklerdeki kişiye özel kodlar değiştirildi.
+
+Modeli yeniden üretmek ve görmediği mesajlardaki başarısını görmek için:
+
+```bash
+cd FilterCore && swift run TrainClassifier
+```
 
 ## Lisans
 

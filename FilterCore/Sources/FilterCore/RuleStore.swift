@@ -60,6 +60,23 @@ public struct RuleStore {
         try Self.encode(rules).write(to: fileURL, options: .atomic)
     }
 
+    /// The classifier's on/off switch and what the user taught it, next to the rules file.
+    public var classifierURL: URL {
+        fileURL.deletingLastPathComponent().appendingPathComponent("classifier-settings.json")
+    }
+
+    /// Saved classifier settings, or the defaults (off, nothing taught) when there are none or they can't be read.
+    public func loadClassifierSettings() -> ClassifierSettings {
+        guard let data = try? Data(contentsOf: classifierURL),
+              let settings = try? JSONDecoder().decode(ClassifierSettings.self, from: data)
+        else { return ClassifierSettings() }
+        return settings
+    }
+
+    public func saveClassifierSettings(_ settings: ClassifierSettings) throws {
+        try JSONEncoder().encode(settings).write(to: classifierURL, options: .atomic)
+    }
+
     // Also used for import / export, so the exported file is the same format as the stored one.
 
     public static func encode(_ rules: [Rule]) throws -> Data {

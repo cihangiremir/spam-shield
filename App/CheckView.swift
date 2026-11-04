@@ -40,6 +40,8 @@ struct CheckForm: View {
     @State private var blocksSender = false
     @State private var phrase = ""
     @State private var resultMessage: String?
+    /// Set after teaching the classifier, so the same message isn't counted twice.
+    @State private var taughtMessage: String?
 
     private var hasSender: Bool { !sender.trimmingCharacters(in: .whitespaces).isEmpty }
 
@@ -67,6 +69,7 @@ struct CheckForm: View {
                 if hasSender { senderSection }
                 phraseSection
                 addSection
+                classifierSection
             } else {
                 Section {
                     Label("Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar iOS tarafından filtreye hiç gönderilmez. Buradaki sonuç bu mesajlar için geçerli olmaz.", systemImage: "info.circle")
@@ -84,6 +87,7 @@ struct CheckForm: View {
             blocksSender = false
             phrase = ""
             resultMessage = nil
+            taughtMessage = nil
         }
     }
 
@@ -115,7 +119,10 @@ struct CheckForm: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(decision.action.outcome)
                         .font(.headline)
-                    Text(decision.matchedRule.map { String(localized: "Eşleşen kural: \($0.name)") } ?? String(localized: "Hiçbir kural eşleşmedi."))
+                    Text(decision.matchedRule.map { String(localized: "Eşleşen kural: \($0.name)") }
+                         ?? (decision.isFromClassifier
+                             ? String(localized: "Hiçbir kural eşleşmedi, öğrenen filtre spam'e benzetti.")
+                             : String(localized: "Hiçbir kural eşleşmedi.")))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -204,5 +211,40 @@ struct CheckForm: View {
         } footer: {
             if let resultMessage { Text(resultMessage) }
         }
+    }
+
+    private var classifierSection: some View {
+        let looksLikeSpam = model.classifier.isJunk(messageText)
+        return Section {
+            Label(looksLikeSpam
+                  ? String(localized: "Öğrenen filtre bu mesajı spam'e benzetiyor.")
+                  : String(localized: "Öğrenen filtre bu mesajı normal buluyor."),
+                  systemImage: looksLikeSpam ? "exclamationmark.bubble" : "checkmark.bubble")
+            HStack {
+                Button("Spam") { teach(isJunk: true) }
+                    .frame(maxWidth: .infinity)
+                Button("Spam değil") { teach(isJunk: false) }
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+            .disabled(taughtMessage != nil)
+        } header: {
+            Text("Öğrenen filtreye öğret")
+        } footer: {
+            if let taughtMessage {
+                Text(taughtMessage)
+            } else if model.classifierSettings.isEnabled {
+                Text("Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Mesaj saklanmaz, sadece kelimeleri sayılır.")
+            } else {
+                Text("Öğrenen filtre kapalı. Öğrettiklerin saklanır; Kurallar sekmesinden açınca kullanılır.")
+            }
+        }
+    }
+
+    private func teach(isJunk: Bool) {
+        model.teachClassifier(messageText, isJunk: isJunk)
+        taughtMessage = isJunk
+            ? String(localized: "Spam olarak öğretildi.")
+            : String(localized: "Normal mesaj olarak öğretildi.")
     }
 }

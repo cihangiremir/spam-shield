@@ -20,9 +20,13 @@ let package = Package(
             resources: [
                 .copy("Resources/rules.json"),
                 .copy("Resources/legitimate-samples.json"),
+                .copy("Resources/classifier.json"),
                 .process("Resources/Localizable.xcstrings"),
             ]
         ),
         .testTarget(name: "FilterCoreTests", dependencies: ["FilterCore"]),
+        // Rebuilds Resources/classifier.json from TrainingData/messages.json: `swift run TrainClassifier`.
+        // Not part of the app.
+        .executableTarget(name: "TrainClassifier", dependencies: ["FilterCore"]),
     ]
 )

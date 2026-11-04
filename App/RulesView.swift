@@ -10,6 +10,7 @@ struct RulesView: View {
     @State private var isExporting = false
     @State private var isImporting = false
     @State private var isConfirmingReset = false
+    @State private var isConfirmingForget = false
 
     private var visibleRules: [Rule] {
         let query = TextNormalizer.normalize(searchText)
@@ -29,6 +30,7 @@ struct RulesView: View {
 
                 let rules = visibleRules
                 ownRulesSection(rules.filter { $0.displayCategory == nil })
+                if searchText.isEmpty { classifierSection }
                 ForEach(RuleCategory.allCases, id: \.self) { category in
                     categorySection(category, rules: rules.filter { $0.displayCategory == category })
                 }
@@ -70,6 +72,9 @@ struct RulesView: View {
             .confirmationDialog("Tüm kurallar silinip varsayılanlar yüklensin mi?", isPresented: $isConfirmingReset, titleVisibility: .visible) {
                 Button("Varsayılanlara dön", role: .destructive) { model.resetToDefaults() }
             }
+            .confirmationDialog("Öğrettiğin mesajlar unutulsun mu?", isPresented: $isConfirmingForget, titleVisibility: .visible) {
+                Button("Öğrettiklerini sil", role: .destructive) { model.forgetClassifierExamples() }
+            }
         }
     }
 
@@ -97,6 +102,23 @@ struct RulesView: View {
                     Text("Kaçan bir spam mesajdan kural oluşturmak için Kontrol et sekmesine yapıştır.")
                 }
             }
+        }
+    }
+
+    private var classifierSection: some View {
+        Section {
+            Toggle(isOn: Binding(
+                get: { model.classifierSettings.isEnabled },
+                set: { model.setClassifierEnabled($0) }
+            )) {
+                Label("Öğrenen filtre", systemImage: "brain")
+            }
+            if model.classifierSettings.exampleCount > 0 {
+                LabeledContent("Öğrettiğin mesajlar", value: "\(model.classifierSettings.exampleCount)")
+                Button("Öğrettiklerini sil", role: .destructive) { isConfirmingForget = true }
+            }
+        } footer: {
+            Text("Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Mesajlar saklanmaz, sadece kelimeleri sayılır.")
         }
     }
 

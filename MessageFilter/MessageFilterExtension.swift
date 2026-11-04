@@ -20,8 +20,8 @@ extension MessageFilterExtension: ILMessageFilterQueryHandling {
     }
 }
 
-/// iOS often keeps the extension running for several messages in a row. Reading the rule files and compiling
-/// every regex only when a file changed keeps each message cheap.
+/// iOS often keeps the extension running for several messages in a row. Reading the rule and classifier files
+/// and compiling every regex only when a file changed keeps each message cheap.
 private enum EngineCache {
     private static let lock = NSLock()
     private static var cached: (engine: FilterEngine, fileDates: [Date?])?
@@ -38,12 +38,13 @@ private enum EngineCache {
             return engine
         }
 
-        let fileDates = [store.fileURL, store.catalogURL].map { url in
+        let fileDates = [store.fileURL, store.catalogURL, store.classifierURL].map { url in
             (try? FileManager.default.attributesOfItem(atPath: url.path))?[.modificationDate] as? Date
         }
         if let cached, cached.fileDates == fileDates { return cached.engine }
 
-        let engine = FilterEngine(rules: store.load())
+        let settings = store.loadClassifierSettings()
+        let engine = FilterEngine(rules: store.load(), classifier: settings.isEnabled ? settings.classifier : nil)
         cached = (engine, fileDates)
         return engine
     }

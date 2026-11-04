@@ -10,10 +10,20 @@ final class RuleListModel {
     private(set) var rules: [Rule] {
         didSet {
             // Coming back to the foreground reloads the same rules; no need to compile them again.
-            if rules != oldValue { engine = FilterEngine(rules: rules) }
+            if rules != oldValue { engine = makeEngine() }
         }
     }
-    /// Built once per rule change, so the Check screen doesn't compile every regex on each keystroke.
+    /// Whether the learning classifier is on and what the user taught it.
+    private(set) var classifierSettings: ClassifierSettings {
+        didSet {
+            guard classifierSettings != oldValue else { return }
+            classifier = classifierSettings.classifier
+            engine = makeEngine()
+        }
+    }
+    /// The classifier with what the user taught, also when it is off, so the Check screen can show its verdict.
+    private(set) var classifier: SpamClassifier
+    /// Built once per rule or classifier change, so the Check screen doesn't compile every regex on each keystroke.
     private(set) var engine: FilterEngine
     var errorMessage: String?
 
@@ -34,20 +44,24 @@ final class RuleListModel {
     init(store: RuleStore? = RuleStore.shared()) {
         self.store = store
         rules = DefaultRules.all
+        classifierSettings = ClassifierSettings()
+        classifier = .bundled
         engine = FilterEngine(rules: DefaultRules.all)
         reload()
         // `didSet` doesn't run during init.
-        if rules != DefaultRules.all { engine = FilterEngine(rules: rules) }
+        if classifierSettings.exampleCount > 0 { classifier = classifierSettings.classifier }
+        if rules != DefaultRules.all || classifierSettings.isEnabled { engine = makeEngine() }
     }
 
-    /// Reads the saved rules again. The app calls this when it comes to the foreground, because the share
-    /// extension may have added rules meanwhile, and saving the old list would drop them.
+    /// Reads the saved rules and classifier settings again. The app calls this when it comes to the foreground,
+    /// because the share extension may have added rules meanwhile, and saving the old list would drop them.
     func reload() {
         guard let store else {
             errorMessage = String(localized: "App Group bulunamadı. Kurallar kaydedilemez, filtre sadece varsayılan kurallarla çalışır. Xcode'da hedeflerin Signing ayarlarını kontrol et.")
             return
         }
         catalogVersion = store.loadCatalog().version
+        classifierSettings = store.loadClassifierSettings()
         do {
             rules = try store.loadForEditing()
             unblockSaving()
@@ -170,6 +184,38 @@ final class RuleListModel {
         } catch {
             errorMessage = String(localized: "Dosya okunamadı: \(error.localizedDescription)")
         }
+    }
+
+    // MARK: Classifier
+
+    func setClassifierEnabled(_ isEnabled: Bool) {
+        updateClassifierSettings { $0.isEnabled = isEnabled }
+    }
+
+    /// Teaches the classifier that the message is spam or not. Only token counts are saved, not the message.
+    func teachClassifier(_ text: String, isJunk: Bool) {
+        updateClassifierSettings { $0.learn(text, isJunk: isJunk) }
+    }
+
+    func forgetClassifierExamples() {
+        updateClassifierSettings { $0.forgetExamples() }
+    }
+
+    /// Starts from the saved settings, because the app and the share extension both write them.
+    private func updateClassifierSettings(_ change: (inout ClassifierSettings) -> Void) {
+        var settings = store?.loadClassifierSettings() ?? classifierSettings
+        change(&settings)
+        classifierSettings = settings
+        guard let store else { return }
+        do {
+            try store.saveClassifierSettings(settings)
+        } catch {
+            errorMessage = String(localized: "Öğrenen filtre ayarları kaydedilemedi: \(error.localizedDescription)")
+        }
+    }
+
+    private func makeEngine() -> FilterEngine {
+        FilterEngine(rules: rules, classifier: classifierSettings.isEnabled ? classifier : nil)
     }
 
     private func unblockSaving() {
