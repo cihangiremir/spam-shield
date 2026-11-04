@@ -1,0 +1,54 @@
+# Tests every change; on main, publishes the rule list to GitHub Pages, where the app downloads it from
+# (https://<owner>.github.io/<repo>/rules.json). See README, "Kural listesini güncelleme".
+name: Rules
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One publish at a time, and a newer push doesn't wait behind an older one.
+concurrency:
+  group: rules-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  RULES: FilterCore/Sources/FilterCore/Resources/rules.json
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test the rule engine and rules.json
+        working-directory: FilterCore
+        run: swift test
+      - name: Check that a changed rules.json has a higher version
+        run: |
+          owner=$(echo "${GITHUB_REPOSITORY%%/*}" | tr '[:upper:]' '[:lower:]')
+          repo="${GITHUB_REPOSITORY#*/}"
+          python3 scripts/check_rules_version.py "$RULES" "https://${owner}.github.io/${repo}/rules.json"
+
+  publish:
+    needs: test
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}rules.json
+    steps:
+      - uses: actions/checkout@v4
+      - run: mkdir site && cp "$RULES" site/rules.json
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4
