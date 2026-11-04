@@ -15,8 +15,8 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: "1.0"
-    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "1.2"
+    CURRENT_PROJECT_VERSION: "2"
     # Pick your team in Xcode (Signing & Capabilities) or put the Team ID here.
     DEVELOPMENT_TEAM: ""
     CODE_SIGN_STYLE: Automatic
@@ -33,6 +33,8 @@ targets:
     type: application
     platform: iOS
     sources: [App]
+    # Without it xcodegen leaves no app scheme, and Xcode only offers FilterCore, which builds but installs nothing.
+    scheme: {}
     dependencies:
       - package: FilterCore
       - target: MessageFilter
@@ -47,6 +49,8 @@ targets:
         # Phones in a language other than Turkish or English get English.
         CFBundleDevelopmentRegion: en
         CFBundleLocalizations: [tr, en]
+        # Shows the Language row in Settings › Apps › Spam Shield even when the phone has only one preferred language.
+        UIPrefersShowingLanguageSettings: true
         UILaunchScreen: {}
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         # Where the app downloads new rules from (see README, "Kural listesini güncelleme").
