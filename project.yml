@@ -41,6 +41,9 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: Spam Shield
+        # The version is set once in settings.base above.
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         # Phones in a language other than Turkish or English get English.
         CFBundleDevelopmentRegion: en
         CFBundleLocalizations: [tr, en]
@@ -74,6 +77,9 @@ targets:
       path: MessageFilter/Info.plist
       properties:
         CFBundleDisplayName: Spam Shield
+        # The version is set once in settings.base above.
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSExtension:
           NSExtensionPointIdentifier: com.apple.identitylookup.message-filter
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).MessageFilterExtension
@@ -103,6 +109,9 @@ targets:
       path: ShareExtension/Info.plist
       properties:
         CFBundleDisplayName: Spam Shield
+        # The version is set once in settings.base above.
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleDevelopmentRegion: en
         CFBundleLocalizations: [tr, en]
         NSExtension:
