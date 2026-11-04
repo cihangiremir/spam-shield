@@ -940,34 +940,34 @@
         }
       }
     },
-    "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Mesajlar saklanmaz, sadece kelimeleri sayılır." : {
+    "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Öğrettiğin mesajların kendisi değil, kelimeleri telefonda saklanır." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Of the messages no rule catches, moves the ones that look like spam to Promotions instead of Junk, so a wrong guess doesn't hide a message. Trained on thousands of example messages; you can teach it more in the Check tab. Messages aren't stored; only their words are counted."
+            "value" : "Of the messages no rule catches, moves the ones that look like spam to Promotions instead of Junk, so a wrong guess doesn't hide a message. Trained on thousands of example messages; you can teach it more in the Check tab. The words of the messages you teach are kept on this phone, not the messages themselves."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Mesajlar saklanmaz, sadece kelimeleri sayılır."
+            "value" : "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Öğrettiğin mesajların kendisi değil, kelimeleri telefonda saklanır."
           }
         }
       }
     },
-    "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Mesaj saklanmaz, sadece kelimeleri sayılır." : {
+    "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Öğrettiğin mesajın kendisi değil, kelimeleri telefonda saklanır." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Of the messages no rule catches, moves the ones that look like spam to Promotions. The message isn't stored; only its words are counted."
+            "value" : "Of the messages no rule catches, moves the ones that look like spam to Promotions. The words of the message you teach are kept on this phone, not the message itself."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Mesaj saklanmaz, sadece kelimeleri sayılır."
+            "value" : "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Öğrettiğin mesajın kendisi değil, kelimeleri telefonda saklanır."
           }
         }
       }
@@ -1688,6 +1688,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Öğrenen filtre kapalı. Öğrettiklerin saklanır; Kurallar sekmesinden açınca kullanılır."
+          }
+        }
+      }
+    },
+    "Öğrenen filtrenin ayarları okunamadı, filtre kapalı çalışıyor. Öğrettiklerinin üzerine yazılmasın diye değişiklikler kaydedilmiyor. Öğrettiklerini silersen yeniden kullanabilirsin." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The learning filter's settings couldn't be read, so it is off. Changes aren't saved so what you taught isn't overwritten. Delete what you taught to use it again."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrenen filtrenin ayarları okunamadı, filtre kapalı çalışıyor. Öğrettiklerinin üzerine yazılmasın diye değişiklikler kaydedilmiyor. Öğrettiklerini silersen yeniden kullanabilirsin."
           }
         }
       }

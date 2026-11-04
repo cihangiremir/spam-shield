@@ -136,4 +136,28 @@ struct SpamClassifierTests {
         try store.saveClassifierSettings(settings)
         #expect(store.loadClassifierSettings() == settings)
     }
+
+    @Test func unreadableSettingsThrowForEditingButLoadAsDefaults() throws {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let store = RuleStore(fileURL: folder.appendingPathComponent("rules.json"))
+        try Data("not json".utf8).write(to: store.classifierURL)
+
+        #expect(throws: (any Error).self) { try store.loadClassifierSettingsForEditing() }
+        #expect(store.loadClassifierSettings() == ClassifierSettings())
+    }
+
+    /// A file from an app version with fewer fields still reads, instead of losing what the user taught.
+    @Test func settingsWithMissingFieldsGetDefaults() throws {
+        var settings = ClassifierSettings()
+        settings.learn("zorbix zorbix.top", isJunk: true)
+        var object = try #require(JSONSerialization.jsonObject(with: JSONEncoder().encode(settings)) as? [String: Any])
+        object["isEnabled"] = nil
+
+        let decoded = try JSONDecoder().decode(ClassifierSettings.self, from: JSONSerialization.data(withJSONObject: object))
+        #expect(!decoded.isEnabled)
+        #expect(decoded.exampleCount == 1)
+        #expect(decoded.learned == settings.learned)
+    }
 }

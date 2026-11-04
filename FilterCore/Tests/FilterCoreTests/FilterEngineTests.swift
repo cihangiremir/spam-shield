@@ -199,13 +199,14 @@ struct FilterEngineTests {
         #expect(decision.matchedRule == nil)
     }
 
-    /// A spammer controls the text and the filter extension has little time per message.
-    @Test(.timeLimit(.minutes(1)), arguments: ["sms", "mesaj", "edevlet", "a", "iptal yaz 1234 ", "tebrikler hak "])
+    /// A spammer controls the text and the filter extension has little time per message. 20,000 characters,
+    /// because a regex that slows down with the square of the length still looks fast at a few thousand.
+    @Test(.timeLimit(.minutes(1)), arguments: ["sms", "mesaj", "edevlet", "a", "iptal yaz 1234 ", "tebrikler hak ", "www.", "a1", "a.1"])
     func longRepetitiveTextIsFast(unit: String) {
         let engine = FilterEngine(rules: DefaultRules.all)
-        let text = String(repeating: unit, count: 3000 / unit.count)
+        let text = String(repeating: unit, count: 20_000 / unit.count)
         let duration = ContinuousClock().measure { _ = engine.evaluate(sender: nil, body: text) }
-        #expect(duration < .milliseconds(200))
+        #expect(duration < .milliseconds(500))
     }
 
     @Test func disabledDefaultRulesDoNotMatch() {

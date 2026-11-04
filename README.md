@@ -87,7 +87,7 @@ Arayüz çevirileri `App/Localizable.xcstrings` içinde; yeni bir metnin hem `en
 
 `FilterCore/Sources/FilterCore/SpamClassifier.swift` bir naive Bayes sınıflandırıcı. Sadece hiçbir kural eşleşmediğinde
 sorulur ve spam derse mesaj Gereksiz'e değil Promosyonlar'a gider. Varsayılan olarak kapalı; Kurallar sekmesinden açılır,
-Kontrol et sekmesinden "Spam" / "Spam değil" diye öğretilir. Telefonda mesaj metni saklanmaz, sadece kelime sayıları.
+Kontrol et sekmesinden "Spam" / "Spam değil" diye öğretilir. Telefonda öğretilen mesajların kendisi değil, kelimeleri ve sayıları saklanır.
 
 Hazır model (`Resources/classifier.json`) yalnızca kelime sayılarını içerir; 3'ten az mesajda geçen kelimeler atılır.
 `FilterCore/TrainingData/messages.json` içindeki mesajlardan üretilir:

@@ -63,7 +63,7 @@ public struct FilterEngine {
         }
 
         if let best { return FilterDecision(action: best.action, matchedRule: best) }
-        if let classifier, let body, classifier.isJunk(body) {
+        if let classifier, classifier.isJunk(normalized: normalizedBody) {
             return FilterDecision(action: .promotion, matchedRule: nil, isFromClassifier: true)
         }
         return FilterDecision(action: .allow, matchedRule: nil)

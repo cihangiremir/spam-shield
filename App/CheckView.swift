@@ -234,7 +234,7 @@ struct CheckForm: View {
             if let taughtMessage {
                 Text(taughtMessage)
             } else if model.classifierSettings.isEnabled {
-                Text("Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Mesaj saklanmaz, sadece kelimeleri sayılır.")
+                Text("Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Öğrettiğin mesajın kendisi değil, kelimeleri telefonda saklanır.")
             } else {
                 Text("Öğrenen filtre kapalı. Öğrettiklerin saklanır; Kurallar sekmesinden açınca kullanılır.")
             }
@@ -242,7 +242,10 @@ struct CheckForm: View {
     }
 
     private func teach(isJunk: Bool) {
-        model.teachClassifier(messageText, isJunk: isJunk)
+        guard model.teachClassifier(messageText, isJunk: isJunk) else {
+            taughtMessage = model.errorMessage
+            return
+        }
         taughtMessage = isJunk
             ? String(localized: "Spam olarak öğretildi.")
             : String(localized: "Normal mesaj olarak öğretildi.")

@@ -113,12 +113,12 @@ struct RulesView: View {
             )) {
                 Label("Öğrenen filtre", systemImage: "brain")
             }
-            if model.classifierSettings.exampleCount > 0 {
+            if model.classifierSettings.exampleCount > 0 || model.isClassifierFileUnreadable {
                 LabeledContent("Öğrettiğin mesajlar", value: "\(model.classifierSettings.exampleCount)")
                 Button("Öğrettiklerini sil", role: .destructive) { isConfirmingForget = true }
             }
         } footer: {
-            Text("Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Mesajlar saklanmaz, sadece kelimeleri sayılır.")
+            Text("Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Öğrettiğin mesajların kendisi değil, kelimeleri telefonda saklanır.")
         }
     }
 

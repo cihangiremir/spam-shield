@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "fragments": {
     "suspiciousTLDs": "store|site|vip|live|online|icu|top|click|link|sbs|cfd|shop|support|help|info|art|xyz|buzz|club|bond|rest|cyou|monster|lol|quest|website|space|fun|pw|tk|ml|ga|cf|gq",
     "nonWordTLDs": "icu|sbs|cfd|xyz|cyou|buzz|pw|tk|ml|ga|cf|gq",
@@ -131,9 +131,9 @@
           "details": "Endings like .xyz, .top or .icu that banks and stores don't use."
         }
       },
-      "note": "Cheap TLDs that real Turkish banks, carriers and shops don't use. Many of them are also words, so \"Ödemeniz alındı.Online işlemler\" (a missing space) must not count: a word-like TLD needs a link sign (http, www, a path) or a hyphen/digit in the domain.",
+      "note": "Cheap TLDs that real Turkish banks, carriers and shops don't use. Many of them are also words, so \"Ödemeniz alındı.Online işlemler\" (a missing space) must not count: a word-like TLD needs a link sign (http, www, a path) or a hyphen/digit in the domain. \"www.\" only starts a link where no domain is in progress and the part before the first digit or hyphen is letters only: otherwise the regex engine retries every position and 20,000 characters of \"www.\" or \"a1\" took seconds.",
       "matchType": "regex",
-      "pattern": "(https?://|www\\.)[a-z0-9.-]*\\.({{suspiciousTLDs}})(?![a-z0-9-])|[a-z0-9-]\\.({{suspiciousTLDs}})/|[a-z0-9-]\\.({{nonWordTLDs}})(?![a-z0-9-])|(?<![a-z0-9-])[a-z0-9]*[0-9-][a-z0-9-]*\\.({{suspiciousTLDs}})(?![a-z0-9-])",
+      "pattern": "(https?://|(?<![a-z0-9.-])www\\.)[a-z0-9.-]*\\.({{suspiciousTLDs}})(?![a-z0-9-])|[a-z0-9-]\\.({{suspiciousTLDs}})/|[a-z0-9-]\\.({{nonWordTLDs}})(?![a-z0-9-])|(?<![a-z0-9-])[a-z]*[0-9-][a-z0-9-]*\\.({{suspiciousTLDs}})(?![a-z0-9-])",
       "action": "junk"
     },
     {

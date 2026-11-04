@@ -67,10 +67,14 @@ public struct RuleStore {
 
     /// Saved classifier settings, or the defaults (off, nothing taught) when there are none or they can't be read.
     public func loadClassifierSettings() -> ClassifierSettings {
-        guard let data = try? Data(contentsOf: classifierURL),
-              let settings = try? JSONDecoder().decode(ClassifierSettings.self, from: data)
-        else { return ClassifierSettings() }
-        return settings
+        (try? loadClassifierSettingsForEditing()) ?? ClassifierSettings()
+    }
+
+    /// Like `loadClassifierSettings()`, but throws when the file exists and can't be read, so the app
+    /// doesn't save the defaults over what the user taught.
+    public func loadClassifierSettingsForEditing() throws -> ClassifierSettings {
+        guard FileManager.default.fileExists(atPath: classifierURL.path) else { return ClassifierSettings() }
+        return try JSONDecoder().decode(ClassifierSettings.self, from: Data(contentsOf: classifierURL))
     }
 
     public func saveClassifierSettings(_ settings: ClassifierSettings) throws {

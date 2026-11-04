@@ -23,6 +23,9 @@ final class RuleListModel {
     }
     /// The classifier with what the user taught, also when it is off, so the Check screen can show its verdict.
     private(set) var classifier: SpamClassifier
+    /// Set when the saved classifier settings can't be read, so the defaults aren't saved over what the user taught.
+    /// Forgetting the taught messages clears it.
+    private(set) var isClassifierFileUnreadable = false
     /// Built once per rule or classifier change, so the Check screen doesn't compile every regex on each keystroke.
     private(set) var engine: FilterEngine
     var errorMessage: String?
@@ -47,10 +50,8 @@ final class RuleListModel {
         classifierSettings = ClassifierSettings()
         classifier = .bundled
         engine = FilterEngine(rules: DefaultRules.all)
+        // `didSet` runs for the changes `reload` makes and builds the engine.
         reload()
-        // `didSet` doesn't run during init.
-        if classifierSettings.exampleCount > 0 { classifier = classifierSettings.classifier }
-        if rules != DefaultRules.all || classifierSettings.isEnabled { engine = makeEngine() }
     }
 
     /// Reads the saved rules and classifier settings again. The app calls this when it comes to the foreground,
@@ -61,13 +62,17 @@ final class RuleListModel {
             return
         }
         catalogVersion = store.loadCatalog().version
-        classifierSettings = store.loadClassifierSettings()
         do {
             rules = try store.loadForEditing()
             unblockSaving()
         } catch {
             isSavingBlocked = true
             errorMessage = String(localized: "Kayıtlı kurallar okunamadı, filtre varsayılan kurallarla çalışıyor. Kayıtlı dosyanın üzerine yazılmasın diye değişiklikler kaydedilmiyor. Varsayılanlara dönebilir ya da kuralları içe aktarabilirsin.")
+        }
+        do {
+            classifierSettings = try store.loadClassifierSettingsForEditing()
+        } catch {
+            blockClassifierSaving()
         }
     }
 
@@ -192,26 +197,56 @@ final class RuleListModel {
         updateClassifierSettings { $0.isEnabled = isEnabled }
     }
 
-    /// Teaches the classifier that the message is spam or not. Only token counts are saved, not the message.
-    func teachClassifier(_ text: String, isJunk: Bool) {
+    /// Teaches the classifier that the message is spam or not. The message's words are counted and saved, not the message.
+    /// Returns false when it couldn't be saved; `errorMessage` says why.
+    func teachClassifier(_ text: String, isJunk: Bool) -> Bool {
         updateClassifierSettings { $0.learn(text, isJunk: isJunk) }
     }
 
+    /// Also replaces a settings file that can't be read; the user chose to drop what was in it.
     func forgetClassifierExamples() {
-        updateClassifierSettings { $0.forgetExamples() }
+        var settings = (try? store?.loadClassifierSettingsForEditing()) ?? classifierSettings
+        settings.forgetExamples()
+        saveClassifierSettings(settings)
     }
 
     /// Starts from the saved settings, because the app and the share extension both write them.
-    private func updateClassifierSettings(_ change: (inout ClassifierSettings) -> Void) {
-        var settings = store?.loadClassifierSettings() ?? classifierSettings
+    @discardableResult
+    private func updateClassifierSettings(_ change: (inout ClassifierSettings) -> Void) -> Bool {
+        var settings = classifierSettings
+        if let store {
+            do {
+                settings = try store.loadClassifierSettingsForEditing()
+            } catch {
+                blockClassifierSaving()
+                return false
+            }
+        }
         change(&settings)
+        return saveClassifierSettings(settings)
+    }
+
+    @discardableResult
+    private func saveClassifierSettings(_ settings: ClassifierSettings) -> Bool {
         classifierSettings = settings
-        guard let store else { return }
+        guard let store else { return true }
         do {
             try store.saveClassifierSettings(settings)
+            if isClassifierFileUnreadable {
+                isClassifierFileUnreadable = false
+                errorMessage = nil
+            }
+            return true
         } catch {
             errorMessage = String(localized: "Öğrenen filtre ayarları kaydedilemedi: \(error.localizedDescription)")
+            return false
         }
+    }
+
+    private func blockClassifierSaving() {
+        isClassifierFileUnreadable = true
+        classifierSettings = ClassifierSettings()
+        errorMessage = String(localized: "Öğrenen filtrenin ayarları okunamadı, filtre kapalı çalışıyor. Öğrettiklerinin üzerine yazılmasın diye değişiklikler kaydedilmiyor. Öğrettiklerini silersen yeniden kullanabilirsin.")
     }
 
     private func makeEngine() -> FilterEngine {

@@ -2,7 +2,7 @@ import Foundation
 
 /// Learns from labelled messages which words, link domains and shapes point to spam (a naive Bayes classifier).
 /// It only keeps counts: how many junk / other messages it saw and in how many of them each token appeared,
-/// so no message text is stored.
+/// so the messages themselves aren't stored, only their words.
 ///
 /// The engine asks it only when no rule matched, and a spam verdict sends the message to Promotions, never to
 /// Junk: a wrong guess must not hide a legitimate message.
@@ -74,6 +74,11 @@ public struct SpamClassifier: Codable, Equatable, Sendable {
 
     /// Log-odds that the message is junk. Above `threshold` counts as spam.
     public func score(_ text: String) -> Double {
+        score(normalized: TextNormalizer.normalize(text))
+    }
+
+    /// `score(_:)` for text that already went through `TextNormalizer.normalize`.
+    func score(normalized: String) -> Double {
         guard junkMessages > 0, otherMessages > 0, junkTotal > 0, otherTotal > 0 else { return -.infinity }
 
         // Smoothing in proportion to each class's size. With the usual +1 for both, a word seen a few times in
@@ -84,7 +89,7 @@ public struct SpamClassifier: Codable, Equatable, Sendable {
         }
 
         var logOdds = log(Double(junkMessages) / Double(otherMessages))
-        for token in Self.tokens(in: text) {
+        for token in Self.tokens(inNormalized: normalized) {
             let junkCount = junkTokens[token, default: 0]
             let otherCount = otherTokens[token, default: 0]
             // A token the model never saw says nothing about the message.
@@ -98,10 +103,17 @@ public struct SpamClassifier: Codable, Equatable, Sendable {
         score(text) > Self.threshold
     }
 
+    func isJunk(normalized: String) -> Bool {
+        score(normalized: normalized) > Self.threshold
+    }
+
     /// What the classifier looks at: words of two or more letters, link domains ("d:ornek.com"),
     /// whether there is a link at all and whether there is a number. Each counts once per message.
     static func tokens(in text: String) -> Set<String> {
-        let normalized = TextNormalizer.normalize(text)
+        tokens(inNormalized: TextNormalizer.normalize(text))
+    }
+
+    private static func tokens(inNormalized normalized: String) -> Set<String> {
         var tokens = Set<String>()
 
         var word = String.UnicodeScalarView()
@@ -175,6 +187,14 @@ public struct ClassifierSettings: Codable, Equatable, Sendable {
     static let userExampleShare = 50
 
     public init() {}
+
+    /// Missing fields get their defaults, so a file saved by an older app version still reads after a field is added.
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        isEnabled = try container.decodeIfPresent(Bool.self, forKey: .isEnabled) ?? false
+        learned = try container.decodeIfPresent(SpamClassifier.self, forKey: .learned) ?? SpamClassifier()
+        exampleCount = try container.decodeIfPresent(Int.self, forKey: .exampleCount) ?? 0
+    }
 
     public mutating func learn(_ text: String, isJunk: Bool) {
         let bundled = SpamClassifier.bundled
