@@ -1,10 +1,11 @@
 {
-  "version": 3,
+  "version": 4,
   "fragments": {
     "suspiciousTLDs": "store|site|vip|live|online|icu|top|click|link|sbs|cfd|shop|support|help|info|art|xyz|buzz|club|bond|rest|cyou|monster|lol|quest|website|space|fun|pw|tk|ml|ga|cf|gq",
     "nonWordTLDs": "icu|sbs|cfd|xyz|cyou|buzz|pw|tk|ml|ga|cf|gq",
     "linkTLDs": "com|net|org|biz|co|io|me|app|{{suspiciousTLDs}}",
-    "nonTurkishLink": "(?<![a-z0-9.-])(https?://)?([a-z0-9-]+\\.)+(?!tr(?![a-z0-9-]))[a-z]{2,}(?![a-z0-9-])(?!\\.[a-z0-9])"
+    "nonTurkishLink": "(?<![a-z0-9.-])(https?://)?([a-z0-9-]+\\.)+(?!tr(?![a-z0-9-]))[a-z]{2,}(?![a-z0-9-])(?!\\.[a-z0-9])",
+    "optOut": "\\b(ret|iptal|smsiptal|izinsiz)\\b'?( [a-z0-9]+){0,3} yaz\\w*.{0,30}\\b\\d{4}\\b|\\b\\d{4}\\b.{0,30}\\b(ret|iptal)\\b( [a-z0-9]+){0,3} yaz"
   },
   "rules": [
     {
@@ -34,8 +35,9 @@
           "details": "Loan offers like \"we'll pay off your debt\", \"credit record amnesty\" or \"loans without a guarantor\"."
         }
       },
+      "note": "\"Nakit ihtiyac\" and \"aninda kredi\" are left out: banks advertise with them. A message with opt-out info (optOut) is left to Promotions.",
       "matchType": "regex",
-      "pattern": "kredi notu(nuz)? (ne olursa olsun|fark etmez|onemsiz|dusuk)|borc\\w* kapatiyoruz|borc kapatma kredi\\w*|icrali\\w* (kredi|kisi)|kefilsiz kredi|aninda kredi|sicil affi|nakit ihtiyac",
+      "pattern": "^(?!.*({{optOut}})).*?(kredi notu(nuz)? (ne olursa olsun|fark etmez|onemsiz|dusuk)|borc\\w* kapatiyoruz|borc kapatma kredi\\w*|icrali\\w* (kredi|kisi)|kefilsiz kredi|sicil affi)",
       "action": "junk"
     },
     {
@@ -49,8 +51,9 @@
           "details": "Fake prizes like \"Congratulations, you've won\" or \"your gift is ready\"."
         }
       },
+      "note": "\"Hak kazandiniz\" is left out: bank draws say \"cekilise katilmaya hak kazandiniz\". A message with opt-out info (optOut) is left to Promotions.",
       "matchType": "regex",
-      "pattern": "tebrikler.{0,40}(kazandi|kazanan)|hediye\\w* (tanimlandi|hazir|sizi bekliyor)|cekilis\\w*.{0,30}kazandi|odul\\w* (talep|almak icin)",
+      "pattern": "^(?!.*({{optOut}})).*?(tebrikler.{0,40}(?<!hak )(kazandi|kazanan)|hediye\\w* (tanimlandi|hazir(\\b|dir|landi)|sizi bekliyor)|cekilis\\w*.{0,30}(?<!hak )kazandi|odul\\w* (talep|almak icin))",
       "action": "junk"
     },
     {
@@ -64,8 +67,9 @@
           "details": "Short links like bit.ly or cutt.ly that hide the real address."
         }
       },
+      "note": "Brands send short links in campaigns too, so a message with opt-out info (optOut) is left to Promotions.",
       "matchType": "regex",
-      "pattern": "(^|[^a-z0-9.])(bit\\.ly|t\\.ly|cutt\\.ly|tinyurl\\.com|shorturl\\.at|rb\\.gy|is\\.gd|goo\\.gl|s\\.id|tiny\\.cc|ow\\.ly|t2m\\.io|t\\.co|kisalt\\w*\\.[a-z]{2,})/",
+      "pattern": "^(?!.*({{optOut}})).*?(^|[^a-z0-9.])(bit\\.ly|t\\.ly|cutt\\.ly|tinyurl\\.com|shorturl\\.at|rb\\.gy|is\\.gd|goo\\.gl|s\\.id|tiny\\.cc|ow\\.ly|t2m\\.io|t\\.co|kisalt\\w*\\.[a-z]{2,})/",
       "action": "junk"
     },
     {
@@ -113,7 +117,7 @@
       },
       "note": "The only real e-Devlet domain is turkiye.gov.tr. \"gov.tr-...\" / \"gov.tr.xyz\" and \"edevlet\", \"turkiye-gov\" inside another domain are look-alikes.",
       "matchType": "regex",
-      "pattern": "gov\\.tr(-|\\.[a-z0-9])|[a-z0-9-]*(edevlet|e-devlet|turkiye-gov|gov-tr)[a-z0-9-]*(\\.[a-z0-9-]+)*\\.({{linkTLDs}})(?![a-z0-9-])",
+      "pattern": "gov\\.tr(-|\\.[a-z0-9])|(?<![a-z0-9-])(?=[a-z0-9-]*(edevlet|e-devlet|turkiye-gov|gov-tr))(?>[a-z0-9-]*)(\\.[a-z0-9-]+)*\\.({{linkTLDs}})(?![a-z0-9-])",
       "action": "junk"
     },
     {
@@ -190,9 +194,9 @@
           "details": "\"Mom, it's me, send money\" messages. Your family is in your contacts, so they aren't affected."
         }
       },
-      "note": "Family members are in Contacts, so iOS never sends their messages to the filter. \"Abi/abla\" are left out: they are also how strangers, like couriers, address you.",
+      "note": "Family members are in Contacts, so iOS never sends their messages to the filter. \"Abi/abla\" are left out: they are also how strangers, like couriers, address you. A bare \"gonder\" is left out: \"Anne ben yarin belge gondercem\" is not about money.",
       "matchType": "regex",
-      "pattern": "\\b(anne|baba|anneci?gim|babaci?gim)\\b,? ben\\b.{0,200}\\b(para|tl|iban|hesab\\w*|gonder\\w*)",
+      "pattern": "\\b(anne|baba|anneci?gim|babaci?gim)\\b,? ben\\b.{0,200}\\b(para|tl|iban|hesab\\w*)",
       "action": "junk"
     },
     {
@@ -302,6 +306,7 @@
           "details": "Marketing messages carrying İYS or RET opt-out information."
         }
       },
+      "note": "Registered senders must say how to opt out; none of the spam in a real Messages junk folder did, so the explicit \"RET/IPTAL ... yazip 1234\" instruction (optOut) exempts a message from the stricter rules. It isn't a Promotions marker itself: OTP and card alerts also say \"IPTAL yazip\". \"B0xx\" and \"IYS\" count for Promotions only: betting spam copies them.",
       "matchType": "regex",
       "pattern": "\\bret\\b.{0,40}\\b\\d{4}\\b|\\bmersis\\b|\\biys\\b|\\bb0\\d{2}\\b|(sms|mesaj) (almamak|listeden cikmak) icin",
       "action": "promotion"

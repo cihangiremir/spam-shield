@@ -70,6 +70,12 @@ struct FilterEngineTests {
         "Tüm borçlarınızı kapatıyoruz, icralı kişilere kredi",
         "TEBRİKLER! Çekilişimizde iPhone kazandınız",
         "Size özel fırsat: bit.ly/3abcde",
+        "Size özel fırsat: bit.ly/3abcde B052", // a copied İYS code doesn't make it a registered sender
+        "Size özel fırsat: bit.ly/3abcde/ret/2024", // only the "RET yazıp 1234" instruction exempts a message
+        "Hesabınıza giriş yapın: http://akbank.co/x İletişim tercihlerinizi değiştirmek için IPTAL yazıp 5203'e gönderin.",
+        "Deneme bonusu 500 TL! SMS almak istemiyorsanız RET yazıp 2924'e gönderin.",
+        "Hediyeniz hazırdır, hemen alın: www.hediye-al.xyz",
+        "Hediyeniz hazırlandı, teslim için arayın",
         "PTT: Kargonuz teslim edilemedi, adres bilgilerinizi güncelleyin https://ptt-kargo.xyz",
         "HGS geçiş cezanız bulunmaktadır, ödemek için www.hgs-odeme.top",
         "500 TL deneme hediyesi hesabınızda",
@@ -161,6 +167,8 @@ struct FilterEngineTests {
     @Test(arguments: [
         "Sepette %30 indirim! SMS almak istemiyorsanız RET yazıp 3404'e gönderin. B002",
         "Yeni sezon ürünleri mağazalarda. Mersis: 0123456789012345",
+        "Puan fırsatı: http://bit.ly/ornek SMS almak istemiyorsanız RET yazıp 2924'e gönderin.",
+        "Kefilsiz kredi fırsatı! SMS almak istemiyorsanız RET yazıp 2924'e gönderin.",
     ])
     func defaultRulesSendCommercialSmsToPromotions(body: String) {
         #expect(evaluate(body).action == .promotion)
@@ -171,6 +179,10 @@ struct FilterEngineTests {
         "Your verification code is 123456",
         "Kargonuz dağıtıma çıktı, gün içinde teslim edilecek.",
         "1234 ile biten kartınızla 250,00 TL harcama yapılmıştır.",
+        // The opt-out wording only exempts from junk rules; it doesn't make an alert a campaign.
+        "Doğrulama kodunuz 482913. İşlemi iptal etmek için IPTAL yazıp 3340'a gönderin.",
+        "Kartınızla 1.250,00 TL harcama yapıldı. Siz yapmadıysanız IPTAL yazıp 4566'ya gönderin.",
+        "Şifreniz 1234. SMS almak istemiyorsanız bizi arayın.",
     ])
     func defaultRulesSendInfoMessagesToTransactions(body: String) {
         #expect(evaluate(body).action == .transaction)
@@ -185,6 +197,15 @@ struct FilterEngineTests {
         let decision = evaluate(body)
         #expect(decision.action == .allow)
         #expect(decision.matchedRule == nil)
+    }
+
+    /// A spammer controls the text and the filter extension has little time per message.
+    @Test(.timeLimit(.minutes(1)), arguments: ["sms", "mesaj", "edevlet", "a", "iptal yaz 1234 ", "tebrikler hak "])
+    func longRepetitiveTextIsFast(unit: String) {
+        let engine = FilterEngine(rules: DefaultRules.all)
+        let text = String(repeating: unit, count: 3000 / unit.count)
+        let duration = ContinuousClock().measure { _ = engine.evaluate(sender: nil, body: text) }
+        #expect(duration < .milliseconds(200))
     }
 
     @Test func disabledDefaultRulesDoNotMatch() {
