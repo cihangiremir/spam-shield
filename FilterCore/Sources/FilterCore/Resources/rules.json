@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "fragments": {
     "suspiciousTLDs": "store|site|vip|live|online|icu|top|click|link|sbs|cfd|shop|support|help|info|art|xyz|buzz|club|bond|rest|cyou|monster|lol|quest|website|space|fun|pw|tk|ml|ga|cf|gq",
     "nonWordTLDs": "icu|sbs|cfd|xyz|cyou|buzz|pw|tk|ml|ga|cf|gq",
@@ -306,9 +306,9 @@
           "details": "Marketing messages carrying İYS or RET opt-out information."
         }
       },
-      "note": "Registered senders must say how to opt out; none of the spam in a real Messages junk folder did, so the explicit \"RET/IPTAL ... yazip 1234\" instruction (optOut) exempts a message from the stricter rules. It isn't a Promotions marker itself: OTP and card alerts also say \"IPTAL yazip\". \"B0xx\" and \"IYS\" count for Promotions only: betting spam copies them.",
+      "note": "Registered senders must say how to opt out; none of the spam in a real Messages junk folder did, so the explicit \"RET/IPTAL ... yazip 1234\" instruction (optOut) exempts a message from the stricter rules. It isn't a Promotions marker itself: OTP and card alerts also say \"IPTAL yazip\". \"IYS\" counts for Promotions only: betting spam copies it. The \"B0xx\" code at the end isn't a marker: delivery, card and OTP messages carry it too.",
       "matchType": "regex",
-      "pattern": "\\bret\\b.{0,40}\\b\\d{4}\\b|\\bmersis\\b|\\biys\\b|\\bb0\\d{2}\\b|(sms|mesaj) (almamak|listeden cikmak) icin",
+      "pattern": "\\bret\\b.{0,40}\\b\\d{4}\\b|\\bmersis\\b|\\biys\\b|(sms|mesaj) (almamak|listeden cikmak) icin",
       "action": "promotion"
     },
     {
@@ -338,7 +338,7 @@
         }
       },
       "matchType": "regex",
-      "pattern": "kargoya verildi|(kargo|gonderi)\\w*.{0,60}(teslim edil(di|mistir)|dagitima cikti|yola cikti|sube\\w* ulas)",
+      "pattern": "kargoya verildi|(kargo|gonderi|siparis|paket)\\w*.{0,60}(teslim (edil(di|mistir|ecek\\w*)|ettik|alin(di|mistir)|alabilirsiniz)|teslimat kod|dagitima cik(ti|mistir|ar\\w*)|yola cik(ti|mistir)|sube\\w* ulas)",
       "action": "transaction"
     },
     {

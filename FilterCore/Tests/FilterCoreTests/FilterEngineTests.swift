@@ -183,6 +183,16 @@ struct FilterEngineTests {
         "Doğrulama kodunuz 482913. İşlemi iptal etmek için IPTAL yazıp 3340'a gönderin.",
         "Kartınızla 1.250,00 TL harcama yapıldı. Siz yapmadıysanız IPTAL yazıp 4566'ya gönderin.",
         "Şifreniz 1234. SMS almak istemiyorsanız bizi arayın.",
+        // The "B0xx" code at the end comes on these too; it doesn't make them campaigns.
+        "Doğrulama kodunuz 482913. Kimseyle paylaşmayınız. B001",
+        "Kartınızla 250,00 TL harcama yapıldı. B002",
+        "Ornek 12345678901 teslimat numaralı gönderiniz yola çıkmıştır. Tahmini teslim süresi 1-3 iş günüdür. https://ornek.gl/abc B016",
+        "12345 kod ile dağıtıma çıkan 12345678901 teslimat numaralı gönderinizi teslim alabilirsiniz. https://ornek.gl/abc B016",
+        "12345678901 teslimat numaralı gönderiniz Ahmet Yılmaz (Yakını) tarafından teslim alınmıştır. https://ornek.gl/abc B016",
+        "1234567890123 no'lu kargonuz 2 saat içinde teslim edilecek. Ödemeniz 100,00 TL. KVKK: http://ornek.la/kvkk B016",
+        "1234567890123 takip no'lu kargonuzu A**** Y**** (Kendisi) teslim ettik. KVKK: http://ornek.la/kvkk B016",
+        "Gönderiniz dağıtıma çıkarılmıştır. Takip: https://www.ornekkargo.com.tr",
+        "Paketiniz yola çıktı, yarın teslim edilecek.",
     ])
     func defaultRulesSendInfoMessagesToTransactions(body: String) {
         #expect(evaluate(body).action == .transaction)
@@ -201,7 +211,7 @@ struct FilterEngineTests {
 
     /// A spammer controls the text and the filter extension has little time per message. 20,000 characters,
     /// because a regex that slows down with the square of the length still looks fast at a few thousand.
-    @Test(.timeLimit(.minutes(1)), arguments: ["sms", "mesaj", "edevlet", "a", "iptal yaz 1234 ", "tebrikler hak ", "www.", "a1", "a.1"])
+    @Test(.timeLimit(.minutes(1)), arguments: ["sms", "mesaj", "edevlet", "a", "iptal yaz 1234 ", "tebrikler hak ", "www.", "a1", "a.1", "kargo "])
     func longRepetitiveTextIsFast(unit: String) {
         let engine = FilterEngine(rules: DefaultRules.all)
         let text = String(repeating: unit, count: 20_000 / unit.count)
