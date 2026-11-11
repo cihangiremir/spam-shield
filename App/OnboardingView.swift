@@ -4,8 +4,8 @@ import SwiftUI
 struct OnboardingView: View {
     let onFinish: () -> Void
 
-    @Environment(\.openURL) private var openURL
     @State private var page = 0
+    @ScaledMetric(relativeTo: .largeTitle) private var iconHeight = 104.0
 
     private let pageCount = 3
 
@@ -13,8 +13,11 @@ struct OnboardingView: View {
         VStack(spacing: 0) {
             HStack {
                 Spacer()
+                let isLastPage = page == pageCount - 1
                 Button("Geç", action: onFinish)
-                    .opacity(page == pageCount - 1 ? 0 : 1)
+                    .opacity(isLastPage ? 0 : 1)
+                    .disabled(isLastPage)
+                    .accessibilityHidden(isLastPage)
             }
             .padding(.horizontal)
             .padding(.top, 8)
@@ -29,9 +32,9 @@ struct OnboardingView: View {
 
             VStack(spacing: 12) {
                 if page == 1 {
-                    Button("Mesajlar ayarlarını aç", action: openMessagesSettings)
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
+                    MessagesSettingsButton()
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
                 }
                 Button {
                     if page < pageCount - 1 {
@@ -54,14 +57,14 @@ struct OnboardingView: View {
 
     private var welcomePage: some View {
         pageContent(
-            systemImage: "checkmark.shield.fill",
+            icon: Image("BrandMark").resizable().scaledToFit(),
             title: "Spam SMS'lere karşı kalkan",
-            text: "Bahis, kredi ve dolandırıcılık mesajlarını Gereksiz klasörüne ayırır. Doğrulama kodlarını ve kargo bildirimlerini kendi klasörlerine koyar."
+            text: "Bahis, kredi ve dolandırıcılık mesajlarını Gereksiz'e ayırır. Kodları ve kargo bildirimlerini kendi klasörlerine koyar."
         )
     }
 
     private var setupPage: some View {
-        pageContent(systemImage: "gearshape.fill", title: "Filtreyi aç", text: nil) {
+        pageContent(icon: symbol("gearshape.fill"), title: "Filtreyi aç", text: nil) {
             VStack(alignment: .leading, spacing: 14) {
                 step(1, "Ayarlar uygulamasını aç.")
                 step(2, "Uygulamalar › Mesajlar'a gir (iOS 17'de doğrudan Mesajlar).")
@@ -75,25 +78,30 @@ struct OnboardingView: View {
 
     private var privacyPage: some View {
         pageContent(
-            systemImage: "lock.shield.fill",
+            icon: symbol("lock.shield.fill"),
             title: "Mesajların sende kalır",
-            text: "Filtre tamamen iPhone'unda çalışır, hiçbir mesaj bir sunucuya gönderilmez. Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar filtreye hiç gelmez."
+            text: "Filtre tamamen iPhone'unda çalışır. Hiçbir mesaj bir sunucuya gönderilmez."
         )
     }
 
+    private func symbol(_ name: String) -> some View {
+        Image(systemName: name)
+            .resizable()
+            .scaledToFit()
+            .symbolRenderingMode(.hierarchical)
+            .foregroundStyle(.tint)
+    }
+
     private func pageContent(
-        systemImage: String,
+        icon: some View,
         title: LocalizedStringKey,
         text: LocalizedStringKey?,
         @ViewBuilder extra: () -> some View = { EmptyView() }
     ) -> some View {
         ScrollView {
             VStack(spacing: 20) {
-                Image(systemName: systemImage)
-                    .font(.system(size: 52, weight: .semibold))
-                    .foregroundStyle(.white)
-                    .frame(width: 112, height: 112)
-                    .background(Color.accentColor.gradient, in: .rect(cornerRadius: 28))
+                icon
+                    .frame(height: iconHeight)
                     .padding(.top, 40)
                     .accessibilityHidden(true)
                 Text(title)
@@ -112,16 +120,6 @@ struct OnboardingView: View {
         }
     }
 
-    /// Opens Settings › Apps › Messages. Apple has no public link to that page (the public one opens this app's
-    /// own settings), so this uses the undocumented "App-prefs:" URL and falls back to Settings' own page for
-    /// this app when iOS refuses it. App Review may reject it; fine for installing from Xcode.
-    private func openMessagesSettings() {
-        guard let url = URL(string: "App-prefs:com.apple.MobileSMS") else { return }
-        openURL(url) { accepted in
-            if !accepted, let fallback = URL(string: UIApplication.openSettingsURLString) { openURL(fallback) }
-        }
-    }
-
     private func step(_ number: Int, _ text: LocalizedStringKey) -> some View {
         Label {
             Text(text)
@@ -129,6 +127,22 @@ struct OnboardingView: View {
             Image(systemName: "\(number).circle.fill")
                 .foregroundStyle(Color.accentColor)
                 .font(.title3)
+        }
+    }
+}
+
+/// Opens Settings › Apps › Messages. Apple has no public link to that page (the public one opens this app's
+/// own settings), so this uses the undocumented "App-prefs:" URL and falls back to Settings' own page for
+/// this app when iOS refuses it. App Review may reject it; fine for installing from Xcode.
+struct MessagesSettingsButton: View {
+    @Environment(\.openURL) private var openURL
+
+    var body: some View {
+        Button("Mesajlar ayarlarını aç") {
+            guard let url = URL(string: "App-prefs:com.apple.MobileSMS") else { return }
+            openURL(url) { accepted in
+                if !accepted, let fallback = URL(string: UIApplication.openSettingsURLString) { openURL(fallback) }
+            }
         }
     }
 }

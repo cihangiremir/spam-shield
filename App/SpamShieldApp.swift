@@ -17,7 +17,7 @@ struct SpamShieldApp: App {
     var body: some Scene {
         WindowGroup {
             TabView(selection: $selectedTab) {
-                HomeView(selectedTab: $selectedTab) { hasCompletedOnboarding = false }
+                HomeView { hasCompletedOnboarding = false }
                     .tabItem { Label("Koruma", systemImage: "checkmark.shield") }
                     .tag(AppTab.home)
                 CheckView()

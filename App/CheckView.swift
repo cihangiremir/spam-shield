@@ -72,7 +72,7 @@ struct CheckForm: View {
                 classifierSection
             } else {
                 Section {
-                    Label("Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar iOS tarafından filtreye hiç gönderilmez. Buradaki sonuç bu mesajlar için geçerli olmaz.", systemImage: "info.circle")
+                    Label("Rehberindeki kişiler, cevap yazdığın numaralar ve iMessage'lar filtreye hiç uğramaz. Buradaki sonuç onlar için geçerli değildir.", systemImage: "info.circle")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
@@ -102,7 +102,7 @@ struct CheckForm: View {
                 messageText = strings.first ?? ""
             }
         } footer: {
-            Text("Mesajlar'da mesaja uzun bas › Kopyala, sonra buraya yapıştır. Göndericiyi elle yazabilirsin.")
+            Text("Mesajlar'da mesaja uzun bas › Kopyala, sonra buraya yapıştır.")
         }
     }
 
@@ -184,7 +184,7 @@ struct CheckForm: View {
             if !phrase.isEmpty && !phraseIsInMessage {
                 Text("Bu ifade mesajda geçmiyor.").foregroundStyle(.red)
             } else {
-                Text("Kelimelere dokunarak ifade oluştur. Kısa ve yaygın ifadeler normal mesajları da engelleyebilir; \"deneme hediye\" gibi spame özgü ifadeler seç.")
+                Text("Kelimelere dokunarak ifade oluştur. Kısa, yaygın ifadeler normal mesajları da engelleyebilir.")
             }
         }
     }
@@ -234,9 +234,9 @@ struct CheckForm: View {
             if let taughtMessage {
                 Text(taughtMessage)
             } else if model.classifierSettings.isEnabled {
-                Text("Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Öğrettiğin mesajın kendisi değil, kelimeleri telefonda saklanır.")
+                Text("Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır.")
             } else {
-                Text("Öğrenen filtre kapalı. Öğrettiklerin saklanır; Kurallar sekmesinden açınca kullanılır.")
+                Text("Öğrenen filtre kapalı. Kurallar sekmesinden açabilirsin.")
             }
         }
     }

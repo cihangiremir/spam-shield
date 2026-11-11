@@ -30,7 +30,7 @@ struct RuleEditorView: View {
                     Toggle("Etkin", isOn: $rule.isEnabled)
                 } footer: {
                     if rule.builtInID != nil {
-                        Text("Hazır kural: silinemez, kapatılabilir. Düzenlersen kural listesi güncellemeleri bu kuralı artık değiştirmez.")
+                        Text("Hazır kural silinemez, kapatılabilir. Düzenlersen güncellemeler bu kuralı değiştirmez.")
                     }
                 }
 
@@ -42,7 +42,7 @@ struct RuleEditorView: View {
 
                 Section {
                     if isRegex {
-                        Label("Bu kural gelişmiş bir desen kullanıyor. Görmek veya değiştirmek için Gelişmiş'i aç.", systemImage: "chevron.left.forwardslash.chevron.right")
+                        Label("Bu kural gelişmiş bir desen kullanıyor. Gelişmiş'ten görebilirsin.", systemImage: "chevron.left.forwardslash.chevron.right")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     } else {

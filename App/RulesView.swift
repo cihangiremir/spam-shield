@@ -118,7 +118,7 @@ struct RulesView: View {
                 Button("Öğrettiklerini sil", role: .destructive) { isConfirmingForget = true }
             }
         } footer: {
-            Text("Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Öğrettiğin mesajların kendisi değil, kelimeleri telefonda saklanır.")
+            Text("Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır; yanılırsa mesaj kaybolmaz. Kontrol et sekmesinden öğretebilirsin, telefonda sadece kelimeler saklanır.")
         }
     }
 
@@ -150,7 +150,9 @@ struct RulesView: View {
             } label: {
                 VStack(alignment: .leading, spacing: 4) {
                     HStack(spacing: 6) {
+                        // Dims only the name: dimming the whole row pushed the gray summary below readable contrast.
                         Text(rule.name)
+                            .foregroundStyle(rule.isEnabled ? .primary : .secondary)
                         if rule.isCustomized {
                             Text("Düzenlendi")
                                 .font(.caption2.weight(.medium))
@@ -182,7 +184,6 @@ struct RulesView: View {
             .labelsHidden()
         }
         .padding(.vertical, 2)
-        .opacity(rule.isEnabled ? 1 : 0.55)
     }
 }
 

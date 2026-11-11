@@ -1,12 +1,13 @@
 import FilterCore
 import SwiftUI
 
-/// Start screen: how many rules are on, shortcuts to the other tabs and how filtering works.
+/// Start screen: how many rules are on, the rule list version and how filtering works.
 /// iOS doesn't tell apps whether their filter is selected in Settings, so this can't show that.
 struct HomeView: View {
     @Environment(RuleListModel.self) private var model
-    @Binding var selectedTab: AppTab
     let showOnboarding: () -> Void
+
+    @ScaledMetric(relativeTo: .largeTitle) private var markHeight = 88.0
 
     var body: some View {
         NavigationStack {
@@ -23,74 +24,79 @@ struct HomeView: View {
                     }
                 }
 
-                Section {
-                    shortcut("Mesaj kontrol et", systemImage: "text.magnifyingglass", tint: .accentColor) {
-                        selectedTab = .check
-                    }
-                    shortcut("Kuralları yönet", systemImage: "list.bullet.rectangle", tint: .indigo) {
-                        selectedTab = .rules
-                    }
-                    shortcut("Kurulum rehberi", systemImage: "questionmark", tint: .gray, action: showOnboarding)
-                }
-
                 Section("Açık kurallar") {
-                    ForEach(FilterAction.allCases, id: \.self) { action in
-                        LabeledContent {
-                            Text("\(enabledCount(for: action))")
-                                .monospacedDigit()
-                        } label: {
-                            Label {
-                                Text(action.title)
-                            } icon: {
-                                Image(systemName: action.systemImage)
-                                    .foregroundStyle(action.tint)
-                            }
-                        }
+                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible())], spacing: 12) {
+                        ForEach(FilterAction.allCases, id: \.self, content: countTile)
                     }
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(Color.clear)
                 }
 
                 rulesUpdateSection
 
                 Section("Nasıl çalışır") {
                     info("Filtrelenen mesajlar nereye gider", systemImage: "tray.full") {
-                        Text("Filtrelenen mesajlar silinmez. Mesajlar uygulamasında sol üstteki Filtreler menüsünden Gereksiz, Promosyonlar ve İşlemler klasörlerinde görebilirsin. Bu mesajlar için bildirim gelmez.")
-                        Text("Promosyonlar veya İşlemler klasörü sende görünmüyorsa, ilgili kuralları açıp \"Mesaj nereye gitsin\" ayarını Gereksiz yap.")
+                        Text("Filtrelenen mesajlar silinmez, bildirim de gelmez. Mesajlar'da sol üstteki Filtreler menüsünden Gereksiz, Promosyonlar ve İşlemler klasörlerinde görebilirsin.")
+                        Text("Promosyonlar veya İşlemler klasörü görünmüyorsa o kuralları Gereksiz'e yönlendir.")
                     }
                     info("Hangi mesajlar filtrelenir", systemImage: "person.crop.circle.badge.questionmark") {
-                        Text("iOS sadece tanımadığın göndericilerden gelen SMS/MMS mesajlarını filtreye gönderir. Rehberindeki kişiler, daha önce cevap yazdığın numaralar ve iMessage'lar filtrelenmez.")
-                        Text("Bir numarayı rehberden silmek onu filtreye sokmaz: o numaraya daha önce cevap yazdıysan iOS onu tanıdık saymaya devam eder.")
+                        Text("Sadece tanımadığın göndericilerden gelen SMS'ler. Rehberindeki kişiler, cevap yazdığın numaralar ve iMessage'lar filtrelenmez.")
+                        Text("Cevap yazdığın bir numara rehberden silinse de tanıdık sayılır.")
                     }
                     info("Gizlilik", systemImage: "lock") {
-                        Text("Filtre tamamen iPhone'unda çalışır. Mesajların hiçbir sunucuya gönderilmez.")
-                        Text("Uygulama internete sadece güncel kural listesini GitHub'dan indirmek için bağlanır.")
+                        Text("Filtre tamamen iPhone'unda çalışır, mesajların hiçbir yere gönderilmez. İnternet sadece kural listesini güncellemek için kullanılır.")
                     }
                 }
             }
             .navigationTitle("Koruma")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Kurulum rehberi", systemImage: "questionmark.circle", action: showOnboarding)
+                }
+            }
         }
     }
 
     private var hero: some View {
         VStack(spacing: 12) {
-            Image(systemName: "checkmark.shield.fill")
-                .font(.system(size: 44, weight: .semibold))
-                .foregroundStyle(.white)
-                .frame(width: 96, height: 96)
-                .background(Color.accentColor.gradient, in: .circle)
+            Image("BrandMark")
+                .resizable()
+                .scaledToFit()
+                .frame(height: markHeight)
                 .accessibilityHidden(true)
             Text("\(model.rules.filter(\.isEnabled).count) kural açık")
                 .font(.title2.bold())
-            Text("Rehberinde olmayan göndericilerden gelen SMS'ler bu kurallarla, cihazında kontrol edilir.")
+            Text("Filtrenin çalışması için Ayarlar'da Spam Shield'ı seç.")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
-            Text("Filtre, Ayarlar'da Spam Shield seçili değilse çalışmaz.")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
+            MessagesSettingsButton()
+                .buttonStyle(.bordered)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 8)
+    }
+
+    private func countTile(_ action: FilterAction) -> some View {
+        let count = enabledCount(for: action)
+        return VStack(alignment: .leading, spacing: 4) {
+            Image(systemName: action.systemImage)
+                .font(.title3.weight(.semibold))
+                .foregroundStyle(action.tint)
+            Text(count, format: .number)
+                .font(.title.bold())
+                .monospacedDigit()
+            Text(action.title)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+        // Fills the grid row, so tiles whose symbols differ in height still line up.
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .padding(14)
+        .background(Color(.secondarySystemGroupedBackground), in: .rect(cornerRadius: 12))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(action.title)
+        .accessibilityValue(Text(count, format: .number))
     }
 
     private var rulesUpdateSection: some View {
@@ -121,29 +127,12 @@ struct HomeView: View {
         } header: {
             Text("Kural listesi")
         } footer: {
-            Text("Yeni kurallar GitHub'daki açık listeden otomatik indirilir. Değiştirdiğin kurallar korunur.")
+            Text("Yeni kurallar otomatik indirilir. Değiştirdiğin kurallar korunur.")
         }
     }
 
     private func enabledCount(for action: FilterAction) -> Int {
         model.rules.filter { $0.isEnabled && $0.action == action }.count
-    }
-
-    private func shortcut(_ title: LocalizedStringKey, systemImage: String, tint: Color, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            HStack {
-                Label {
-                    Text(title)
-                } icon: {
-                    SettingsIcon(systemImage: systemImage, tint: tint)
-                }
-                Spacer()
-                Image(systemName: "chevron.forward")
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(.tertiary)
-            }
-        }
-        .tint(.primary)
     }
 
     private func info(_ title: LocalizedStringKey, systemImage: String, @ViewBuilder content: () -> some View) -> some View {
@@ -156,19 +145,5 @@ struct HomeView: View {
         } label: {
             Label(title, systemImage: systemImage)
         }
-    }
-}
-
-/// White symbol on a colored rounded square, like the rows in the Settings app.
-struct SettingsIcon: View {
-    let systemImage: String
-    let tint: Color
-
-    var body: some View {
-        Image(systemName: systemImage)
-            .font(.system(size: 15, weight: .semibold))
-            .foregroundStyle(.white)
-            .frame(width: 29, height: 29)
-            .background(tint.gradient, in: .rect(cornerRadius: 7))
     }
 }

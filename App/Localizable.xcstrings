@@ -17,9 +17,6 @@
         }
       }
     },
-    "%lld" : {
-      "shouldTranslate" : false
-    },
     "%lld kural açık" : {
       "localizations" : {
         "en" : {
@@ -156,22 +153,6 @@
         }
       }
     },
-    "Bahis, kredi ve dolandırıcılık mesajlarını Gereksiz klasörüne ayırır. Doğrulama kodlarını ve kargo bildirimlerini kendi klasörlerine koyar." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moves betting, loan and scam messages to Junk. Puts verification codes and delivery updates in their own folders."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bahis, kredi ve dolandırıcılık mesajlarını Gereksiz klasörüne ayırır. Doğrulama kodlarını ve kargo bildirimlerini kendi klasörlerine koyar."
-          }
-        }
-      }
-    },
     "Bahisçiler gerçek firmaların gönderici adlarını kullanabiliyor. Engellersen o firmanın gerçek mesajları da gelmez." : {
       "localizations" : {
         "en" : {
@@ -216,22 +197,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bilinmeyen ve Spam bölümüne gir."
-          }
-        }
-      }
-    },
-    "Bir numarayı rehberden silmek onu filtreye sokmaz: o numaraya daha önce cevap yazdıysan iOS onu tanıdık saymaya devam eder." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deleting a number from your contacts doesn't send it to the filter: if you have replied to that number before, iOS still treats it as known."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bir numarayı rehberden silmek onu filtreye sokmaz: o numaraya daha önce cevap yazdıysan iOS onu tanıdık saymaya devam eder."
           }
         }
       }
@@ -296,22 +261,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bu ifade mesajda geçmiyor."
-          }
-        }
-      }
-    },
-    "Bu kural gelişmiş bir desen kullanıyor. Görmek veya değiştirmek için Gelişmiş'i aç." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This rule uses an advanced pattern. Open Advanced to see or change it."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bu kural gelişmiş bir desen kullanıyor. Görmek veya değiştirmek için Gelişmiş'i aç."
           }
         }
       }
@@ -556,54 +505,6 @@
         }
       }
     },
-    "Filtre tamamen iPhone'unda çalışır, hiçbir mesaj bir sunucuya gönderilmez. Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar filtreye hiç gelmez." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The filter runs entirely on your iPhone; no message is sent to a server. Messages from your contacts, from numbers you have replied to and iMessages never reach the filter."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtre tamamen iPhone'unda çalışır, hiçbir mesaj bir sunucuya gönderilmez. Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar filtreye hiç gelmez."
-          }
-        }
-      }
-    },
-    "Filtre tamamen iPhone'unda çalışır. Mesajların hiçbir sunucuya gönderilmez." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The filter runs entirely on your iPhone. Your messages are never sent to a server."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtre tamamen iPhone'unda çalışır. Mesajların hiçbir sunucuya gönderilmez."
-          }
-        }
-      }
-    },
-    "Filtre, Ayarlar'da Spam Shield seçili değilse çalışmaz." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The filter only works when Spam Shield is selected in Settings."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtre, Ayarlar'da Spam Shield seçili değilse çalışmaz."
-          }
-        }
-      }
-    },
     "Filtrelenen mesajlar nereye gider" : {
       "localizations" : {
         "en" : {
@@ -616,22 +517,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrelenen mesajlar nereye gider"
-          }
-        }
-      }
-    },
-    "Filtrelenen mesajlar silinmez. Mesajlar uygulamasında sol üstteki Filtreler menüsünden Gereksiz, Promosyonlar ve İşlemler klasörlerinde görebilirsin. Bu mesajlar için bildirim gelmez." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtered messages aren't deleted. In Messages, open the Filters menu at the top left to see them in Junk, Promotions and Transactions. You don't get notifications for them."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtrelenen mesajlar silinmez. Mesajlar uygulamasında sol üstteki Filtreler menüsünden Gereksiz, Promosyonlar ve İşlemler klasörlerinde görebilirsin. Bu mesajlar için bildirim gelmez."
           }
         }
       }
@@ -876,22 +761,6 @@
         }
       }
     },
-    "Hazır kural: silinemez, kapatılabilir. Düzenlersen kural listesi güncellemeleri bu kuralı artık değiştirmez." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Built-in rule: it can be turned off but not deleted. If you edit it, rule list updates no longer change it."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hazır kural: silinemez, kapatılabilir. Düzenlersen kural listesi güncellemeleri bu kuralı artık değiştirmez."
-          }
-        }
-      }
-    },
     "Henüz yapılmadı" : {
       "localizations" : {
         "en" : {
@@ -936,38 +805,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hiçbir kural eşleşmedi."
-          }
-        }
-      }
-    },
-    "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Öğrettiğin mesajların kendisi değil, kelimeleri telefonda saklanır." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Of the messages no rule catches, moves the ones that look like spam to Promotions instead of Junk, so a wrong guess doesn't hide a message. Trained on thousands of example messages; you can teach it more in the Check tab. The words of the messages you teach are kept on this phone, not the messages themselves."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Gereksiz'e değil Promosyonlar'a taşır, böylece yanılırsa mesaj kaybolmaz. Binlerce örnek mesajla eğitildi; Kontrol et sekmesinden sen de öğretebilirsin. Öğrettiğin mesajların kendisi değil, kelimeleri telefonda saklanır."
-          }
-        }
-      }
-    },
-    "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Öğrettiğin mesajın kendisi değil, kelimeleri telefonda saklanır." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Of the messages no rule catches, moves the ones that look like spam to Promotions. The words of the message you teach are kept on this phone, not the message itself."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hiçbir kuralın yakalamadığı mesajlarda spam'e benzeyenleri Promosyonlar'a taşır. Öğrettiğin mesajın kendisi değil, kelimeleri telefonda saklanır."
           }
         }
       }
@@ -1032,22 +869,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İndirilen liste kullanılmadı, mevcut kurallar çalışmaya devam ediyor. %@"
-          }
-        }
-      }
-    },
-    "iOS sadece tanımadığın göndericilerden gelen SMS/MMS mesajlarını filtreye gönderir. Rehberindeki kişiler, daha önce cevap yazdığın numaralar ve iMessage'lar filtrelenmez." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iOS only sends SMS/MMS from unknown senders to the filter. Your contacts, numbers you have replied to and iMessages aren't filtered."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iOS sadece tanımadığın göndericilerden gelen SMS/MMS mesajlarını filtreye gönderir. Rehberindeki kişiler, daha önce cevap yazdığın numaralar ve iMessage'lar filtrelenmez."
           }
         }
       }
@@ -1144,22 +965,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kayıtlı kurallar okunamadı, filtre varsayılan kurallarla çalışıyor. Kayıtlı dosyanın üzerine yazılmasın diye değişiklikler kaydedilmiyor. Varsayılanlara dönebilir ya da kuralları içe aktarabilirsin."
-          }
-        }
-      }
-    },
-    "Kelimelere dokunarak ifade oluştur. Kısa ve yaygın ifadeler normal mesajları da engelleyebilir; \"deneme hediye\" gibi spame özgü ifadeler seç." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap words to build a phrase. Short, common phrases can block normal messages too; pick phrases typical of spam, like \"deneme hediye\"."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kelimelere dokunarak ifade oluştur. Kısa ve yaygın ifadeler normal mesajları da engelleyebilir; \"deneme hediye\" gibi spame özgü ifadeler seç."
           }
         }
       }
@@ -1340,22 +1145,6 @@
         }
       }
     },
-    "Kuralları yönet" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manage rules"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kuralları yönet"
-          }
-        }
-      }
-    },
     "Kurulum rehberi" : {
       "localizations" : {
         "en" : {
@@ -1436,22 +1225,6 @@
         }
       }
     },
-    "Mesaj kontrol et" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check a message"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mesaj kontrol et"
-          }
-        }
-      }
-    },
     "Mesaj metni" : {
       "localizations" : {
         "en" : {
@@ -1496,22 +1269,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mesajlar ayarlarını aç"
-          }
-        }
-      }
-    },
-    "Mesajlar'da mesaja uzun bas › Kopyala, sonra buraya yapıştır. Göndericiyi elle yazabilirsin." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In Messages, touch and hold the message › Copy, then paste it here. You can type the sender yourself."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mesajlar'da mesaja uzun bas › Kopyala, sonra buraya yapıştır. Göndericiyi elle yazabilirsin."
           }
         }
       }
@@ -1676,22 +1433,6 @@
         }
       }
     },
-    "Öğrenen filtre kapalı. Öğrettiklerin saklanır; Kurallar sekmesinden açınca kullanılır." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The learning filter is off. What you teach is kept and used once you turn it on in the Rules tab."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Öğrenen filtre kapalı. Öğrettiklerin saklanır; Kurallar sekmesinden açınca kullanılır."
-          }
-        }
-      }
-    },
     "Öğrenen filtrenin ayarları okunamadı, filtre kapalı çalışıyor. Öğrettiklerinin üzerine yazılmasın diye değişiklikler kaydedilmiyor. Öğrettiklerini silersen yeniden kullanabilirsin." : {
       "localizations" : {
         "en" : {
@@ -1820,22 +1561,6 @@
         }
       }
     },
-    "Promosyonlar veya İşlemler klasörü sende görünmüyorsa, ilgili kuralları açıp \"Mesaj nereye gitsin\" ayarını Gereksiz yap." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If you don't see the Promotions or Transactions folder, open those rules and set \"Where the message goes\" to Junk."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Promosyonlar veya İşlemler klasörü sende görünmüyorsa, ilgili kuralları açıp \"Mesaj nereye gitsin\" ayarını Gereksiz yap."
-          }
-        }
-      }
-    },
     "Promosyonlar'a gider" : {
       "localizations" : {
         "en" : {
@@ -1896,38 +1621,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Regex küçük harfli ve Türkçe karaktersiz metne uygulanır (\"kazandınız\" → \"kazandiniz\"). Deseni de öyle yaz."
-          }
-        }
-      }
-    },
-    "Rehberinde olmayan göndericilerden gelen SMS'ler bu kurallarla, cihazında kontrol edilir." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SMS from senders who aren't in your contacts are checked against these rules on your device."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rehberinde olmayan göndericilerden gelen SMS'ler bu kurallarla, cihazında kontrol edilir."
-          }
-        }
-      }
-    },
-    "Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar iOS tarafından filtreye hiç gönderilmez. Buradaki sonuç bu mesajlar için geçerli olmaz." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iOS never sends messages from your contacts, from numbers you have replied to, or iMessages to the filter. The result here doesn't apply to them."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rehberindeki kişilerden, daha önce cevap yazdığın numaralardan gelen mesajlar ve iMessage'lar iOS tarafından filtreye hiç gönderilmez. Buradaki sonuç bu mesajlar için geçerli olmaz."
           }
         }
       }
@@ -2205,22 +1898,6 @@
         }
       }
     },
-    "Uygulama internete sadece güncel kural listesini GitHub'dan indirmek için bağlanır." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The app only goes online to download the latest rule list from GitHub."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uygulama internete sadece güncel kural listesini GitHub'dan indirmek için bağlanır."
-          }
-        }
-      }
-    },
     "Uygulamalar › Mesajlar'a gir (iOS 17'de doğrudan Mesajlar)." : {
       "localizations" : {
         "en" : {
@@ -2301,18 +1978,274 @@
         }
       }
     },
-    "Yeni kurallar GitHub'daki açık listeden otomatik indirilir. Değiştirdiğin kurallar korunur." : {
+    "Filtrelenen mesajlar silinmez, bildirim de gelmez. Mesajlar'da sol üstteki Filtreler menüsünden Gereksiz, Promosyonlar ve İşlemler klasörlerinde görebilirsin." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New rules are downloaded automatically from the public list on GitHub. Rules you changed are kept."
+            "value" : "Filtered messages aren't deleted and don't notify you. In Messages, open the Filters menu at the top left to see them in Junk, Promotions and Transactions."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yeni kurallar GitHub'daki açık listeden otomatik indirilir. Değiştirdiğin kurallar korunur."
+            "value" : "Filtrelenen mesajlar silinmez, bildirim de gelmez. Mesajlar'da sol üstteki Filtreler menüsünden Gereksiz, Promosyonlar ve İşlemler klasörlerinde görebilirsin."
+          }
+        }
+      }
+    },
+    "Promosyonlar veya İşlemler klasörü görünmüyorsa o kuralları Gereksiz'e yönlendir." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you don't see the Promotions or Transactions folder, send those rules to Junk."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promosyonlar veya İşlemler klasörü görünmüyorsa o kuralları Gereksiz'e yönlendir."
+          }
+        }
+      }
+    },
+    "Sadece tanımadığın göndericilerden gelen SMS'ler. Rehberindeki kişiler, cevap yazdığın numaralar ve iMessage'lar filtrelenmez." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only SMS from unknown senders. Your contacts, numbers you have replied to and iMessages aren't filtered."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sadece tanımadığın göndericilerden gelen SMS'ler. Rehberindeki kişiler, cevap yazdığın numaralar ve iMessage'lar filtrelenmez."
+          }
+        }
+      }
+    },
+    "Cevap yazdığın bir numara rehberden silinse de tanıdık sayılır." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A number you have replied to still counts as known after you delete it from your contacts."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cevap yazdığın bir numara rehberden silinse de tanıdık sayılır."
+          }
+        }
+      }
+    },
+    "Filtre tamamen iPhone'unda çalışır, mesajların hiçbir yere gönderilmez. İnternet sadece kural listesini güncellemek için kullanılır." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The filter runs entirely on your iPhone; your messages are never sent anywhere. The app only goes online to update the rule list."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtre tamamen iPhone'unda çalışır, mesajların hiçbir yere gönderilmez. İnternet sadece kural listesini güncellemek için kullanılır."
+          }
+        }
+      }
+    },
+    "Filtrenin çalışması için Ayarlar'da Spam Shield'ı seç." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Spam Shield in Settings to turn the filter on."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrenin çalışması için Ayarlar'da Spam Shield'ı seç."
+          }
+        }
+      }
+    },
+    "Yeni kurallar otomatik indirilir. Değiştirdiğin kurallar korunur." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New rules are downloaded automatically. Rules you changed are kept."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni kurallar otomatik indirilir. Değiştirdiğin kurallar korunur."
+          }
+        }
+      }
+    },
+    "Bahis, kredi ve dolandırıcılık mesajlarını Gereksiz'e ayırır. Kodları ve kargo bildirimlerini kendi klasörlerine koyar." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moves betting, loan and scam messages to Junk. Puts codes and delivery updates in their own folders."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bahis, kredi ve dolandırıcılık mesajlarını Gereksiz'e ayırır. Kodları ve kargo bildirimlerini kendi klasörlerine koyar."
+          }
+        }
+      }
+    },
+    "Filtre tamamen iPhone'unda çalışır. Hiçbir mesaj bir sunucuya gönderilmez." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The filter runs entirely on your iPhone. No message is ever sent to a server."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtre tamamen iPhone'unda çalışır. Hiçbir mesaj bir sunucuya gönderilmez."
+          }
+        }
+      }
+    },
+    "Rehberindeki kişiler, cevap yazdığın numaralar ve iMessage'lar filtreye hiç uğramaz. Buradaki sonuç onlar için geçerli değildir." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your contacts, numbers you have replied to and iMessages never reach the filter. The result here doesn't apply to them."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rehberindeki kişiler, cevap yazdığın numaralar ve iMessage'lar filtreye hiç uğramaz. Buradaki sonuç onlar için geçerli değildir."
+          }
+        }
+      }
+    },
+    "Mesajlar'da mesaja uzun bas › Kopyala, sonra buraya yapıştır." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Messages, touch and hold the message › Copy, then paste it here."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mesajlar'da mesaja uzun bas › Kopyala, sonra buraya yapıştır."
+          }
+        }
+      }
+    },
+    "Kelimelere dokunarak ifade oluştur. Kısa, yaygın ifadeler normal mesajları da engelleyebilir." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap words to build a phrase. Short, common phrases can block normal messages too."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kelimelere dokunarak ifade oluştur. Kısa, yaygın ifadeler normal mesajları da engelleyebilir."
+          }
+        }
+      }
+    },
+    "Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moves messages that no rule catches but look like spam to Promotions."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır."
+          }
+        }
+      }
+    },
+    "Öğrenen filtre kapalı. Kurallar sekmesinden açabilirsin." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The learning filter is off. You can turn it on in the Rules tab."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öğrenen filtre kapalı. Kurallar sekmesinden açabilirsin."
+          }
+        }
+      }
+    },
+    "Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır; yanılırsa mesaj kaybolmaz. Kontrol et sekmesinden öğretebilirsin, telefonda sadece kelimeler saklanır." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moves messages that no rule catches but look like spam to Promotions, so nothing is lost if it's wrong. Teach it in the Check tab; only words are stored on your phone."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır; yanılırsa mesaj kaybolmaz. Kontrol et sekmesinden öğretebilirsin, telefonda sadece kelimeler saklanır."
+          }
+        }
+      }
+    },
+    "Hazır kural silinemez, kapatılabilir. Düzenlersen güncellemeler bu kuralı değiştirmez." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Built-in rules can't be deleted, only turned off. Once you edit one, updates no longer change it."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hazır kural silinemez, kapatılabilir. Düzenlersen güncellemeler bu kuralı değiştirmez."
+          }
+        }
+      }
+    },
+    "Bu kural gelişmiş bir desen kullanıyor. Gelişmiş'ten görebilirsin." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This rule uses an advanced pattern. You can see it under Advanced."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu kural gelişmiş bir desen kullanıyor. Gelişmiş'ten görebilirsin."
           }
         }
       }
