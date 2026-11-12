@@ -118,7 +118,7 @@ struct RulesView: View {
                 Button("Öğrettiklerini sil", role: .destructive) { isConfirmingForget = true }
             }
         } footer: {
-            Text("Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır; yanılırsa mesaj kaybolmaz. Kontrol et sekmesinden öğretebilirsin, telefonda sadece kelimeler saklanır.")
+            Text("Kurallara takılmayan mesajlardan spam ve kampanyaları Promosyonlar'a, bildirimleri İşlemler'e taşır; yanılırsa mesaj kaybolmaz. Kontrol et sekmesinden öğretebilirsin, telefonda sadece kelimeler saklanır.")
         }
     }
 

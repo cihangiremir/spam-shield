@@ -17,6 +17,22 @@
         }
       }
     },
+    "%@ olarak öğretildi." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taught as %@."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ olarak öğretildi."
+          }
+        }
+      }
+    },
     "%lld kural açık" : {
       "localizations" : {
         "en" : {
@@ -185,6 +201,22 @@
         }
       }
     },
+    "Bildirim" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notice"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bildirim"
+          }
+        }
+      }
+    },
     "Bilinmeyen ve Spam bölümüne gir." : {
       "localizations" : {
         "en" : {
@@ -201,18 +233,18 @@
         }
       }
     },
-    "Birden fazla kural eşleşirse öncelik: İzin ver › Gereksiz › Promosyonlar › İşlemler." : {
+    "Birden fazla kural eşleşirse öncelik: İzin ver › Gereksiz › İşlemler › Promosyonlar." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If several rules match, the order is: Allow › Junk › Promotions › Transactions."
+            "value" : "If several rules match, the order is: Allow › Junk › Transactions › Promotions."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Birden fazla kural eşleşirse öncelik: İzin ver › Gereksiz › Promosyonlar › İşlemler."
+            "value" : "Birden fazla kural eşleşirse öncelik: İzin ver › Gereksiz › İşlemler › Promosyonlar."
           }
         }
       }
@@ -277,6 +309,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bu kurallar zaten listende var."
+          }
+        }
+      }
+    },
+    "Bu mesaj ne?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is this message?"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu mesaj ne?"
           }
         }
       }
@@ -777,18 +825,18 @@
         }
       }
     },
-    "Hiçbir kural eşleşmedi, öğrenen filtre spam'e benzetti." : {
+    "Hiçbir kural eşleşmedi, öğrenen filtre ayırdı." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No rule matched; the learning filter thinks it looks like spam."
+            "value" : "No rule matched; the learning filter sorted it."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hiçbir kural eşleşmedi, öğrenen filtre spam'e benzetti."
+            "value" : "Hiçbir kural eşleşmedi, öğrenen filtre ayırdı."
           }
         }
       }
@@ -937,6 +985,22 @@
         }
       }
     },
+    "Kampanya" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Campaign"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kampanya"
+          }
+        }
+      }
+    },
     "Kaydet" : {
       "localizations" : {
         "en" : {
@@ -981,6 +1045,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kendi kuralların"
+          }
+        }
+      }
+    },
+    "Kişisel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kişisel"
           }
         }
       }
@@ -1141,6 +1221,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kurallar kaydedilemedi: %@"
+          }
+        }
+      }
+    },
+    "Kurallara takılmayan mesajlardan spam ve kampanyaları Promosyonlar'a, bildirimleri İşlemler'e taşır. Emin değilse gelen kutusunda bırakır." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Of the messages no rule catches, moves spam and campaigns to Promotions and notices to Transactions. When unsure, it leaves them in the inbox."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kurallara takılmayan mesajlardan spam ve kampanyaları Promosyonlar'a, bildirimleri İşlemler'e taşır. Emin değilse gelen kutusunda bırakır."
+          }
+        }
+      }
+    },
+    "Kurallara takılmayan mesajlardan spam ve kampanyaları Promosyonlar'a, bildirimleri İşlemler'e taşır; yanılırsa mesaj kaybolmaz. Kontrol et sekmesinden öğretebilirsin, telefonda sadece kelimeler saklanır." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Of the messages no rule catches, moves spam and campaigns to Promotions and notices to Transactions; if it's wrong, nothing is lost. You can teach it in the Check tab; only words are kept on the phone."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kurallara takılmayan mesajlardan spam ve kampanyaları Promosyonlar'a, bildirimleri İşlemler'e taşır; yanılırsa mesaj kaybolmaz. Kontrol et sekmesinden öğretebilirsin, telefonda sadece kelimeler saklanır."
           }
         }
       }
@@ -1353,22 +1465,6 @@
         }
       }
     },
-    "Normal mesaj olarak öğretildi." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Taught as a normal message."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Normal mesaj olarak öğretildi."
-          }
-        }
-      }
-    },
     "Öğrenen filtre" : {
       "localizations" : {
         "en" : {
@@ -1401,50 +1497,34 @@
         }
       }
     },
-    "Öğrenen filtre bu mesajı normal buluyor." : {
+    "Öğrenen filtrenin ayarları okunamadı, filtre varsayılan ayarlarla ve öğrettiklerin olmadan çalışıyor. Öğrettiklerinin üzerine yazılmasın diye değişiklikler kaydedilmiyor. Öğrettiklerini silersen yeniden kullanabilirsin." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The learning filter thinks this message looks normal."
+            "value" : "The learning filter's settings couldn't be read, so it runs with the default settings and without what you taught. Changes aren't saved so what you taught isn't overwritten. Delete what you taught to use it again."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öğrenen filtre bu mesajı normal buluyor."
+            "value" : "Öğrenen filtrenin ayarları okunamadı, filtre varsayılan ayarlarla ve öğrettiklerin olmadan çalışıyor. Öğrettiklerinin üzerine yazılmasın diye değişiklikler kaydedilmiyor. Öğrettiklerini silersen yeniden kullanabilirsin."
           }
         }
       }
     },
-    "Öğrenen filtre bu mesajı spam'e benzetiyor." : {
+    "Öğrenen filtreye göre: %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The learning filter thinks this message looks like spam."
+            "value" : "Learning filter: %@"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öğrenen filtre bu mesajı spam'e benzetiyor."
-          }
-        }
-      }
-    },
-    "Öğrenen filtrenin ayarları okunamadı, filtre kapalı çalışıyor. Öğrettiklerinin üzerine yazılmasın diye değişiklikler kaydedilmiyor. Öğrettiklerini silersen yeniden kullanabilirsin." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The learning filter's settings couldn't be read, so it is off. Changes aren't saved so what you taught isn't overwritten. Delete what you taught to use it again."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Öğrenen filtrenin ayarları okunamadı, filtre kapalı çalışıyor. Öğrettiklerinin üzerine yazılmasın diye değişiklikler kaydedilmiyor. Öğrettiklerini silersen yeniden kullanabilirsin."
+            "value" : "Öğrenen filtreye göre: %@"
           }
         }
       }
@@ -1765,38 +1845,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spam bildir"
-          }
-        }
-      }
-    },
-    "Spam değil" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not spam"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spam değil"
-          }
-        }
-      }
-    },
-    "Spam olarak öğretildi." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Taught as spam."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spam olarak öğretildi."
           }
         }
       }
@@ -2170,22 +2218,6 @@
         }
       }
     },
-    "Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moves messages that no rule catches but look like spam to Promotions."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır."
-          }
-        }
-      }
-    },
     "Öğrenen filtre kapalı. Kurallar sekmesinden açabilirsin." : {
       "localizations" : {
         "en" : {
@@ -2198,22 +2230,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Öğrenen filtre kapalı. Kurallar sekmesinden açabilirsin."
-          }
-        }
-      }
-    },
-    "Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır; yanılırsa mesaj kaybolmaz. Kontrol et sekmesinden öğretebilirsin, telefonda sadece kelimeler saklanır." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moves messages that no rule catches but look like spam to Promotions, so nothing is lost if it's wrong. Teach it in the Check tab; only words are stored on your phone."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır; yanılırsa mesaj kaybolmaz. Kontrol et sekmesinden öğretebilirsin, telefonda sadece kelimeler saklanır."
           }
         }
       }

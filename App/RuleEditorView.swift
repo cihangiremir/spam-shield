@@ -84,7 +84,7 @@ struct RuleEditorView: View {
                     if isShowingAdvanced && isRegex {
                         patternFooter
                     } else {
-                        Text("Birden fazla kural eşleşirse öncelik: İzin ver › Gereksiz › Promosyonlar › İşlemler.")
+                        Text("Birden fazla kural eşleşirse öncelik: İzin ver › Gereksiz › İşlemler › Promosyonlar.")
                     }
                 }
             }

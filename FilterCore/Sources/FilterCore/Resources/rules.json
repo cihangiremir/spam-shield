@@ -1,11 +1,18 @@
 {
-  "version": 6,
+  "version": 8,
   "fragments": {
     "suspiciousTLDs": "store|site|vip|live|online|icu|top|click|link|sbs|cfd|shop|support|help|info|art|xyz|buzz|club|bond|rest|cyou|monster|lol|quest|website|space|fun|pw|tk|ml|ga|cf|gq",
     "nonWordTLDs": "icu|sbs|cfd|xyz|cyou|buzz|pw|tk|ml|ga|cf|gq",
     "linkTLDs": "com|net|org|biz|co|io|me|app|{{suspiciousTLDs}}",
     "nonTurkishLink": "(?<![a-z0-9.-])(https?://)?([a-z0-9-]+\\.)+(?!tr(?![a-z0-9-]))[a-z]{2,}(?![a-z0-9-])(?!\\.[a-z0-9])",
-    "optOut": "\\b(ret|iptal|smsiptal|izinsiz)\\b'?( [a-z0-9]+){0,3} yaz\\w*.{0,30}\\b\\d{4}\\b|\\b\\d{4}\\b.{0,30}\\b(ret|iptal)\\b( [a-z0-9]+){0,3} yaz"
+    "optOut": "\\b(ret|iptal|smsiptal|izinsiz)\\b'?( [a-z0-9]+){0,3} yaz\\w*.{0,30}\\b\\d{4}\\b|\\b\\d{4}\\b.{0,30}\\b(ret|iptal)\\b( [a-z0-9]+){0,3} yaz",
+    "phoneNumber": "(\\+|00)?\\d{10,}",
+    "courierDomains": "yurticikargo\\.com|araskargo\\.com|aras\\.la|mngkargo\\.com|suratkargo\\.com|hepsijet\\.com|kolaygelsin\\.com|sendeo\\.com|ups\\.com|dhl\\.com|fedex\\.com|ty\\.gl",
+    "noticeDomains": "{{courierDomains}}|hepsiburada\\.com|trendyol\\.com|pttavm\\.com|akbank\\.com|garantibbva\\.com|garanti\\.com|ziraatbank\\.com|isbank\\.com|maximum\\.com|yapikredi\\.com|worldcard\\.com|vakifbank\\.com|halkbank\\.com|denizbank\\.com|enpara\\.com|turkcell\\.com|trcll\\.im|paycell\\.com|vodafone\\.com|vodafone\\.net|vftr\\.co|turktelekom\\.com",
+    "hostEnd": "(?!\\.?[a-z0-9-])",
+    "notTrHost": "(?![a-z0-9.-]*\\.tr{{hostEnd}})",
+    "bareTLDs": "com|net|org|biz|info|co|io|app|{{nonWordTLDs}}",
+    "linkStart": "(?:https?://(?:www\\.)?|(?<![a-z0-9.@/-])www\\.|(?<![a-z0-9.@/-])(?=[a-z0-9-]+(?:\\.[a-z0-9-]+)*\\.(?:{{bareTLDs}}){{hostEnd}}))"
   },
   "rules": [
     {
@@ -21,7 +28,7 @@
       },
       "note": "Betting spam avoids \"bonus\" with wording like \"deneme hediye\" or \"yatirim sartsiz anlik cekim\". A bare \"%10 bonus\" is left out: it is also how Garanti BBVA Bonus card campaigns read. Free spins come as \"25Spn\"; a bare \"spin\" or \"FS\" needs \"hediye\" or \"bedava\" next to it. Sites rotate numbered domains (betvakti414.com, vaycasino1042.com) and write \"B0nus\" or \"cevirmsiz\". \"Her gole hediye\" is left out: carriers run match campaigns like that too.",
       "matchType": "regex",
-      "pattern": "\\b(bahis|\\w*casino\\w*|kumarhane|rulet|freespin\\w*|free spin\\w*|freebet|b0nus\\w*|deneme (bonus\\w*|hediye\\w*)|yatirim bonusu|kayip bonusu|hos ?geldin bonusu|cevi?ri?msiz\\w*|yatirim ?sartsiz|sartsiz (bonus|hediye|cekim)\\w*|anlik cekim|canli bahis|bedava bahis|\\d+ ?spn|\\d+ ?(spin|fs) (hediye|bedava)\\w*|hediye\\w* \\d+ ?fs|[a-z]*(bet|bahis)[a-z]*\\d+(\\.({{linkTLDs}})|com)(?![a-z0-9-]))\\b",
+      "pattern": "\\b(bahis|\\w*casino\\w*|kumarhane|rulet|freespin\\w*|free spin\\w*|freebet|b0nus\\w*|deneme (bonus\\w*|hediye\\w*)|yatirim bonusu|kayip bonusu|hos ?geldin bonusu|cevi?ri?msiz\\w*|cevrim ?sartsiz|yatirim ?sartsiz|sartsiz (bonus|hediye|cekim)\\w*|anlik cekim|canli bahis|bedava bahis|\\d+ ?spn|\\d+ ?(spin|fs) (hediye|bedava)\\w*|hediye\\w* \\d+ ?fs|[a-z]*(bet|bahis)[a-z]*\\d+(\\.({{linkTLDs}})|com)(?![a-z0-9-]))\\b",
       "action": "junk"
     },
     {
@@ -37,7 +44,8 @@
       },
       "note": "\"Nakit ihtiyac\" and \"aninda kredi\" are left out: banks advertise with them. A message with opt-out info (optOut) is left to Promotions.",
       "matchType": "regex",
-      "pattern": "^(?!.*({{optOut}})).*?(kredi notu(nuz)? (ne olursa olsun|fark etmez|onemsiz|dusuk)|borc\\w* kapatiyoruz|borc kapatma kredi\\w*|icrali\\w* (kredi|kisi)|kefilsiz kredi|sicil affi)",
+      "pattern": "(kredi notu(nuz)? (ne olursa olsun|fark etmez|onemsiz|dusuk)|borc\\w* kapatiyoruz|borc kapatma kredi\\w*|icrali\\w* (kredi|kisi)|kefilsiz kredi|sicil affi)",
+      "unlessPattern": "{{optOut}}",
       "action": "junk"
     },
     {
@@ -53,7 +61,8 @@
       },
       "note": "\"Hak kazandiniz\" is left out: bank draws say \"cekilise katilmaya hak kazandiniz\". A message with opt-out info (optOut) is left to Promotions.",
       "matchType": "regex",
-      "pattern": "^(?!.*({{optOut}})).*?(tebrikler.{0,40}(?<!hak )(kazandi|kazanan)|hediye\\w* (tanimlandi|hazir(\\b|dir|landi)|sizi bekliyor)|cekilis\\w*.{0,30}(?<!hak )kazandi|odul\\w* (talep|almak icin))",
+      "pattern": "(tebrikler.{0,40}(?<!hak )(kazandi|kazanan)|hediye\\w* (tanimlandi|hazir(\\b|dir|landi)|sizi bekliyor)|cekilis\\w*.{0,30}(?<!hak )kazandi|odul\\w* (talep|almak icin))",
+      "unlessPattern": "{{optOut}}",
       "action": "junk"
     },
     {
@@ -69,7 +78,8 @@
       },
       "note": "Brands send short links in campaigns too, so a message with opt-out info (optOut) is left to Promotions.",
       "matchType": "regex",
-      "pattern": "^(?!.*({{optOut}})).*?(^|[^a-z0-9.])(bit\\.ly|t\\.ly|cutt\\.ly|tinyurl\\.com|shorturl\\.at|rb\\.gy|is\\.gd|goo\\.gl|s\\.id|tiny\\.cc|ow\\.ly|t2m\\.io|t\\.co|kisalt\\w*\\.[a-z]{2,})/",
+      "pattern": "(^|[^a-z0-9.])(bit\\.ly|t\\.ly|cutt\\.ly|tinyurl\\.com|shorturl\\.at|rb\\.gy|is\\.gd|goo\\.gl|s\\.id|tiny\\.cc|ow\\.ly|t2m\\.io|t\\.co|kisalt\\w*\\.[a-z]{2,})/",
+      "unlessPattern": "{{optOut}}",
       "action": "junk"
     },
     {
@@ -168,6 +178,23 @@
       "action": "junk"
     },
     {
+      "id": "brand-link",
+      "name": "Telefon numarasından marka taklidi",
+      "category": "scam",
+      "details": "Bir telefon numarasından gelen, bir banka, operatör ya da kargo firmasının adını kullanıp o firmanın kendi adresi olmayan bir linke yönlendiren mesajlar (ör. \"Akbank: hesabınız bloke, akbank-guvenli.com\"). Firmaların kendi mesajları kayıtlı adla gelir.",
+      "translations": {
+        "en": {
+          "name": "Brand impersonation from phone numbers",
+          "details": "Messages from a phone number that use a bank, carrier or courier's name but point to a link that isn't that company's own address (e.g. \"Akbank: your account is blocked, akbank-guvenli.com\"). The companies' own messages come from their registered name."
+        }
+      },
+      "note": "Each branch: a brand name, and a link that isn't one of the brand's own domains or .tr. Links without http/www count only with a TLD that isn't a word (bareTLDs), so a missing space (\"alindi.Online\") doesn't. \"akbank.com.evil.xyz\" and \"gov.tr.evil.com\" aren't the brand's or .tr (hostEnd). Only for phone numbers: the brands' own campaigns, from their registered names, link to partner stores (\"VakifBank Worldcard'la hepsiburada.com'da\").",
+      "matchType": "regex",
+      "senderPattern": "^{{phoneNumber}}$",
+      "pattern": "^(?:(?=.*\\b(akbank)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(akbank\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(garanti ?bbva|garanti bankasi)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(garantibbva\\.com|garanti\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(ziraat)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(ziraatbank\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(is ?bankasi|isbank)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(isbank\\.com|maximum\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(yapi ?kredi)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(yapikredi\\.com|worldcard\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(vakifbank)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(vakifbank\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(halkbank)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(halkbank\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(denizbank)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(denizbank\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(enpara)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(enpara\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(turkcell)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(turkcell\\.com|trcll\\.im|fizy\\.com|bip\\.com|dergilik\\.com|paycell\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(vodafone)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(vodafone\\.com|vodafone\\.net|vftr\\.co){{hostEnd}}){{notTrHost}})|(?=.*\\b(turk ?telekom)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(turktelekom\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(ptt)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(pttavm\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(yurtici ?kargo)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(yurticikargo\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(aras ?kargo)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(aras\\.la|araskargo\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(mng ?kargo)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(mngkargo\\.com){{hostEnd}}){{notTrHost}})|(?=.*\\b(trendyol)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(trendyol\\.com|ty\\.gl){{hostEnd}}){{notTrHost}})|(?=.*\\b(hepsiburada|hepsijet)\\b)(?=.*{{linkStart}}(?!(?:[a-z0-9-]+\\.)*(hepsiburada\\.com|hepsijet\\.com){{hostEnd}}){{notTrHost}}))",
+      "action": "junk"
+    },
+    {
       "id": "credential-link",
       "name": "Link ile bilgi isteyen mesajlar",
       "category": "scam",
@@ -181,6 +208,40 @@
       "note": "Banks and institutions never ask for card, ID or login details through an SMS link to a non-.tr domain. Their own .tr sites (turkiye.gov.tr, garantibbva.com.tr) are left alone.",
       "matchType": "regex",
       "pattern": "^(?=.*(kart bilgileri|kimlik bilgi|kimlik dogrulama|iban ve kimlik|tc kimlik numaraniz|bilgilerinizi (gir|guncelle|dogrula|onayla)|giris (yapin|bilgilerinizle)\\b|adresinizi (bugun icinde )?(onaylayin|guncelleyin|dogrulayin)))(?=.*{{nonTurkishLink}})",
+      "action": "junk"
+    },
+    {
+      "id": "phone-lure",
+      "name": "Telefon numarasından kargo veya banka linki",
+      "category": "scam",
+      "details": "Bir telefon numarasından gelen, kargo ya da banka diliyle yazılmış ve tanınmayan bir linke yönlendiren mesajlar. Gerçek kargo firmaları ve bankalar kayıtlı bir adla (ör. ARAS KARGO) yazar.",
+      "translations": {
+        "en": {
+          "name": "Courier or bank links from phone numbers",
+          "details": "Messages from a phone number that use courier or bank wording and point to an unknown link. Real couriers and banks send from a registered name like ARAS KARGO."
+        }
+      },
+      "note": "Companies must send SMS from a registered sender name in Turkey; fake courier and bank messages come from mobile or foreign numbers. \"Gonderin\" (send) isn't \"gonderi\" (shipment). Needs a real link (http or www) so a missing space (\"verdim.yarin\") doesn't count, and leaves .tr links and couriers' own domains (a seller forwarding a tracking link) alone. App versions without senderPattern would apply this to every sender; they reject this list because it junks the Hepsiburada legitimate sample (see RuleCatalogTests), so keep hepsiburada.com out of courierDomains.",
+      "matchType": "regex",
+      "senderPattern": "^{{phoneNumber}}$",
+      "pattern": "^(?=.*\\b(kargo|gonderi(?!n\\b)|paket|teslimat|kurye|gumruk|banka|hesabiniz|kartiniz|bloke|askiya))(?=.*(https?://|(?<![a-z0-9.-])www\\.)(?!(www\\.)?([a-z0-9-]+\\.)*({{courierDomains}}){{hostEnd}}){{notTrHost}})",
+      "action": "junk"
+    },
+    {
+      "id": "fake-notice",
+      "name": "Sahte kart, fatura veya kargo bildirimi",
+      "category": "scam",
+      "details": "Kart harcaması, fatura ya da kargo bildirimi gibi görünüp tanınmayan bir linke tıklatan veya bir şey almak için önce ücret yatırtan mesajlar. Gerçek bildirimler bankanın, operatörün ya da kargo firmasının kendi sitesine yönlendirir.",
+      "translations": {
+        "en": {
+          "name": "Fake card, bill or delivery notices",
+          "details": "Messages that look like a card charge, bill or delivery notice but have you click an unknown link, or ask for a fee before you get something. Real notices link to the bank's, carrier's or courier's own site."
+        }
+      },
+      "note": "Without this, the Transactions rules (card-activity, bill, delivery-info) file these as notices when they come from a registered sender name. The click has to lead straight to the link (\"iptal icin tiklayin: kart-iptal.com\"), and .tr links and the domains in noticeDomains (the brands brand-link knows) are left alone, like the Aras sample's \"Adres teyidi icin tiklayin: https://aras.la/...\". Campaigns with opt-out info or a Mersis number (\"almak istemiyorsaniz tiklayin http://izn.im/...\") are left to the campaign rules.",
+      "matchType": "regex",
+      "pattern": "^(?=.*\\b(kartiniz\\w*|hesabiniz\\w*|fatura\\w*|ekstre\\w*|kargo\\w*|gonderi(?!n\\b)\\w*|paket\\w*|teslimat\\w*|siparis\\w*|odemeniz)\\b)(?=.*\\b(tiklayin|tiklayiniz|tamamlayin|tamamlayiniz)\\b\\W{0,5}{{linkStart}}(?!(www\\.)?([a-z0-9-]+\\.)*({{noticeDomains}}){{hostEnd}}){{notTrHost}})|\\b(komisyon|islem ucreti|kurye ucreti|gumruk ucreti|teslimat ucreti)\\w*.{0,40}\\b(yatirin|yatiriniz|gonderin|gonderiniz)\\b",
+      "unlessPattern": "{{optOut}}|\\bmersis\\b|istemiyorsaniz tikla",
       "action": "junk"
     },
     {
@@ -244,7 +305,8 @@
       },
       "note": "Real OTP messages say \"don't share this code\"; scams ask you to pass it on. Only positive verb forms match: the first part lists them, the second rejects the negative \"-me/-ma\" (\"iletmeyin\"). Delivery codes meant for the courier are left out.",
       "matchType": "regex",
-      "pattern": "^(?!.*\\b(kurye|gorevli)\\w*).*?(gelen.{0,30}\\bkod\\w*.{0,50}\\b(iletir|iletin|iletmeniz|yazin|yazar|yazmaniz|gonderin|gonderir|gondermeniz|soyler|soyleyin|soylemeniz|paylasin|paylasir|paylasmaniz|okur|okuyun|okumaniz)\\b|\\bkod\\w*\\b.{0,40}\\b(bana|bize|bu sohbete|buraya) (ilet|yaz|gonder|soyle|paylas|oku)(?!m)\\w*)",
+      "pattern": "(gelen.{0,30}\\bkod\\w*.{0,50}\\b(iletir|iletin|iletmeniz|yazin|yazar|yazmaniz|gonderin|gonderir|gondermeniz|soyler|soyleyin|soylemeniz|paylasin|paylasir|paylasmaniz|okur|okuyun|okumaniz)\\b|\\bkod\\w*\\b.{0,40}\\b(bana|bize|bu sohbete|buraya) (ilet|yaz|gonder|soyle|paylas|oku)(?!m)\\w*|\\b(sifre|parola)(nizi|yi)\\b.{0,20}\\b(yanitlayin|yanitlayiniz|iletin|iletiniz|gonderin|gonderiniz|paylasin|paylasiniz)\\b|^(?=.*\\b(yanlislikla|accidentally|by mistake)\\b)(?=.*\\b(kod\\w*|code)\\b)(?=.*\\b(iletir|iletin|iletebilir\\w*|gonderir misin\\w*|forward)\\b))",
+      "unlessPattern": "\\b(kurye|gorevli)\\w*",
       "action": "junk"
     },
     {
@@ -315,29 +377,34 @@
       "id": "otp",
       "name": "Doğrulama kodları",
       "category": "sorting",
-      "details": "Doğrulama ve giriş kodları.",
+      "details": "Doğrulama ve giriş kodları. Telefon numarasından gelenler gelen kutusunda kalır.",
       "translations": {
         "en": {
           "name": "Verification codes",
-          "details": "Verification and login codes."
+          "details": "Verification and login codes. Messages from a phone number stay in the inbox."
         }
       },
+      "note": "Discount codes look like OTPs (\"indirim kodunuz: CS1202\", \"firsat kodu: 20020\", \"indirim icin sifreniz 0000\"); a transaction beats a promotion, so they would leave Promotions. A code word right after indirim/firsat/kupon/kampanya/promosyon doesn't count, nor digits glued to letters.",
       "matchType": "regex",
-      "pattern": "(dogrulama|onay|aktivasyon|guvenlik|giris|tek kullanimlik) ?(kodu|kodunuz|sifre|sifreniz|sifresi)|verification code|\\b(code|kod|kodu|kodunuz|sifreniz)\\b\\D{0,20}\\d{4,8}\\b|\\b\\d{4,8} (sifresi|kodu) ile",
+      "senderPattern": "^(?!{{phoneNumber}}$)",
+      "pattern": "((dogrulama|onay|aktivasyon|guvenlik|giris|tek kullanimlik) ?(kodu|kodunuz|sifre|sifreniz|sifresi)|verification code|\\b(code|kod|kodu|kodunuz|sifreniz)\\b\\D{0,20}(?<![a-z0-9])\\d{4,8}\\b|\\b\\d{4,8} (sifresi|kodu) ile)",
+      "unlessPattern": "\\b(indirim|firsat|kupon|kampanya|promosyon)\\w*( icin| ozel)? (kod|sifre)",
       "action": "transaction"
     },
     {
       "id": "delivery-info",
       "name": "Kargo bilgilendirme",
       "category": "sorting",
-      "details": "\"Kargoya verildi\", \"teslim edildi\" bildirimleri.",
+      "details": "\"Kargoya verildi\", \"teslim edildi\" bildirimleri. Telefon numarasından gelenler gelen kutusunda kalır.",
       "translations": {
         "en": {
           "name": "Delivery updates",
-          "details": "\"Shipped\" and \"delivered\" notifications."
+          "details": "\"Shipped\" and \"delivered\" notifications. Messages from a phone number stay in the inbox."
         }
       },
+      "note": "Companies send from a registered name; a phone number writing like a courier gets no Transactions trust (see phone-lure).",
       "matchType": "regex",
+      "senderPattern": "^(?!{{phoneNumber}}$)",
       "pattern": "kargoya verildi|(kargo|gonderi|siparis|paket)\\w*.{0,60}(teslim (edil(di|mistir|ecek\\w*)|ettik|alin(di|mistir)|alabilirsiniz)|teslimat kod|dagitima cik(ti|mistir|ar\\w*)|yola cik(ti|mistir)|sube\\w* ulas)",
       "action": "transaction"
     },
@@ -345,15 +412,67 @@
       "id": "card-activity",
       "name": "Kart ve hesap hareketleri",
       "category": "sorting",
-      "details": "Kart harcaması ve hesap hareketi bildirimleri.",
+      "details": "Kart harcaması ve hesap hareketi bildirimleri. Telefon numarasından gelenler gelen kutusunda kalır.",
       "translations": {
         "en": {
           "name": "Card and account activity",
-          "details": "Card spending and account activity notifications."
+          "details": "Card spending and account activity notifications. Messages from a phone number stay in the inbox."
         }
       },
       "matchType": "regex",
+      "senderPattern": "^(?!{{phoneNumber}}$)",
       "pattern": "(kartinizla|kartinizdan|hesabinizdan|hesabiniza).{0,80}\\d.{0,10}\\b(tl|try)\\b",
+      "action": "transaction"
+    },
+    {
+      "id": "bill",
+      "name": "Fatura ve ekstre",
+      "category": "sorting",
+      "details": "Tutarı ve son ödeme tarihi yazan fatura ve kart ekstresi bildirimleri. Telefon numarasından gelenler gelen kutusunda kalır.",
+      "translations": {
+        "en": {
+          "name": "Bills and statements",
+          "details": "Bill and card statement notices with an amount and a due date. Messages from a phone number stay in the inbox."
+        }
+      },
+      "note": "Campaigns about bills (\"otomatik fatura talimatina bonus\", \"son gun\") name no due date; a real bill names one together with the amount.",
+      "matchType": "regex",
+      "senderPattern": "^(?!{{phoneNumber}}$)",
+      "pattern": "^(?=.*\\b(fatura|ekstre)\\w*)(?=.*\\bson odeme)(?=.*\\d ?(tl|try)\\b)|\\bfatura(niz|si)\\b.{0,40}\\b(kesil|olus)(di|mistir|tu|mustur|turul\\w*)\\b",
+      "action": "transaction"
+    },
+    {
+      "id": "appointment",
+      "name": "Randevu bildirimleri",
+      "category": "sorting",
+      "details": "Oluşturulan, onaylanan, iptal edilen ve hatırlatılan randevular. Telefon numarasından gelenler gelen kutusunda kalır.",
+      "translations": {
+        "en": {
+          "name": "Appointments",
+          "details": "Appointments that were booked, confirmed, cancelled or are coming up. Messages from a phone number stay in the inbox."
+        }
+      },
+      "note": "Campaigns ask you to book (\"randevu icin\", \"randevunuzu hemen alin\"); only \"your appointment\" with a date, a time or a done verb counts.",
+      "matchType": "regex",
+      "senderPattern": "^(?!{{phoneNumber}}$)",
+      "pattern": "\\brandevu(nuz|nuzu|nuzun)\\b.{0,80}(olusturul|onaylan|iptal edil|alin(di|mistir)\\b|kesinles|hatirlat|guncellen)|(\\d{1,2}[./]\\d{1,2}([./]\\d{2,4})?|\\d{1,2}[:.]\\d{2})\\b.{0,60}\\brandevu(nuz|nuzu|nuzun)\\b|\\brandevu(nuz|nuzu|nuzun)\\b.{0,60}(\\d{1,2}[./]\\d{1,2}|\\d{1,2}:\\d{2})",
+      "action": "transaction"
+    },
+    {
+      "id": "payment",
+      "name": "Ödeme onayları",
+      "category": "sorting",
+      "details": "\"Ödemeniz alınmıştır\", \"tahsil edilmiştir\" gibi ödeme onayları. Telefon numarasından gelenler gelen kutusunda kalır.",
+      "translations": {
+        "en": {
+          "name": "Payment confirmations",
+          "details": "Confirmations such as \"your payment was received\". Messages from a phone number stay in the inbox."
+        }
+      },
+      "note": "Only finished verbs count, so scams saying the payment failed (\"alinamamistir\", \"basarisiz\", \"onaylanmamistir\") don't get in.",
+      "matchType": "regex",
+      "senderPattern": "^(?!{{phoneNumber}}$)",
+      "pattern": "\\bodeme(niz|si)\\b.{0,60}(alin(di|mistir)\\b|gerceklesti\\b|gerceklesmistir|basari(yla|li)\\b|onaylan(di|mistir)\\b|tamamlan(di|mistir)\\b)|\\btahsil edil(di|mistir)\\b",
       "action": "transaction"
     }
   ]

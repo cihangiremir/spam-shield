@@ -197,10 +197,10 @@ final class RuleListModel {
         updateClassifierSettings { $0.isEnabled = isEnabled }
     }
 
-    /// Teaches the classifier that the message is spam or not. The message's words are counted and saved, not the message.
+    /// Teaches the classifier what kind of message this is. The message's words are counted and saved, not the message.
     /// Returns false when it couldn't be saved; `errorMessage` says why.
-    func teachClassifier(_ text: String, isJunk: Bool) -> Bool {
-        updateClassifierSettings { $0.learn(text, isJunk: isJunk) }
+    func teachClassifier(_ text: String, as kind: MessageKind) -> Bool {
+        updateClassifierSettings { $0.learn(text, as: kind) }
     }
 
     /// Also replaces a settings file that can't be read; the user chose to drop what was in it.
@@ -246,7 +246,7 @@ final class RuleListModel {
     private func blockClassifierSaving() {
         isClassifierFileUnreadable = true
         classifierSettings = ClassifierSettings()
-        errorMessage = String(localized: "Öğrenen filtrenin ayarları okunamadı, filtre kapalı çalışıyor. Öğrettiklerinin üzerine yazılmasın diye değişiklikler kaydedilmiyor. Öğrettiklerini silersen yeniden kullanabilirsin.")
+        errorMessage = String(localized: "Öğrenen filtrenin ayarları okunamadı, filtre varsayılan ayarlarla ve öğrettiklerin olmadan çalışıyor. Öğrettiklerinin üzerine yazılmasın diye değişiklikler kaydedilmiyor. Öğrettiklerini silersen yeniden kullanabilirsin.")
     }
 
     private func makeEngine() -> FilterEngine {

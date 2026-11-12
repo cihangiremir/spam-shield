@@ -8,7 +8,9 @@ import Foundation
 /// - `fragments`: pattern parts shared by several rules, used in patterns as `{{name}}`.
 ///   A fragment may use other fragments.
 /// - `rules`: `id` (the rule's `builtInID`), `name`, `category`, `details`, `matchType`, `pattern`, `action`,
-///   and optionally `target` (default `body`), `isEnabled` (default true), `note` (for maintainers, not shown)
+///   and optionally `target` (default `body`), `isEnabled` (default true), `senderPattern` and `unlessPattern`
+///   (see `Rule`; app versions before them apply the rule without the condition, see `RuleCatalogTests`),
+///   `note` (for maintainers, not shown)
 ///   and `translations` (`{"en": {"name": ..., "details": ...}}`; `name` and `details` themselves are Turkish).
 public struct RuleCatalog: Equatable, Sendable {
     public let version: Int
@@ -65,7 +67,9 @@ public struct RuleCatalog: Equatable, Sendable {
                 action: entry.action,
                 builtInID: entry.id,
                 category: entry.category,
-                details: translation?.details ?? entry.details
+                details: translation?.details ?? entry.details,
+                senderPattern: try entry.senderPattern.map { try Self.expand($0, fragments: fragments) },
+                unlessPattern: try entry.unlessPattern.map { try Self.expand($0, fragments: fragments) }
             )
             if let error = rule.validationError { throw RuleCatalogError.invalidRule(entry.name, error) }
             rules.append(rule)
@@ -129,6 +133,8 @@ public struct RuleCatalog: Equatable, Sendable {
         let pattern: String
         let action: FilterAction
         let isEnabled: Bool?
+        let senderPattern: String?
+        let unlessPattern: String?
         let translations: [String: Translation]?
     }
 

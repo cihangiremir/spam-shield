@@ -105,6 +105,20 @@ struct RuleCatalogTests {
         let promotion = try RuleCatalog(data: catalogData(rules: [entry(pattern: ".", action: "promotion")]))
         try promotion.checkNoJunk()
     }
+
+    /// App versions before `senderPattern` and `unlessPattern` ignore them and would apply "phone-lure" to every
+    /// sender and junk loan campaigns that say how to opt out. Their own download check has to refuse the list,
+    /// which it does through the Hepsiburada sample.
+    @Test func olderAppsRefuseRulesThatNeedACondition() {
+        let asOlderAppsSeeThem = RuleCatalog.bundled.rules.map { rule in
+            var rule = rule
+            rule.senderPattern = nil
+            rule.unlessPattern = nil
+            return rule
+        }
+        let engine = FilterEngine(rules: asOlderAppsSeeThem)
+        #expect(RuleCatalog.legitimateSamples.contains { engine.evaluate(sender: nil, body: $0).action == .junk })
+    }
 }
 
 struct RuleStoreCatalogTests {

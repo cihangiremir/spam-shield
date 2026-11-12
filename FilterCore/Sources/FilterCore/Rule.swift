@@ -9,12 +9,14 @@ public enum FilterAction: String, Codable, CaseIterable, Sendable {
 
     /// When several rules match, the action with the highest precedence wins.
     /// An explicit allow always beats everything else so the user can rescue a sender.
+    /// A transaction beats a promotion: OTPs, card alerts and delivery notices carry the same footers as campaigns
+    /// (Mersis, RET, "B0xx"), while the transaction rules are kept narrow enough not to catch campaigns.
     var precedence: Int {
         switch self {
         case .allow: return 3
         case .junk: return 2
-        case .promotion: return 1
-        case .transaction: return 0
+        case .transaction: return 1
+        case .promotion: return 0
         }
     }
 }
@@ -51,6 +53,12 @@ public struct Rule: Codable, Identifiable, Hashable, Sendable {
     /// explanation shown instead of the pattern. Both come from `RuleCatalog`.
     public var category: String?
     public var details: String?
+    /// A regex the sender must match too, run on `TextNormalizer.normalizeSender` output. A missing sender counts
+    /// as empty text. Only built-in rules set it, e.g. so a phone number never gets a message into Transactions.
+    public var senderPattern: String?
+    /// A regex on the message text that, when found, keeps the rule from applying (an exception such as
+    /// "has opt-out info"). Runs on normalized text like a regex pattern. Only built-in rules set it.
+    public var unlessPattern: String?
 
     public init(
         id: UUID = UUID(),
@@ -63,7 +71,9 @@ public struct Rule: Codable, Identifiable, Hashable, Sendable {
         builtInID: String? = nil,
         isCustomized: Bool = false,
         category: String? = nil,
-        details: String? = nil
+        details: String? = nil,
+        senderPattern: String? = nil,
+        unlessPattern: String? = nil
     ) {
         self.id = id
         self.name = name
@@ -76,6 +86,8 @@ public struct Rule: Codable, Identifiable, Hashable, Sendable {
         self.isCustomized = isCustomized
         self.category = category
         self.details = details
+        self.senderPattern = senderPattern
+        self.unlessPattern = unlessPattern
     }
 
     public init(from decoder: Decoder) throws {
@@ -92,6 +104,8 @@ public struct Rule: Codable, Identifiable, Hashable, Sendable {
         isCustomized = try container.decodeIfPresent(Bool.self, forKey: .isCustomized) ?? false
         category = try container.decodeIfPresent(String.self, forKey: .category)
         details = try container.decodeIfPresent(String.self, forKey: .details)
+        senderPattern = try container.decodeIfPresent(String.self, forKey: .senderPattern)
+        unlessPattern = try container.decodeIfPresent(String.self, forKey: .unlessPattern)
     }
 
     /// Message shown in the rule editor when the pattern can't be used, otherwise nil.
@@ -100,6 +114,12 @@ public struct Rule: Codable, Identifiable, Hashable, Sendable {
             return String(localized: "The pattern can't be empty.", bundle: .module)
         }
         if matchType == .regex, (try? NSRegularExpression(pattern: TextNormalizer.foldRegexPattern(pattern))) == nil {
+            return String(localized: "Invalid regex.", bundle: .module)
+        }
+        if let senderPattern, (try? NSRegularExpression(pattern: senderPattern)) == nil {
+            return String(localized: "Invalid regex.", bundle: .module)
+        }
+        if let unlessPattern, (try? NSRegularExpression(pattern: TextNormalizer.foldRegexPattern(unlessPattern))) == nil {
             return String(localized: "Invalid regex.", bundle: .module)
         }
         return nil

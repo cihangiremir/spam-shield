@@ -121,7 +121,7 @@ struct CheckForm: View {
                         .font(.headline)
                     Text(decision.matchedRule.map { String(localized: "Eşleşen kural: \($0.name)") }
                          ?? (decision.isFromClassifier
-                             ? String(localized: "Hiçbir kural eşleşmedi, öğrenen filtre spam'e benzetti.")
+                             ? String(localized: "Hiçbir kural eşleşmedi, öğrenen filtre ayırdı.")
                              : String(localized: "Hiçbir kural eşleşmedi.")))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
@@ -214,17 +214,21 @@ struct CheckForm: View {
     }
 
     private var classifierSection: some View {
-        let looksLikeSpam = model.classifier.isJunk(messageText)
+        let verdict = model.classifier.verdict(messageText) ?? .allow
         return Section {
-            Label(looksLikeSpam
-                  ? String(localized: "Öğrenen filtre bu mesajı spam'e benzetiyor.")
-                  : String(localized: "Öğrenen filtre bu mesajı normal buluyor."),
-                  systemImage: looksLikeSpam ? "exclamationmark.bubble" : "checkmark.bubble")
-            HStack {
-                Button("Spam") { teach(isJunk: true) }
-                    .frame(maxWidth: .infinity)
-                Button("Spam değil") { teach(isJunk: false) }
-                    .frame(maxWidth: .infinity)
+            Label(String(localized: "Öğrenen filtreye göre: \(verdict.outcome)"), systemImage: verdict.systemImage)
+            Text("Bu mesaj ne?")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+            Grid(horizontalSpacing: 8, verticalSpacing: 8) {
+                GridRow {
+                    teachButton(.junk)
+                    teachButton(.promotion)
+                }
+                GridRow {
+                    teachButton(.transaction)
+                    teachButton(.personal)
+                }
             }
             .buttonStyle(.bordered)
             .disabled(taughtMessage != nil)
@@ -234,20 +238,23 @@ struct CheckForm: View {
             if let taughtMessage {
                 Text(taughtMessage)
             } else if model.classifierSettings.isEnabled {
-                Text("Kurallara takılmayan, spam'e benzeyen mesajları Promosyonlar'a taşır.")
+                Text("Kurallara takılmayan mesajlardan spam ve kampanyaları Promosyonlar'a, bildirimleri İşlemler'e taşır. Emin değilse gelen kutusunda bırakır.")
             } else {
                 Text("Öğrenen filtre kapalı. Kurallar sekmesinden açabilirsin.")
             }
         }
     }
 
-    private func teach(isJunk: Bool) {
-        guard model.teachClassifier(messageText, isJunk: isJunk) else {
+    private func teachButton(_ kind: MessageKind) -> some View {
+        Button(kind.title) { teach(kind) }
+            .frame(maxWidth: .infinity)
+    }
+
+    private func teach(_ kind: MessageKind) {
+        guard model.teachClassifier(messageText, as: kind) else {
             taughtMessage = model.errorMessage
             return
         }
-        taughtMessage = isJunk
-            ? String(localized: "Spam olarak öğretildi.")
-            : String(localized: "Normal mesaj olarak öğretildi.")
+        taughtMessage = String(localized: "\(kind.title) olarak öğretildi.")
     }
 }

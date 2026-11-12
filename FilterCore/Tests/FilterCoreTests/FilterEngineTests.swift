@@ -115,6 +115,14 @@ struct FilterEngineTests {
         ("Evden çalışarak günde 1.500 TL kazanın, deneyim gerekmez!", "fake-job"),
         ("Bankanızın güvenlik biriminden arıyoruz. İşlemi durdurmak için telefonunuza gelen kodu bize iletir misiniz?", "code-sharing"),
         ("Hediyenizi tanımlamak için SMS ile gelen doğrulama kodunu buraya yazın.", "code-sharing"),
+        ("Hesabınıza 1.000 TL hediye çeki tanımlandı! Kullanmak için şifrenizi yanıtlayın.", "code-sharing"),
+        ("Merhaba, WhatsApp doğrulama kodum yanlışlıkla sizin numaranıza geldi, iletir misiniz?", "code-sharing"),
+        ("Hi, I accidentally sent my verification code to your number. Could you forward it to me?", "code-sharing"),
+        ("Kartınızdan 4.999 TL işlem yapılmıştır. Siz yapmadıysanız iptal için tıklayın: kart-iptal-islem.com", "fake-notice"),
+        ("E-fatura: 24 Şubat tarihli faturanız oluşturuldu. İndirmek için tıklayın: https://efatura-indir.net", "fake-notice"),
+        ("Ödemeniz alınamadı! Kargonuz askıda. Tamamlayın: kargo-merkezi.com", "fake-notice"),
+        ("Vize randevunuz onaylandı! İşlem ücreti 1.500 TL'yi 24 saat içinde gönderin.", "fake-notice"),
+        ("Kâr payınız hazır! 12.000 TL çekmek için önce 1.200 TL komisyon yatırın.", "fake-notice"),
     ])
     func phishingRulesSendScamsToJunk(body: String, ruleID: String) {
         let decision = evaluate(body)
@@ -126,7 +134,8 @@ struct FilterEngineTests {
     /// The same list guards rule updates downloaded from GitHub (see `RuleCatalog`).
     @Test(arguments: RuleCatalog.legitimateSamples)
     func legitimateLookalikesAreNotJunk(body: String) {
-        #expect(evaluate(body).action != .junk)
+        // Without a sender, like the download check: these come from registered names, not phone numbers.
+        #expect(evaluate(body, sender: nil).action != .junk)
     }
 
     /// Betting spam sent from a hijacked company sender ID, with İYS codes so it looks like a normal ad.
@@ -169,6 +178,10 @@ struct FilterEngineTests {
         "Yeni sezon ürünleri mağazalarda. Mersis: 0123456789012345",
         "Puan fırsatı: http://bit.ly/ornek SMS almak istemiyorsanız RET yazıp 2924'e gönderin.",
         "Kefilsiz kredi fırsatı! SMS almak istemiyorsanız RET yazıp 2924'e gönderin.",
+        // Discount codes aren't verification codes.
+        "Size özel %20 indirim kodunuz: CS1202. SMS almak istemiyorsanız RET yazıp 3404'e gönderin.",
+        "Destek kredisi teklifimiz için fırsat kodunuz: 20650. Mersis: 0123456789012345",
+        "Tüm ürünlerde %30 indirim için şifreniz 1234567. RET yazıp 3404'e gönderin.",
     ])
     func defaultRulesSendCommercialSmsToPromotions(body: String) {
         #expect(evaluate(body).action == .promotion)
@@ -193,9 +206,96 @@ struct FilterEngineTests {
         "1234567890123 takip no'lu kargonuzu A**** Y**** (Kendisi) teslim ettik. KVKK: http://ornek.la/kvkk B016",
         "Gönderiniz dağıtıma çıkarılmıştır. Takip: https://www.ornekkargo.com.tr",
         "Paketiniz yola çıktı, yarın teslim edilecek.",
+        // Campaign footers don't make an alert a campaign.
+        "Siparişiniz kargoya verildi. Takip: https://ornek.gl/abc Mersis No: 0123456789012345",
+        "Doğrulama kodunuz 482913. SMS almak istemiyorsanız RET yazıp 4566'ya gönderin.",
+        // Bills, appointments and payments.
+        "Sayın abonemiz, Ekim 2026 dönemi faturanız 245,50 TL'dir. Son ödeme tarihi 15.11.2026. Mersis: 0123456789012345",
+        "Kredi kartı ekstreniz kesildi. Dönem borcu 3.450,00 TL, son ödeme tarihi 22.11.2026.",
+        "Doğalgaz faturanız kesilmiştir. Tutar 890,00 TL",
+        "14.11.2026 saat 10:30 tarihli Dahiliye randevunuz oluşturulmuştur.",
+        "Randevunuz onaylandı: 12 Kasım 14:00, Ornek Diş Kliniği.",
+        "Yarın saat 15:00'teki randevunuzu hatırlatırız. B002",
+        "123,45 TL tutarındaki ödemeniz alınmıştır. Teşekkür ederiz.",
+        "100,00 TL ödemeniz gerçekleşmiştir. KVKK: http://ornek.la/kvkk B016",
+        "Ekim dönemi faturanıza ait 245,50 TL tahsil edilmiştir.",
+        // Links to the company's own site aren't fake notices.
+        "Ekim faturanız oluşturuldu. Görüntülemek için tıklayın: https://trcll.im/abc",
+        "Kargonuz yola çıktı. Teslimat saatini seçmek için tıklayın: https://aras.la/abc",
     ])
     func defaultRulesSendInfoMessagesToTransactions(body: String) {
-        #expect(evaluate(body).action == .transaction)
+        #expect(evaluate(body, sender: "ORNEK KARGO").action == .transaction)
+    }
+
+    @Test(arguments: [
+        "Ödemeniz alınamamıştır, kartınızı güncelleyin.",
+        "Ödemeniz başarısız oldu.",
+        "Ödemeniz onaylanmamıştır.",
+        "Randevunuzu hemen alın! %20 indirim. Mersis: 0123456789012345",
+        "Randevunuz için 0212 123 45 67",
+        "Fatura ödemelerinize 3 taksit! Son gün 30 Kasım",
+        "Otomatik fatura talimatına 50 TL bonus! Son gün 31 Ekim",
+    ])
+    func lookalikesOfBillsAppointmentsAndPaymentsAreNotTransactions(body: String) {
+        #expect(evaluate(body, sender: "ORNEK").action != .transaction)
+    }
+
+    @Test(arguments: [("ARAS KARGO" as String?, FilterAction.transaction), ("3404", .transaction), (nil, .transaction),
+                      ("+90 532 111 22 33", .allow), ("05321112233", .allow), ("+447700900123", .allow)])
+    func onlyRegisteredSendersGetIntoTransactions(sender: String?, expected: FilterAction) {
+        #expect(evaluate("Kargonuz dağıtıma çıktı, gün içinde teslim edilecek.", sender: sender).action == expected)
+    }
+
+    @Test(arguments: [
+        ("+905321112233", "Kargonuz şubeye ulaştı, teslim alabilirsiniz: https://pttkargom.com/x"),
+        ("+905321112233", "Gönderiniz gümrükte bekliyor. Ödeme için: https://hizli-gonderi.com/odeme"),
+        ("+905321112233", "Sayın müşterimiz, hesabınız askıya alındı: https://akbnk.co/giris"),
+        ("+447700900123", "Paketiniz adres eksik olduğu için bekliyor. Güncelleyin: www.paketdestek.net"),
+    ])
+    func courierAndBankLinksFromPhoneNumbersAreJunk(sender: String, body: String) {
+        let decision = evaluate(body, sender: sender)
+        #expect(decision.action == .junk)
+        #expect(decision.matchedRule?.builtInID == "phone-lure")
+    }
+
+    @Test(arguments: [
+        // A seller forwarding a courier's tracking link, .tr links, and words that only look like a domain.
+        ("+905321112233", "Kargoya verdim, takip: https://www.yurticikargo.com/tr/takip?code=123"),
+        ("+905321112233", "Paketin yolda, takip et: https://tex.ty.gl/abc"),
+        ("+905321112233", "Kargo bilgisi: https://www.ptt.gov.tr/gonderi-takip"),
+        ("+905321112233", "Kargoya verdim.yarın gelir"),
+        ("+905321112233", "Puan fırsatı: http://ornek.com/puan SMS almak istemiyorsanız RET yazıp 2924'e gönderin."),
+        // The same wording from a registered sender is the real thing.
+        ("ORNEK KARGO", "Kargonuz şubeye ulaştı, teslim alabilirsiniz: https://ornekkargo.com/x"),
+    ])
+    func phoneLureLeavesRealMessagesAlone(sender: String, body: String) {
+        #expect(evaluate(body, sender: sender).action != .junk)
+    }
+
+    @Test(arguments: [
+        ("Hesabınız bloke edildi. Akbank'a giriş için akbank-guvenli.com adresine girin.", "brand-link"),
+        ("PTT: Paketiniz adres eksik olduğu için bekliyor. Güncelleyin: pttdestek.net", "brand-link"),
+        ("Turkcell: 2.500 TL değerindeki puanınız yarın siliniyor, kullanmak için turkcellpuan.com", "brand-link"),
+        // Looks like the brand's own or a .tr address, but the host goes on.
+        ("Akbank: işleminizi onaylayın https://akbank.com.hesap.net/giris", "brand-link"),
+    ])
+    func brandNamesWithSomeoneElsesLinkFromPhoneNumbersAreJunk(body: String, ruleID: String) {
+        let decision = evaluate(body, sender: "+905321112233")
+        #expect(decision.action == .junk)
+        #expect(decision.matchedRule?.builtInID == ruleID)
+    }
+
+    @Test(arguments: [
+        // The brand's own and .tr addresses, and a missing space that only looks like a domain.
+        ("+905321112233", "Hepsiburada'dan aldım, hepsiburada.com/siparislerim'den bakabilirsin"),
+        ("+905321112233", "Akbank şubesinin adresi www.akbank.com'da yazıyor."),
+        ("+905321112233", "Garanti BBVA'nın sitesi: https://www.garantibbva.com.tr"),
+        ("+905321112233", "Turkcell faturam ödendi.Online işlemler bitti."),
+        // Brands' own campaigns come from their registered name and link to partner stores.
+        ("VAKIFBANK", "VakifBank Worldcard'la hepsiburada.com'da 500 TL alışverişe 50 TL Worldpuan!"),
+    ])
+    func brandLinkLeavesRealMessagesAlone(sender: String, body: String) {
+        #expect(evaluate(body, sender: sender).action != .junk)
     }
 
     @Test(arguments: [
@@ -211,7 +311,7 @@ struct FilterEngineTests {
 
     /// A spammer controls the text and the filter extension has little time per message. 20,000 characters,
     /// because a regex that slows down with the square of the length still looks fast at a few thousand.
-    @Test(.timeLimit(.minutes(1)), arguments: ["sms", "mesaj", "edevlet", "a", "iptal yaz 1234 ", "tebrikler hak ", "www.", "a1", "a.1", "kargo "])
+    @Test(.timeLimit(.minutes(1)), arguments: ["sms", "mesaj", "edevlet", "a", "iptal yaz 1234 ", "tebrikler hak ", "www.", "a1", "a.1", "kargo ", "indirim kod ", "kargo www.", "kargo https://", "akbank www.", "ptt a.com ", "trendyol a-b.c", "fatura 1 ", "12.11 randevunuz ", "odemeniz "])
     func longRepetitiveTextIsFast(unit: String) {
         let engine = FilterEngine(rules: DefaultRules.all)
         let text = String(repeating: unit, count: 20_000 / unit.count)
@@ -236,6 +336,18 @@ struct FilterEngineTests {
         let decision = evaluate("Deneme bonusu kodunuz: 1234")
         #expect(decision.action == .junk)
         #expect(decision.matchedRule?.builtInID == "betting")
+    }
+
+    @Test func transactionBeatsPromotion() {
+        let decision = evaluate("Kargonuz teslim edildi. Mersis: 0123456789012345", sender: "ORNEK KARGO")
+        #expect(decision.action == .transaction)
+        #expect(decision.matchedRule?.builtInID == "delivery-info")
+    }
+
+    @Test func unlessPatternKeepsARuleFromApplying() {
+        let rule = Rule(name: "Kredi", matchType: .regex, pattern: "kredi", action: .junk, unlessPattern: "iptal icin")
+        #expect(evaluate("Kefilsiz kredi fırsatı", sender: nil, rules: [rule]).action == .junk)
+        #expect(evaluate("Kefilsiz kredi fırsatı. İptal için RET yazın", sender: nil, rules: [rule]).action == .allow)
     }
 
     @Test func allowBeatsJunk() {

@@ -40,6 +40,18 @@ extension FilterAction {
     }
 }
 
+extension MessageKind {
+    /// Button title for teaching the classifier.
+    var title: String {
+        switch self {
+        case .junk: return String(localized: "Spam")
+        case .promotion: return String(localized: "Kampanya")
+        case .transaction: return String(localized: "Bildirim")
+        case .personal: return String(localized: "Kişisel")
+        }
+    }
+}
+
 extension RuleTarget {
     var title: String {
         switch self {
